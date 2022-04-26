@@ -42,60 +42,9 @@ namespace DomPecheyKP
         {
 
         }
-
-        private void button1_Click(object sender, EventArgs e)
+        private void addTable()
         {
-            /*PdfReader reader = null;
-            Document sourceDocument = null;
-            PdfCopy pdfCopyProvider = null;
-            PdfImportedPage importedPage = null;
-
-            reader = new PdfReader("oldFile.pdf");
-            sourceDocument = new Document(reader.GetPageSizeWithRotation(1));
-            pdfCopyProvider = new PdfCopy(sourceDocument, new System.IO.FileStream("newFile.pdf", System.IO.FileMode.Create));
-
-            sourceDocument.Open();
-
-            for (int i = 1; i <= 5; i++)
-            {
-                importedPage = pdfCopyProvider.GetImportedPage(reader, i);
-                pdfCopyProvider.AddPage(importedPage);
-            }
-            sourceDocument.Close();
-            reader.Close();*/
-
-            using (var reader = new PdfReader(@"oldFile.pdf"))
-            {
-                using (var fileStream = new FileStream(@"newFile.pdf", FileMode.Create, FileAccess.Write))
-                {
-                    var document = new Document(reader.GetPageSizeWithRotation(1));
-                    var writer = PdfWriter.GetInstance(document, fileStream);
-
-                    document.Open();
-
-                    for (var i = 1; i <= reader.NumberOfPages; i++)
-                    {
-                        document.NewPage();
-
-                        var baseFont = BaseFont.CreateFont(BaseFont.HELVETICA_BOLD, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
-                        iTextSharp.text.Font font = new iTextSharp.text.Font(baseFont, iTextSharp.text.Font.DEFAULTSIZE, iTextSharp.text.Font.NORMAL);
-
-                        var importedPage = writer.GetImportedPage(reader, i);
-
-                        var contentByte = writer.DirectContent;
-                        contentByte.AddTemplate(importedPage, 0, 0);
-                        contentByte.BeginText();
-                        contentByte.SetFontAndSize(baseFont, 40);
-
-                        var multiLineString = "Hello,\r\nWo                   rld!".Split('\n');
-
-                        foreach (var line in multiLineString)
-                        {
-                            contentByte.ShowTextAligned(PdfContentByte.ALIGN_CENTER, line, 1000, 200, 0);
-                        }
-
-                        contentByte.EndText();
-                        PdfPTable table = new PdfPTable(2);
+            /*PdfPTable table = new PdfPTable(2);
                         table.WidthPercentage = 80;
                         int[] firstTablecellwidth = { 25, 75 };
                         table.SetWidths(firstTablecellwidth);
@@ -125,8 +74,59 @@ namespace DomPecheyKP
                                 table.AddCell(new Phrase("111", font));
                             }
                         }
-                        //Добавляем таблицу в документ
-                        document.Add(table);
+                        document.Add(table);*/
+        }
+
+
+       
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            
+
+            using (var reader = new PdfReader(@"oldFile.pdf"))
+            {
+                using (var fileStream = new FileStream(@"newFile.pdf", FileMode.Create, FileAccess.Write))
+                {
+                    var document = new Document(reader.GetPageSizeWithRotation(1));
+                    var writer = PdfWriter.GetInstance(document, fileStream);
+
+                    document.Open();
+
+                    for (var i = 1; i <= reader.NumberOfPages; i++)
+                    {
+                        document.NewPage();
+                        //iTextSharp.text.Font baseFont = FontFactory.GetFont("Sitka Banner");
+                        //var baseFont = BaseFont.CreateFont(BaseFont.HELVETICA_BOLD, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
+                        //var baseFont = BaseFont.CreateFont(@"c:/windows/fonts/Sitka Banner", BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
+                        //iTextSharp.text.Font font = new iTextSharp.text.Font(baseFont, iTextSharp.text.Font.DEFAULTSIZE, iTextSharp.text.Font.NORMAL);
+                        // Font arial = FontFactory.GetFont("Arial", 28, Color.Gray);
+                        //iTextSharp.text.Font font = iTextSharp.text.FontFactory.GetFont("Sitka", 12, iTextSharp.text.Font.NORMAL);
+                        System.Text.EncodingProvider ppp = System.Text.CodePagesEncodingProvider.Instance;
+                        Encoding.RegisterProvider(ppp); 
+                        var fontName = "Sitka Banner";
+                        if (!FontFactory.IsRegistered(fontName))
+                        {
+                            var fontPath = Environment.GetEnvironmentVariable("Sitka-Banner.ttf");
+                            FontFactory.Register("Sitka-Banner.ttf");
+                        }
+                        iTextSharp.text.Font font = FontFactory.GetFont(fontName, BaseFont.IDENTITY_H, BaseFont.EMBEDDED, 0);
+                        var importedPage = writer.GetImportedPage(reader, i);
+
+                        var contentByte = writer.DirectContent;
+                        contentByte.AddTemplate(importedPage, 0, 0);
+                        contentByte.BeginText();
+                        contentByte.SetFontAndSize(font.BaseFont, 50);
+
+                        var multiLineString = "Благодарим Вас за обращение".Split('\n');
+
+                        foreach (var line in multiLineString)
+                        {
+                            contentByte.ShowTextAligned(PdfContentByte.ALIGN_CENTER, line, 620, 480, 0);
+                        }
+
+                        contentByte.EndText();
+                        
 
                     }
 
