@@ -96,38 +96,59 @@ namespace DomPecheyKP
                     for (var i = 1; i <= reader.NumberOfPages; i++)
                     {
                         document.NewPage();
-                        //iTextSharp.text.Font baseFont = FontFactory.GetFont("Sitka Banner");
-                        //var baseFont = BaseFont.CreateFont(BaseFont.HELVETICA_BOLD, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
-                        //var baseFont = BaseFont.CreateFont(@"c:/windows/fonts/Sitka Banner", BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
-                        //iTextSharp.text.Font font = new iTextSharp.text.Font(baseFont, iTextSharp.text.Font.DEFAULTSIZE, iTextSharp.text.Font.NORMAL);
-                        // Font arial = FontFactory.GetFont("Arial", 28, Color.Gray);
-                        //iTextSharp.text.Font font = iTextSharp.text.FontFactory.GetFont("Sitka", 12, iTextSharp.text.Font.NORMAL);
-                        System.Text.EncodingProvider ppp = System.Text.CodePagesEncodingProvider.Instance;
-                        Encoding.RegisterProvider(ppp); 
-                        var fontName = "Sitka Banner";
-                        if (!FontFactory.IsRegistered(fontName))
-                        {
-                            var fontPath = Environment.GetEnvironmentVariable("Sitka-Banner.ttf");
-                            FontFactory.Register("Sitka-Banner.ttf");
-                        }
-                        iTextSharp.text.Font font = FontFactory.GetFont(fontName, BaseFont.IDENTITY_H, BaseFont.EMBEDDED, 0);
                         var importedPage = writer.GetImportedPage(reader, i);
-
                         var contentByte = writer.DirectContent;
                         contentByte.AddTemplate(importedPage, 0, 0);
-                        contentByte.BeginText();
-                        contentByte.SetFontAndSize(font.BaseFont, 50);
-
-                        var multiLineString = "Благодарим Вас за обращение".Split('\n');
-
-                        foreach (var line in multiLineString)
+                        if (i == 2)
                         {
-                            contentByte.ShowTextAligned(PdfContentByte.ALIGN_CENTER, line, 620, 480, 0);
+
+                            System.Text.EncodingProvider ppp = System.Text.CodePagesEncodingProvider.Instance;
+                            Encoding.RegisterProvider(ppp);
+                            var fontName = "Sitka Text Italic";
+                            if (!FontFactory.IsRegistered(fontName))
+                            {
+                                var fontPath = Environment.GetEnvironmentVariable("SitkaText.ttf");
+                                FontFactory.Register("SitkaText.ttf");
+                            }
+                            iTextSharp.text.Font font1 = FontFactory.GetFont(fontName, BaseFont.IDENTITY_H);
+                            font1.Color = iTextSharp.text.BaseColor.WHITE;                           
+
+                            
+                            contentByte.BeginText();
+                            contentByte.SetColorFill(BaseColor.WHITE);
+                            contentByte.SetFontAndSize(font1.BaseFont, 70);
+                            var multiLineString = "Александр,\nДобрый день!".Split('\n');
+                            int y = 550;
+                            foreach (var line in multiLineString)
+                            {
+                                contentByte.ShowTextAligned(PdfContentByte.ALIGN_CENTER, line, 650, y, 0);
+                                y -= 80;
+                            }
+                            contentByte.EndText();
                         }
 
-                        contentByte.EndText();
-                        
 
+                        if (i == 11)
+                        {
+
+                            System.Text.EncodingProvider ppp = System.Text.CodePagesEncodingProvider.Instance;
+                            Encoding.RegisterProvider(ppp);
+                            var fontName = "Sitka Text Italic";
+                            if (!FontFactory.IsRegistered(fontName))
+                            {
+                                var fontPath = Environment.GetEnvironmentVariable("SitkaText.ttf");
+                                FontFactory.Register("SitkaText.ttf");
+                            }
+                            iTextSharp.text.Font font1 = FontFactory.GetFont(fontName, BaseFont.IDENTITY_H);
+                            font1.Color = iTextSharp.text.BaseColor.WHITE;
+
+
+                            contentByte.BeginText();
+                            contentByte.SetColorFill(BaseColor.WHITE);
+                            contentByte.SetFontAndSize(font1.BaseFont, 30);
+                            contentByte.ShowTextAligned(PdfContentByte.ALIGN_CENTER, "Николай Макаркин", 650, 100, 0);  
+                            contentByte.EndText();
+                        }
                     }
 
                     document.Close();
