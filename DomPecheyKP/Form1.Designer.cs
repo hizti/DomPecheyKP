@@ -29,24 +29,25 @@ namespace DomPecheyKP
         /// </summary>
         private void InitializeComponent()
         {
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.ProductType = new System.Windows.Forms.GroupBox();
             this.radioButton4 = new System.Windows.Forms.RadioButton();
             this.radioButton3 = new System.Windows.Forms.RadioButton();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.label1 = new System.Windows.Forms.Label();
-            this.Client = new System.Windows.Forms.TextBox();
-            this.Manager = new System.Windows.Forms.TextBox();
+            this.ClientName = new System.Windows.Forms.TextBox();
+            this.ManagerName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.ChimneyElements = new System.Windows.Forms.DataGridView();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.Manufacturer = new System.Windows.Forms.GroupBox();
+            this.radioButton17 = new System.Windows.Forms.RadioButton();
             this.radioButton5 = new System.Windows.Forms.RadioButton();
             this.radioButton6 = new System.Windows.Forms.RadioButton();
             this.radioButton7 = new System.Windows.Forms.RadioButton();
             this.radioButton8 = new System.Windows.Forms.RadioButton();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.Diameter = new System.Windows.Forms.GroupBox();
             this.radioButton16 = new System.Windows.Forms.RadioButton();
             this.radioButton15 = new System.Windows.Forms.RadioButton();
             this.radioButton14 = new System.Windows.Forms.RadioButton();
@@ -55,34 +56,38 @@ namespace DomPecheyKP
             this.radioButton10 = new System.Windows.Forms.RadioButton();
             this.radioButton11 = new System.Windows.Forms.RadioButton();
             this.radioButton12 = new System.Windows.Forms.RadioButton();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.MetalThickness = new System.Windows.Forms.GroupBox();
             this.radioButton19 = new System.Windows.Forms.RadioButton();
             this.radioButton20 = new System.Windows.Forms.RadioButton();
             this.button1 = new System.Windows.Forms.Button();
-            this.radioButton17 = new System.Windows.Forms.RadioButton();
             this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            this.groupBox2.SuspendLayout();
-            this.groupBox3.SuspendLayout();
-            this.groupBox4.SuspendLayout();
+            this.Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NameElement = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CountElement = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PriceElement = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SumElement = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProductType.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ChimneyElements)).BeginInit();
+            this.Manufacturer.SuspendLayout();
+            this.Diameter.SuspendLayout();
+            this.MetalThickness.SuspendLayout();
             this.SuspendLayout();
             // 
-            // groupBox1
+            // ProductType
             // 
-            this.groupBox1.Controls.Add(this.radioButton4);
-            this.groupBox1.Controls.Add(this.radioButton3);
-            this.groupBox1.Controls.Add(this.radioButton2);
-            this.groupBox1.Controls.Add(this.radioButton1);
-            this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.groupBox1.Location = new System.Drawing.Point(12, 51);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(724, 63);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Тип товара";
+            this.ProductType.Controls.Add(this.radioButton4);
+            this.ProductType.Controls.Add(this.radioButton3);
+            this.ProductType.Controls.Add(this.radioButton2);
+            this.ProductType.Controls.Add(this.radioButton1);
+            this.ProductType.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.ProductType.Location = new System.Drawing.Point(12, 51);
+            this.ProductType.Name = "ProductType";
+            this.ProductType.Size = new System.Drawing.Size(724, 63);
+            this.ProductType.TabIndex = 0;
+            this.ProductType.TabStop = false;
+            this.ProductType.Text = "Тип товара";
             // 
             // radioButton4
             // 
@@ -143,21 +148,21 @@ namespace DomPecheyKP
             this.label1.TabIndex = 1;
             this.label1.Text = "Имя клиента";
             // 
-            // Client
+            // ClientName
             // 
-            this.Client.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.Client.Location = new System.Drawing.Point(117, 17);
-            this.Client.Name = "Client";
-            this.Client.Size = new System.Drawing.Size(182, 26);
-            this.Client.TabIndex = 2;
+            this.ClientName.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.ClientName.Location = new System.Drawing.Point(117, 17);
+            this.ClientName.Name = "ClientName";
+            this.ClientName.Size = new System.Drawing.Size(182, 26);
+            this.ClientName.TabIndex = 2;
             // 
-            // Manager
+            // ManagerName
             // 
-            this.Manager.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.Manager.Location = new System.Drawing.Point(412, 17);
-            this.Manager.Name = "Manager";
-            this.Manager.Size = new System.Drawing.Size(182, 26);
-            this.Manager.TabIndex = 4;
+            this.ManagerName.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.ManagerName.Location = new System.Drawing.Point(412, 17);
+            this.ManagerName.Name = "ManagerName";
+            this.ManagerName.Size = new System.Drawing.Size(182, 26);
+            this.ManagerName.TabIndex = 4;
             // 
             // label2
             // 
@@ -169,14 +174,22 @@ namespace DomPecheyKP
             this.label2.TabIndex = 3;
             this.label2.Text = "Менеджер";
             // 
-            // dataGridView1
+            // ChimneyElements
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 358);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.Size = new System.Drawing.Size(724, 150);
-            this.dataGridView1.TabIndex = 5;
+            this.ChimneyElements.AllowUserToAddRows = false;
+            this.ChimneyElements.BackgroundColor = System.Drawing.Color.Wheat;
+            this.ChimneyElements.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ChimneyElements.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Number,
+            this.NameElement,
+            this.CountElement,
+            this.PriceElement,
+            this.SumElement});
+            this.ChimneyElements.Location = new System.Drawing.Point(12, 358);
+            this.ChimneyElements.Name = "ChimneyElements";
+            this.ChimneyElements.RowTemplate.Height = 25;
+            this.ChimneyElements.Size = new System.Drawing.Size(724, 150);
+            this.ChimneyElements.TabIndex = 5;
             // 
             // label3
             // 
@@ -199,20 +212,32 @@ namespace DomPecheyKP
             this.label4.TabIndex = 8;
             this.label4.Text = "Название";
             // 
-            // groupBox2
+            // Manufacturer
             // 
-            this.groupBox2.Controls.Add(this.radioButton17);
-            this.groupBox2.Controls.Add(this.radioButton5);
-            this.groupBox2.Controls.Add(this.radioButton6);
-            this.groupBox2.Controls.Add(this.radioButton7);
-            this.groupBox2.Controls.Add(this.radioButton8);
-            this.groupBox2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.groupBox2.Location = new System.Drawing.Point(12, 203);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(724, 63);
-            this.groupBox2.TabIndex = 4;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Производитель";
+            this.Manufacturer.Controls.Add(this.radioButton17);
+            this.Manufacturer.Controls.Add(this.radioButton5);
+            this.Manufacturer.Controls.Add(this.radioButton6);
+            this.Manufacturer.Controls.Add(this.radioButton7);
+            this.Manufacturer.Controls.Add(this.radioButton8);
+            this.Manufacturer.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.Manufacturer.Location = new System.Drawing.Point(12, 203);
+            this.Manufacturer.Name = "Manufacturer";
+            this.Manufacturer.Size = new System.Drawing.Size(724, 63);
+            this.Manufacturer.TabIndex = 4;
+            this.Manufacturer.TabStop = false;
+            this.Manufacturer.Text = "Производитель";
+            // 
+            // radioButton17
+            // 
+            this.radioButton17.AutoSize = true;
+            this.radioButton17.Font = new System.Drawing.Font("Constantia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.radioButton17.Location = new System.Drawing.Point(593, 26);
+            this.radioButton17.Name = "radioButton17";
+            this.radioButton17.Size = new System.Drawing.Size(84, 23);
+            this.radioButton17.TabIndex = 4;
+            this.radioButton17.TabStop = true;
+            this.radioButton17.Text = "Permetr";
+            this.radioButton17.UseVisualStyleBackColor = true;
             // 
             // radioButton5
             // 
@@ -262,23 +287,24 @@ namespace DomPecheyKP
             this.radioButton8.Text = "Дымок";
             this.radioButton8.UseVisualStyleBackColor = true;
             // 
-            // groupBox3
+            // Diameter
             // 
-            this.groupBox3.Controls.Add(this.radioButton16);
-            this.groupBox3.Controls.Add(this.radioButton15);
-            this.groupBox3.Controls.Add(this.radioButton14);
-            this.groupBox3.Controls.Add(this.radioButton13);
-            this.groupBox3.Controls.Add(this.radioButton9);
-            this.groupBox3.Controls.Add(this.radioButton10);
-            this.groupBox3.Controls.Add(this.radioButton11);
-            this.groupBox3.Controls.Add(this.radioButton12);
-            this.groupBox3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.groupBox3.Location = new System.Drawing.Point(214, 272);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(522, 63);
-            this.groupBox3.TabIndex = 5;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Диамметр";
+            this.Diameter.Controls.Add(this.radioButton16);
+            this.Diameter.Controls.Add(this.radioButton15);
+            this.Diameter.Controls.Add(this.radioButton14);
+            this.Diameter.Controls.Add(this.radioButton13);
+            this.Diameter.Controls.Add(this.radioButton9);
+            this.Diameter.Controls.Add(this.radioButton10);
+            this.Diameter.Controls.Add(this.radioButton11);
+            this.Diameter.Controls.Add(this.radioButton12);
+            this.Diameter.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.Diameter.Location = new System.Drawing.Point(214, 272);
+            this.Diameter.Name = "Diameter";
+            this.Diameter.Size = new System.Drawing.Size(522, 63);
+            this.Diameter.TabIndex = 5;
+            this.Diameter.TabStop = false;
+            this.Diameter.Text = "Диамметр";
+            this.Diameter.Enter += new System.EventHandler(this.Diameter_Enter);
             // 
             // radioButton16
             // 
@@ -378,17 +404,17 @@ namespace DomPecheyKP
             this.radioButton12.Text = "115";
             this.radioButton12.UseVisualStyleBackColor = true;
             // 
-            // groupBox4
+            // MetalThickness
             // 
-            this.groupBox4.Controls.Add(this.radioButton19);
-            this.groupBox4.Controls.Add(this.radioButton20);
-            this.groupBox4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.groupBox4.Location = new System.Drawing.Point(12, 272);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(196, 63);
-            this.groupBox4.TabIndex = 5;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Толщина металла";
+            this.MetalThickness.Controls.Add(this.radioButton19);
+            this.MetalThickness.Controls.Add(this.radioButton20);
+            this.MetalThickness.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.MetalThickness.Location = new System.Drawing.Point(12, 272);
+            this.MetalThickness.Name = "MetalThickness";
+            this.MetalThickness.Size = new System.Drawing.Size(196, 63);
+            this.MetalThickness.TabIndex = 5;
+            this.MetalThickness.TabStop = false;
+            this.MetalThickness.Text = "Толщина металла";
             // 
             // radioButton19
             // 
@@ -424,18 +450,6 @@ namespace DomPecheyKP
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // radioButton17
-            // 
-            this.radioButton17.AutoSize = true;
-            this.radioButton17.Font = new System.Drawing.Font("Constantia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.radioButton17.Location = new System.Drawing.Point(593, 26);
-            this.radioButton17.Name = "radioButton17";
-            this.radioButton17.Size = new System.Drawing.Size(84, 23);
-            this.radioButton17.TabIndex = 4;
-            this.radioButton17.TabStop = true;
-            this.radioButton17.Text = "Permetr";
-            this.radioButton17.UseVisualStyleBackColor = true;
-            // 
             // checkedListBox1
             // 
             this.checkedListBox1.FormattingEnabled = true;
@@ -462,6 +476,34 @@ namespace DomPecheyKP
             this.button3.Text = "button3";
             this.button3.UseVisualStyleBackColor = true;
             // 
+            // Number
+            // 
+            this.Number.HeaderText = "№ п.п.";
+            this.Number.Name = "Number";
+            this.Number.ReadOnly = true;
+            // 
+            // NameElement
+            // 
+            this.NameElement.FillWeight = 500F;
+            this.NameElement.HeaderText = "Наименование";
+            this.NameElement.Name = "NameElement";
+            this.NameElement.ReadOnly = true;
+            // 
+            // CountElement
+            // 
+            this.CountElement.HeaderText = " Кол-во шт.";
+            this.CountElement.Name = "CountElement";
+            // 
+            // PriceElement
+            // 
+            this.PriceElement.HeaderText = "Цена за 1 шт.";
+            this.PriceElement.Name = "PriceElement";
+            // 
+            // SumElement
+            // 
+            this.SumElement.HeaderText = "Цена без скидки";
+            this.SumElement.Name = "SumElement";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -471,29 +513,28 @@ namespace DomPecheyKP
             this.Controls.Add(this.button2);
             this.Controls.Add(this.checkedListBox1);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.groupBox4);
-            this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.MetalThickness);
+            this.Controls.Add(this.Diameter);
+            this.Controls.Add(this.Manufacturer);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.Manager);
+            this.Controls.Add(this.ChimneyElements);
+            this.Controls.Add(this.ManagerName);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.Client);
+            this.Controls.Add(this.ClientName);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.ProductType);
             this.Name = "Form1";
             this.Text = "Комерческое предложение";
-           
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
+            this.ProductType.ResumeLayout(false);
+            this.ProductType.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ChimneyElements)).EndInit();
+            this.Manufacturer.ResumeLayout(false);
+            this.Manufacturer.PerformLayout();
+            this.Diameter.ResumeLayout(false);
+            this.Diameter.PerformLayout();
+            this.MetalThickness.ResumeLayout(false);
+            this.MetalThickness.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -501,24 +542,24 @@ namespace DomPecheyKP
 
         #endregion
 
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox ProductType;
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.RadioButton radioButton4;
         private System.Windows.Forms.RadioButton radioButton3;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox Client;
-        private System.Windows.Forms.TextBox Manager;
+        private System.Windows.Forms.TextBox ClientName;
+        private System.Windows.Forms.TextBox ManagerName;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView ChimneyElements;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox Manufacturer;
         private System.Windows.Forms.RadioButton radioButton5;
         private System.Windows.Forms.RadioButton radioButton6;
         private System.Windows.Forms.RadioButton radioButton7;
         private System.Windows.Forms.RadioButton radioButton8;
-        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.GroupBox Diameter;
         private System.Windows.Forms.RadioButton radioButton9;
         private System.Windows.Forms.RadioButton radioButton10;
         private System.Windows.Forms.RadioButton radioButton11;
@@ -527,7 +568,7 @@ namespace DomPecheyKP
         private System.Windows.Forms.RadioButton radioButton14;
         private System.Windows.Forms.RadioButton radioButton13;
         private System.Windows.Forms.RadioButton radioButton16;
-        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.GroupBox MetalThickness;
         private System.Windows.Forms.RadioButton radioButton19;
         private System.Windows.Forms.RadioButton radioButton20;
         private System.Windows.Forms.Button button1;
@@ -535,6 +576,11 @@ namespace DomPecheyKP
         private System.Windows.Forms.CheckedListBox checkedListBox1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Number;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NameElement;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CountElement;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PriceElement;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SumElement;
     }
 }
 

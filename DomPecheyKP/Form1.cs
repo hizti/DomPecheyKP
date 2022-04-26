@@ -135,5 +135,10 @@ namespace DomPecheyKP
                 }
             }
         }
+
+        private void Diameter_Enter(object sender, EventArgs e)
+        {
+
+        }
     }
 }
