@@ -61,16 +61,11 @@ namespace DomPecheyKP
             this.FireplaceInsert = new System.Windows.Forms.RadioButton();
             this.HeatingFurnace = new System.Windows.Forms.RadioButton();
             this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
+            this.deleteInsulationСonsumables = new System.Windows.Forms.Button();
+            this.addInsulationСonsumables = new System.Windows.Forms.Button();
             this.NewInsulationСonsumables = new System.Windows.Forms.CheckedListBox();
             this.label5 = new System.Windows.Forms.Label();
             this.InsulationСonsumables = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SumInsulationСonsumables = new System.Windows.Forms.Label();
             this.SumChimneyManufacturerAndInsulation = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -128,6 +123,11 @@ namespace DomPecheyKP
             this.AllSum = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Manufacturer.SuspendLayout();
             this.MetalThickness.SuspendLayout();
             this.Diameter.SuspendLayout();
@@ -531,25 +531,27 @@ namespace DomPecheyKP
             this.button5.Text = "Очистить";
             this.button5.UseVisualStyleBackColor = true;
             // 
-            // button6
+            // deleteInsulationСonsumables
             // 
-            this.button6.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button6.Location = new System.Drawing.Point(542, 797);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(96, 35);
-            this.button6.TabIndex = 78;
-            this.button6.Text = "Удалить";
-            this.button6.UseVisualStyleBackColor = true;
+            this.deleteInsulationСonsumables.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.deleteInsulationСonsumables.Location = new System.Drawing.Point(542, 797);
+            this.deleteInsulationСonsumables.Name = "deleteInsulationСonsumables";
+            this.deleteInsulationСonsumables.Size = new System.Drawing.Size(96, 35);
+            this.deleteInsulationСonsumables.TabIndex = 78;
+            this.deleteInsulationСonsumables.Text = "Удалить";
+            this.deleteInsulationСonsumables.UseVisualStyleBackColor = true;
+            this.deleteInsulationСonsumables.Click += new System.EventHandler(this.deleteInsulationСonsumables_Click);
             // 
-            // button7
+            // addInsulationСonsumables
             // 
-            this.button7.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button7.Location = new System.Drawing.Point(423, 798);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(90, 35);
-            this.button7.TabIndex = 77;
-            this.button7.Text = "Добавить";
-            this.button7.UseVisualStyleBackColor = true;
+            this.addInsulationСonsumables.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.addInsulationСonsumables.Location = new System.Drawing.Point(423, 798);
+            this.addInsulationСonsumables.Name = "addInsulationСonsumables";
+            this.addInsulationСonsumables.Size = new System.Drawing.Size(90, 35);
+            this.addInsulationСonsumables.TabIndex = 77;
+            this.addInsulationСonsumables.Text = "Добавить";
+            this.addInsulationСonsumables.UseVisualStyleBackColor = true;
+            this.addInsulationСonsumables.Click += new System.EventHandler(this.addInsulationСonsumables_Click);
             // 
             // NewInsulationСonsumables
             // 
@@ -588,34 +590,8 @@ namespace DomPecheyKP
             this.InsulationСonsumables.RowTemplate.Height = 25;
             this.InsulationСonsumables.Size = new System.Drawing.Size(724, 123);
             this.InsulationСonsumables.TabIndex = 74;
-            // 
-            // dataGridViewTextBoxColumn6
-            // 
-            this.dataGridViewTextBoxColumn6.HeaderText = "№ п.п.";
-            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            this.dataGridViewTextBoxColumn6.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn7
-            // 
-            this.dataGridViewTextBoxColumn7.FillWeight = 500F;
-            this.dataGridViewTextBoxColumn7.HeaderText = "Наименование";
-            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-            this.dataGridViewTextBoxColumn7.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn8
-            // 
-            this.dataGridViewTextBoxColumn8.HeaderText = " Кол-во шт.";
-            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
-            // 
-            // dataGridViewTextBoxColumn9
-            // 
-            this.dataGridViewTextBoxColumn9.HeaderText = "Цена за 1 шт.";
-            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
-            // 
-            // dataGridViewTextBoxColumn10
-            // 
-            this.dataGridViewTextBoxColumn10.HeaderText = "Цена без скидки";
-            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
+            this.InsulationСonsumables.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.InsulationСonsumables_CellEndEdit);
+            this.InsulationСonsumables.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.InsulationСonsumables_RowsAdded);
             // 
             // SumInsulationСonsumables
             // 
@@ -1157,6 +1133,33 @@ namespace DomPecheyKP
             this.numericUpDown1.Size = new System.Drawing.Size(120, 27);
             this.numericUpDown1.TabIndex = 112;
             // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.HeaderText = "№ п.п.";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.dataGridViewTextBoxColumn6.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            this.dataGridViewTextBoxColumn7.FillWeight = 500F;
+            this.dataGridViewTextBoxColumn7.HeaderText = "Наименование";
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            // 
+            // dataGridViewTextBoxColumn8
+            // 
+            this.dataGridViewTextBoxColumn8.HeaderText = " Кол-во шт.";
+            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            // 
+            // dataGridViewTextBoxColumn9
+            // 
+            this.dataGridViewTextBoxColumn9.HeaderText = "Цена за 1 шт.";
+            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
+            // 
+            // dataGridViewTextBoxColumn10
+            // 
+            this.dataGridViewTextBoxColumn10.HeaderText = "Цена без скидки";
+            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1198,8 +1201,8 @@ namespace DomPecheyKP
             this.Controls.Add(this.MetalThickness);
             this.Controls.Add(this.Diameter);
             this.Controls.Add(this.button5);
-            this.Controls.Add(this.button6);
-            this.Controls.Add(this.button7);
+            this.Controls.Add(this.deleteInsulationСonsumables);
+            this.Controls.Add(this.addInsulationСonsumables);
             this.Controls.Add(this.NewInsulationСonsumables);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.InsulationСonsumables);
@@ -1270,16 +1273,11 @@ namespace DomPecheyKP
         private System.Windows.Forms.RadioButton FireplaceInsert;
         private System.Windows.Forms.RadioButton HeatingFurnace;
         private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button deleteInsulationСonsumables;
+        private System.Windows.Forms.Button addInsulationСonsumables;
         private System.Windows.Forms.CheckedListBox NewInsulationСonsumables;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.DataGridView InsulationСonsumables;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
         private System.Windows.Forms.Label SumInsulationСonsumables;
         private System.Windows.Forms.Label SumChimneyManufacturerAndInsulation;
         private System.Windows.Forms.Label label8;
@@ -1339,6 +1337,11 @@ namespace DomPecheyKP
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
     }
 }
 
