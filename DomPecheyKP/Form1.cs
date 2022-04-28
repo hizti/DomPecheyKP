@@ -132,8 +132,16 @@ namespace DomPecheyKP
 
                     a = from RadioButton r in Manufacturer.Controls where r.Checked == true select r.Text;
                     string str = "2. " + a.First();
-                    a = from RadioButton r in Diameter.Controls where r.Checked == true select r.Text;
-                    str += " D" + a.First() + " мм";
+                    if (OwnD.Checked)
+                    {
+                        str += " D" + OwnValue.Value.ToString() + " мм";
+                    }
+                    else
+                    {
+                        a = from RadioButton r in Diameter.Controls.OfType<RadioButton>() where (r.Checked) == true select r.Text;
+                         
+                        str += " D" + a.First() + " мм";
+                    }                    
                     a = from RadioButton r in MetalThickness.Controls where r.Checked == true select r.Text;
                     str += " (" + a.First() + " мм)";
                     
@@ -339,10 +347,15 @@ namespace DomPecheyKP
            //loadIС();
 
             //удалить
-            //foreach (Object checkedItem in NewChimneyElements.Items)
-            //{
-            //    ChimneyElements.Rows.Add("1", checkedItem.ToString(), "1", list[checkedItem.ToString()], list[checkedItem.ToString()]);
-            //}
+            foreach (Object checkedItem in NewChimneyElements.Items)
+            {
+                ChimneyElements.Rows.Add("1", checkedItem.ToString(), "1", list[checkedItem.ToString()], list[checkedItem.ToString()]);
+            }
+
+            foreach (Object checkedItem in NewInsulationСonsumables.Items)
+            {
+                InsulationСonsumables.Rows.Add("1", checkedItem.ToString(), "1", listIC[checkedItem.ToString()], listIC[checkedItem.ToString()]);
+            }
 
         }
 
@@ -403,7 +416,6 @@ namespace DomPecheyKP
             SumChimneyElements.Text = sum.ToString() + " Руб.";
         }
 
-
         private void addChimneyElements_Click(object sender, EventArgs e)
         {
             int n;
@@ -458,6 +470,7 @@ namespace DomPecheyKP
             }
         }
 
+     
         private void ChimneyElements_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
             
@@ -477,6 +490,93 @@ namespace DomPecheyKP
                calculateChimneyElementsSum();
             }
             checkAllChimneyElement();
+        }
+        private void ChimneyElements_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            currentDataGridView = ChimneyElements;
+            ChimneyElements.EditingControl.KeyPress -= EditingControl_KeyPress;
+            ChimneyElements.EditingControl.KeyPress += EditingControl_KeyPress;
+        }
+
+        //////////////////////////////////////////////////////////////
+
+        private void deleteInsulationСonsumables_Click(object sender, EventArgs e)
+        {
+            while (InsulationСonsumables.SelectedRows.Count != 0)
+            {
+                if (listIC.ContainsKey(InsulationСonsumables.SelectedRows[0].Cells[1].Value.ToString()))
+                    NewInsulationСonsumables.Items.Add(InsulationСonsumables.SelectedRows[0].Cells[1].Value);
+                InsulationСonsumables.Rows.Remove(InsulationСonsumables.SelectedRows[0]);
+            }
+
+            for (int i = 0; i < InsulationСonsumables.RowCount - 1; i++)
+            {
+                InsulationСonsumables.Rows[i].Cells[0].Value = i + 1;
+            }
+            calculateInsulationСonsumablesSum();
+
+            checkAllInsulationСonsumables();
+        }
+        private void checkAllInsulationСonsumables()
+        {
+            NewInsulationСonsumables.Items.Clear();
+            foreach (string str in listIC.Keys)
+            {
+                bool f = false;
+                for (int i = 0; i < InsulationСonsumables.RowCount - 1; i++)
+                {
+                    if (str == InsulationСonsumables.Rows[i].Cells[1].Value.ToString())
+                        f = true;
+                }
+                if (!f)
+                    NewInsulationСonsumables.Items.Add(str);
+            }
+        }
+
+        private void calculateInsulationСonsumablesSum()
+        {
+            double sum = 0;
+            foreach (DataGridViewRow row in InsulationСonsumables.Rows)
+                sum += Convert.ToDouble(row.Cells[4].Value);
+            SumInsulationСonsumables.Text = sum.ToString() + " Руб.";
+        }
+
+        private void addInsulationСonsumables_Click(object sender, EventArgs e)
+        {
+            int n;
+            if (InsulationСonsumables.RowCount == 0)
+                n = 1;
+            else
+                n = InsulationСonsumables.RowCount + 1;
+            foreach (Object checkedItem in NewInsulationСonsumables.CheckedItems)
+            {
+                InsulationСonsumables.Rows.Add(n++, checkedItem.ToString(), "1", listIC[checkedItem.ToString()], listIC[checkedItem.ToString()]);
+            }
+            while (NewInsulationСonsumables.CheckedItems.Count != 0)
+            {
+                NewInsulationСonsumables.Items.Remove(NewInsulationСonsumables.CheckedItems[0]);
+            }
+            calculateInsulationСonsumablesSum();
+        }
+
+        private void InsulationСonsumables_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            for (int i = 0; i < InsulationСonsumables.RowCount - 1; i++)
+            {
+                InsulationСonsumables.Rows[i].Cells[0].Value = i + 1;
+            }
+        }
+
+        private void InsulationСonsumables_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            int nRow = e.RowIndex;
+            if (e.ColumnIndex == 2 || e.ColumnIndex == 3)
+            {
+
+                InsulationСonsumables.Rows[nRow].Cells[4].Value = Convert.ToDouble(InsulationСonsumables.Rows[nRow].Cells[2].Value) * Convert.ToDouble(InsulationСonsumables.Rows[nRow].Cells[3].Value);
+                calculateInsulationСonsumablesSum();
+            }
+            checkAllInsulationСonsumables();
         }
 
         private void d115_CheckedChanged(object sender, EventArgs e)
@@ -594,11 +694,6 @@ namespace DomPecheyKP
 
         }
 
-        private void ChimneyElements_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
-        {
-            currentDataGridView = ChimneyElements;
-            ChimneyElements.EditingControl.KeyPress -= EditingControl_KeyPress;
-            ChimneyElements.EditingControl.KeyPress += EditingControl_KeyPress;
-        }
+       
     }
 }
