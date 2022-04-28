@@ -29,13 +29,8 @@ namespace DomPecheyKP
         /// </summary>
         private void InitializeComponent()
         {
-            this.Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.radioButton4 = new System.Windows.Forms.RadioButton();
             this.radioButton3 = new System.Windows.Forms.RadioButton();
-            this.NameElement = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CountElement = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PriceElement = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SumElement = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ManagerName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.ClientName = new System.Windows.Forms.TextBox();
@@ -53,14 +48,14 @@ namespace DomPecheyKP
             this.radioButton19 = new System.Windows.Forms.RadioButton();
             this.radioButton20 = new System.Windows.Forms.RadioButton();
             this.Diameter = new System.Windows.Forms.GroupBox();
-            this.radioButton16 = new System.Windows.Forms.RadioButton();
-            this.radioButton15 = new System.Windows.Forms.RadioButton();
-            this.radioButton14 = new System.Windows.Forms.RadioButton();
-            this.radioButton13 = new System.Windows.Forms.RadioButton();
-            this.radioButton9 = new System.Windows.Forms.RadioButton();
-            this.radioButton10 = new System.Windows.Forms.RadioButton();
-            this.radioButton11 = new System.Windows.Forms.RadioButton();
-            this.radioButton12 = new System.Windows.Forms.RadioButton();
+            this.d300 = new System.Windows.Forms.RadioButton();
+            this.d250 = new System.Windows.Forms.RadioButton();
+            this.d200 = new System.Windows.Forms.RadioButton();
+            this.d180 = new System.Windows.Forms.RadioButton();
+            this.d150 = new System.Windows.Forms.RadioButton();
+            this.d130 = new System.Windows.Forms.RadioButton();
+            this.d120 = new System.Windows.Forms.RadioButton();
+            this.d115 = new System.Windows.Forms.RadioButton();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.button5 = new System.Windows.Forms.Button();
@@ -87,11 +82,16 @@ namespace DomPecheyKP
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NewChimneyElements = new System.Windows.Forms.CheckedListBox();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.deleteChimneyElements = new System.Windows.Forms.Button();
+            this.addChimneyElements = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.ProductType = new System.Windows.Forms.GroupBox();
             this.ChimneyElements = new System.Windows.Forms.DataGridView();
+            this.Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NameElement = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CountElement = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PriceElement = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SumElement = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button8 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
@@ -138,12 +138,6 @@ namespace DomPecheyKP
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
-            // Number
-            // 
-            this.Number.HeaderText = "№ п.п.";
-            this.Number.Name = "Number";
-            this.Number.ReadOnly = true;
-            // 
             // radioButton4
             // 
             this.radioButton4.AutoSize = true;
@@ -167,28 +161,6 @@ namespace DomPecheyKP
             this.radioButton3.TabStop = true;
             this.radioButton3.Text = "Печь-камин";
             this.radioButton3.UseVisualStyleBackColor = true;
-            // 
-            // NameElement
-            // 
-            this.NameElement.FillWeight = 500F;
-            this.NameElement.HeaderText = "Наименование";
-            this.NameElement.Name = "NameElement";
-            this.NameElement.ReadOnly = true;
-            // 
-            // CountElement
-            // 
-            this.CountElement.HeaderText = " Кол-во шт.";
-            this.CountElement.Name = "CountElement";
-            // 
-            // PriceElement
-            // 
-            this.PriceElement.HeaderText = "Цена за 1 шт.";
-            this.PriceElement.Name = "PriceElement";
-            // 
-            // SumElement
-            // 
-            this.SumElement.HeaderText = "Цена без скидки";
-            this.SumElement.Name = "SumElement";
             // 
             // ManagerName
             // 
@@ -292,6 +264,7 @@ namespace DomPecheyKP
             // radioButton8
             // 
             this.radioButton8.AutoSize = true;
+            this.radioButton8.Checked = true;
             this.radioButton8.Font = new System.Drawing.Font("Constantia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.radioButton8.Location = new System.Drawing.Point(31, 26);
             this.radioButton8.Name = "radioButton8";
@@ -359,6 +332,7 @@ namespace DomPecheyKP
             // radioButton20
             // 
             this.radioButton20.AutoSize = true;
+            this.radioButton20.Checked = true;
             this.radioButton20.Font = new System.Drawing.Font("Constantia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.radioButton20.Location = new System.Drawing.Point(6, 28);
             this.radioButton20.Name = "radioButton20";
@@ -370,14 +344,14 @@ namespace DomPecheyKP
             // 
             // Diameter
             // 
-            this.Diameter.Controls.Add(this.radioButton16);
-            this.Diameter.Controls.Add(this.radioButton15);
-            this.Diameter.Controls.Add(this.radioButton14);
-            this.Diameter.Controls.Add(this.radioButton13);
-            this.Diameter.Controls.Add(this.radioButton9);
-            this.Diameter.Controls.Add(this.radioButton10);
-            this.Diameter.Controls.Add(this.radioButton11);
-            this.Diameter.Controls.Add(this.radioButton12);
+            this.Diameter.Controls.Add(this.d300);
+            this.Diameter.Controls.Add(this.d250);
+            this.Diameter.Controls.Add(this.d200);
+            this.Diameter.Controls.Add(this.d180);
+            this.Diameter.Controls.Add(this.d150);
+            this.Diameter.Controls.Add(this.d130);
+            this.Diameter.Controls.Add(this.d120);
+            this.Diameter.Controls.Add(this.d115);
             this.Diameter.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.Diameter.Location = new System.Drawing.Point(225, 303);
             this.Diameter.Name = "Diameter";
@@ -386,101 +360,103 @@ namespace DomPecheyKP
             this.Diameter.TabStop = false;
             this.Diameter.Text = "Диамметр";
             // 
-            // radioButton16
+            // d300
             // 
-            this.radioButton16.AutoSize = true;
-            this.radioButton16.Font = new System.Drawing.Font("Constantia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.radioButton16.Location = new System.Drawing.Point(450, 28);
-            this.radioButton16.Name = "radioButton16";
-            this.radioButton16.Size = new System.Drawing.Size(52, 23);
-            this.radioButton16.TabIndex = 7;
-            this.radioButton16.TabStop = true;
-            this.radioButton16.Text = "300";
-            this.radioButton16.UseVisualStyleBackColor = true;
+            this.d300.AutoSize = true;
+            this.d300.Font = new System.Drawing.Font("Constantia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.d300.Location = new System.Drawing.Point(450, 28);
+            this.d300.Name = "d300";
+            this.d300.Size = new System.Drawing.Size(52, 23);
+            this.d300.TabIndex = 7;
+            this.d300.Text = "300";
+            this.d300.UseVisualStyleBackColor = true;
+            this.d300.CheckedChanged += new System.EventHandler(this.d300_CheckedChanged);
             // 
-            // radioButton15
+            // d250
             // 
-            this.radioButton15.AutoSize = true;
-            this.radioButton15.Font = new System.Drawing.Font("Constantia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.radioButton15.Location = new System.Drawing.Point(384, 28);
-            this.radioButton15.Name = "radioButton15";
-            this.radioButton15.Size = new System.Drawing.Size(52, 23);
-            this.radioButton15.TabIndex = 6;
-            this.radioButton15.TabStop = true;
-            this.radioButton15.Text = "250";
-            this.radioButton15.UseVisualStyleBackColor = true;
+            this.d250.AutoSize = true;
+            this.d250.Font = new System.Drawing.Font("Constantia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.d250.Location = new System.Drawing.Point(384, 28);
+            this.d250.Name = "d250";
+            this.d250.Size = new System.Drawing.Size(52, 23);
+            this.d250.TabIndex = 6;
+            this.d250.Text = "250";
+            this.d250.UseVisualStyleBackColor = true;
+            this.d250.CheckedChanged += new System.EventHandler(this.d250_CheckedChanged);
             // 
-            // radioButton14
+            // d200
             // 
-            this.radioButton14.AutoSize = true;
-            this.radioButton14.Font = new System.Drawing.Font("Constantia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.radioButton14.Location = new System.Drawing.Point(317, 28);
-            this.radioButton14.Name = "radioButton14";
-            this.radioButton14.Size = new System.Drawing.Size(53, 23);
-            this.radioButton14.TabIndex = 5;
-            this.radioButton14.TabStop = true;
-            this.radioButton14.Text = "200";
-            this.radioButton14.UseVisualStyleBackColor = true;
+            this.d200.AutoSize = true;
+            this.d200.Font = new System.Drawing.Font("Constantia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.d200.Location = new System.Drawing.Point(317, 28);
+            this.d200.Name = "d200";
+            this.d200.Size = new System.Drawing.Size(53, 23);
+            this.d200.TabIndex = 5;
+            this.d200.Text = "200";
+            this.d200.UseVisualStyleBackColor = true;
+            this.d200.CheckedChanged += new System.EventHandler(this.d200_CheckedChanged);
             // 
-            // radioButton13
+            // d180
             // 
-            this.radioButton13.AutoSize = true;
-            this.radioButton13.Font = new System.Drawing.Font("Constantia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.radioButton13.Location = new System.Drawing.Point(253, 28);
-            this.radioButton13.Name = "radioButton13";
-            this.radioButton13.Size = new System.Drawing.Size(50, 23);
-            this.radioButton13.TabIndex = 4;
-            this.radioButton13.TabStop = true;
-            this.radioButton13.Text = "180";
-            this.radioButton13.UseVisualStyleBackColor = true;
+            this.d180.AutoSize = true;
+            this.d180.Font = new System.Drawing.Font("Constantia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.d180.Location = new System.Drawing.Point(253, 28);
+            this.d180.Name = "d180";
+            this.d180.Size = new System.Drawing.Size(50, 23);
+            this.d180.TabIndex = 4;
+            this.d180.Text = "180";
+            this.d180.UseVisualStyleBackColor = true;
+            this.d180.CheckedChanged += new System.EventHandler(this.d180_CheckedChanged);
             // 
-            // radioButton9
+            // d150
             // 
-            this.radioButton9.AutoSize = true;
-            this.radioButton9.Font = new System.Drawing.Font("Constantia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.radioButton9.Location = new System.Drawing.Point(190, 26);
-            this.radioButton9.Name = "radioButton9";
-            this.radioButton9.Size = new System.Drawing.Size(49, 23);
-            this.radioButton9.TabIndex = 3;
-            this.radioButton9.TabStop = true;
-            this.radioButton9.Text = "150";
-            this.radioButton9.UseVisualStyleBackColor = true;
+            this.d150.AutoSize = true;
+            this.d150.Font = new System.Drawing.Font("Constantia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.d150.Location = new System.Drawing.Point(190, 26);
+            this.d150.Name = "d150";
+            this.d150.Size = new System.Drawing.Size(49, 23);
+            this.d150.TabIndex = 3;
+            this.d150.Text = "150";
+            this.d150.UseVisualStyleBackColor = true;
+            this.d150.CheckedChanged += new System.EventHandler(this.d150_CheckedChanged);
             // 
-            // radioButton10
+            // d130
             // 
-            this.radioButton10.AutoSize = true;
-            this.radioButton10.Font = new System.Drawing.Font("Constantia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.radioButton10.Location = new System.Drawing.Point(128, 26);
-            this.radioButton10.Name = "radioButton10";
-            this.radioButton10.Size = new System.Drawing.Size(48, 23);
-            this.radioButton10.TabIndex = 2;
-            this.radioButton10.TabStop = true;
-            this.radioButton10.Text = "130";
-            this.radioButton10.UseVisualStyleBackColor = true;
+            this.d130.AutoSize = true;
+            this.d130.Font = new System.Drawing.Font("Constantia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.d130.Location = new System.Drawing.Point(128, 26);
+            this.d130.Name = "d130";
+            this.d130.Size = new System.Drawing.Size(48, 23);
+            this.d130.TabIndex = 2;
+            this.d130.Text = "130";
+            this.d130.UseVisualStyleBackColor = true;
+            this.d130.CheckedChanged += new System.EventHandler(this.d130_CheckedChanged);
             // 
-            // radioButton11
+            // d120
             // 
-            this.radioButton11.AutoSize = true;
-            this.radioButton11.Font = new System.Drawing.Font("Constantia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.radioButton11.Location = new System.Drawing.Point(65, 26);
-            this.radioButton11.Name = "radioButton11";
-            this.radioButton11.Size = new System.Drawing.Size(49, 23);
-            this.radioButton11.TabIndex = 1;
-            this.radioButton11.TabStop = true;
-            this.radioButton11.Text = "120";
-            this.radioButton11.UseVisualStyleBackColor = true;
+            this.d120.AutoSize = true;
+            this.d120.Font = new System.Drawing.Font("Constantia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.d120.Location = new System.Drawing.Point(65, 26);
+            this.d120.Name = "d120";
+            this.d120.Size = new System.Drawing.Size(49, 23);
+            this.d120.TabIndex = 1;
+            this.d120.Text = "120";
+            this.d120.UseVisualStyleBackColor = true;
+            this.d120.CheckedChanged += new System.EventHandler(this.d120_CheckedChanged);
             // 
-            // radioButton12
+            // d115
             // 
-            this.radioButton12.AutoSize = true;
-            this.radioButton12.Font = new System.Drawing.Font("Constantia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.radioButton12.Location = new System.Drawing.Point(6, 26);
-            this.radioButton12.Name = "radioButton12";
-            this.radioButton12.Size = new System.Drawing.Size(45, 23);
-            this.radioButton12.TabIndex = 0;
-            this.radioButton12.TabStop = true;
-            this.radioButton12.Text = "115";
-            this.radioButton12.UseVisualStyleBackColor = true;
+            this.d115.AutoSize = true;
+            this.d115.Checked = true;
+            this.d115.Font = new System.Drawing.Font("Constantia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.d115.Location = new System.Drawing.Point(6, 26);
+            this.d115.Name = "d115";
+            this.d115.Size = new System.Drawing.Size(45, 23);
+            this.d115.TabIndex = 0;
+            this.d115.TabStop = true;
+            this.d115.Text = "115";
+            this.d115.UseVisualStyleBackColor = true;
+            this.d115.CheckedChanged += new System.EventHandler(this.d115_CheckedChanged);
             // 
             // radioButton2
             // 
@@ -557,6 +533,7 @@ namespace DomPecheyKP
             // 
             // InsulationСonsumables
             // 
+            this.InsulationСonsumables.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.InsulationСonsumables.BackgroundColor = System.Drawing.Color.Wheat;
             this.InsulationСonsumables.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.InsulationСonsumables.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -663,6 +640,8 @@ namespace DomPecheyKP
             // NameOfKiln
             // 
             this.NameOfKiln.AllowUserToAddRows = false;
+            this.NameOfKiln.AllowUserToDeleteRows = false;
+            this.NameOfKiln.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.NameOfKiln.BackgroundColor = System.Drawing.Color.Wheat;
             this.NameOfKiln.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.NameOfKiln.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -714,25 +693,27 @@ namespace DomPecheyKP
             this.NewChimneyElements.Size = new System.Drawing.Size(393, 92);
             this.NewChimneyElements.TabIndex = 69;
             // 
-            // button3
+            // deleteChimneyElements
             // 
-            this.button3.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button3.Location = new System.Drawing.Point(538, 552);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(96, 35);
-            this.button3.TabIndex = 71;
-            this.button3.Text = "Удалить";
-            this.button3.UseVisualStyleBackColor = true;
+            this.deleteChimneyElements.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.deleteChimneyElements.Location = new System.Drawing.Point(538, 552);
+            this.deleteChimneyElements.Name = "deleteChimneyElements";
+            this.deleteChimneyElements.Size = new System.Drawing.Size(96, 35);
+            this.deleteChimneyElements.TabIndex = 71;
+            this.deleteChimneyElements.Text = "Удалить";
+            this.deleteChimneyElements.UseVisualStyleBackColor = true;
+            this.deleteChimneyElements.Click += new System.EventHandler(this.deleteChimneyElements_Click);
             // 
-            // button2
+            // addChimneyElements
             // 
-            this.button2.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button2.Location = new System.Drawing.Point(424, 551);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(90, 35);
-            this.button2.TabIndex = 70;
-            this.button2.Text = "Добавить";
-            this.button2.UseVisualStyleBackColor = true;
+            this.addChimneyElements.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.addChimneyElements.Location = new System.Drawing.Point(424, 551);
+            this.addChimneyElements.Name = "addChimneyElements";
+            this.addChimneyElements.Size = new System.Drawing.Size(90, 35);
+            this.addChimneyElements.TabIndex = 70;
+            this.addChimneyElements.Text = "Добавить";
+            this.addChimneyElements.UseVisualStyleBackColor = true;
+            this.addChimneyElements.Click += new System.EventHandler(this.addChimneyElements_Click);
             // 
             // button1
             // 
@@ -760,7 +741,7 @@ namespace DomPecheyKP
             // 
             // ChimneyElements
             // 
-            this.ChimneyElements.AllowUserToAddRows = false;
+            this.ChimneyElements.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.ChimneyElements.BackgroundColor = System.Drawing.Color.Wheat;
             this.ChimneyElements.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.ChimneyElements.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -774,6 +755,36 @@ namespace DomPecheyKP
             this.ChimneyElements.RowTemplate.Height = 25;
             this.ChimneyElements.Size = new System.Drawing.Size(724, 150);
             this.ChimneyElements.TabIndex = 64;
+            this.ChimneyElements.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.ChimneyElements_CellEndEdit);
+            this.ChimneyElements.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.ChimneyElements_RowsAdded);
+            // 
+            // Number
+            // 
+            this.Number.HeaderText = "№ п.п.";
+            this.Number.Name = "Number";
+            this.Number.ReadOnly = true;
+            // 
+            // NameElement
+            // 
+            this.NameElement.FillWeight = 500F;
+            this.NameElement.HeaderText = "Наименование";
+            this.NameElement.Name = "NameElement";
+            // 
+            // CountElement
+            // 
+            this.CountElement.HeaderText = " Кол-во шт.";
+            this.CountElement.Name = "CountElement";
+            // 
+            // PriceElement
+            // 
+            this.PriceElement.HeaderText = "Цена за 1 шт.";
+            this.PriceElement.Name = "PriceElement";
+            // 
+            // SumElement
+            // 
+            this.SumElement.HeaderText = "Цена без скидки";
+            this.SumElement.Name = "SumElement";
+            this.SumElement.ReadOnly = true;
             // 
             // button8
             // 
@@ -826,6 +837,7 @@ namespace DomPecheyKP
             // 
             // InstallationWork
             // 
+            this.InstallationWork.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.InstallationWork.BackgroundColor = System.Drawing.Color.Wheat;
             this.InstallationWork.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.InstallationWork.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -939,6 +951,7 @@ namespace DomPecheyKP
             // 
             // RiggingDelivery
             // 
+            this.RiggingDelivery.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.RiggingDelivery.BackgroundColor = System.Drawing.Color.Wheat;
             this.RiggingDelivery.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.RiggingDelivery.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -1150,13 +1163,14 @@ namespace DomPecheyKP
             this.Controls.Add(this.button4);
             this.Controls.Add(this.NameOfKiln);
             this.Controls.Add(this.NewChimneyElements);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.deleteChimneyElements);
+            this.Controls.Add(this.addChimneyElements);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.ProductType);
             this.Controls.Add(this.ChimneyElements);
             this.Name = "Form1";
             this.Text = "Комерческое предложение";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.Manufacturer.ResumeLayout(false);
             this.Manufacturer.PerformLayout();
             this.MetalThickness.ResumeLayout(false);
@@ -1177,14 +1191,8 @@ namespace DomPecheyKP
         }
 
         #endregion
-
-        private System.Windows.Forms.DataGridViewTextBoxColumn Number;
         private System.Windows.Forms.RadioButton radioButton4;
         private System.Windows.Forms.RadioButton radioButton3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NameElement;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CountElement;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PriceElement;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SumElement;
         private System.Windows.Forms.TextBox ManagerName;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox ClientName;
@@ -1202,14 +1210,14 @@ namespace DomPecheyKP
         private System.Windows.Forms.RadioButton radioButton19;
         private System.Windows.Forms.RadioButton radioButton20;
         private System.Windows.Forms.GroupBox Diameter;
-        private System.Windows.Forms.RadioButton radioButton16;
-        private System.Windows.Forms.RadioButton radioButton15;
-        private System.Windows.Forms.RadioButton radioButton14;
-        private System.Windows.Forms.RadioButton radioButton13;
-        private System.Windows.Forms.RadioButton radioButton9;
-        private System.Windows.Forms.RadioButton radioButton10;
-        private System.Windows.Forms.RadioButton radioButton11;
-        private System.Windows.Forms.RadioButton radioButton12;
+        private System.Windows.Forms.RadioButton d300;
+        private System.Windows.Forms.RadioButton d250;
+        private System.Windows.Forms.RadioButton d200;
+        private System.Windows.Forms.RadioButton d180;
+        private System.Windows.Forms.RadioButton d150;
+        private System.Windows.Forms.RadioButton d130;
+        private System.Windows.Forms.RadioButton d120;
+        private System.Windows.Forms.RadioButton d115;
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.Button button5;
@@ -1236,8 +1244,8 @@ namespace DomPecheyKP
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private System.Windows.Forms.CheckedListBox NewChimneyElements;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button deleteChimneyElements;
+        private System.Windows.Forms.Button addChimneyElements;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.GroupBox ProductType;
         private System.Windows.Forms.DataGridView ChimneyElements;
@@ -1275,6 +1283,11 @@ namespace DomPecheyKP
         private System.Windows.Forms.Label AllSum;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Number;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NameElement;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CountElement;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PriceElement;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SumElement;
     }
 }
 

@@ -13,6 +13,7 @@ using System.IO;
 using iTextSharp;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace DomPecheyKP
 {
@@ -22,7 +23,7 @@ namespace DomPecheyKP
         {
             InitializeComponent();
         }
-
+        Dictionary<string, double> list;
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
 
@@ -33,16 +34,7 @@ namespace DomPecheyKP
 
         }
 
-        private void radioButton10_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void radioButton15_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
+        
 
 
        
@@ -242,19 +234,161 @@ namespace DomPecheyKP
             }
         }
 
-        private void Diameter_Enter(object sender, EventArgs e)
+       
+
+        private void Form1_Load(object sender, EventArgs e)
         {
+            loadElD(2);
+            NameOfKiln.Rows.Add("1","","1","0","0");
+        }
+
+        private void loadElD(int nColumn)
+        {
+            
+            NewChimneyElements.Items.Clear();            
+            ChimneyElements.Rows.Clear();
+
+            list  = new Dictionary<string, double>();
+            Excel.Application ObjWorkExcel = new Excel.Application(); //открыть эксель
+            Excel.Workbook ObjWorkBook = ObjWorkExcel.Workbooks.Open(Environment.CurrentDirectory + @"\ДанныеКП.xlsx", Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing); //открыть файл
+            Excel.Worksheet ObjWorkSheet = (Excel.Worksheet)ObjWorkBook.Sheets[1]; //получить 1 лист
+            var lastCell = ObjWorkSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell);//1 ячейку          
+            for (int i = 3; i < (int)lastCell.Row; i++) // по всем строкам
+            {
+                list.Add(ObjWorkSheet.Cells[i, 1].Text.ToString(), Convert.ToDouble(ObjWorkSheet.Cells[i, nColumn].Text.ToString()));//считываем текст в строку
+                NewChimneyElements.Items.Add(ObjWorkSheet.Cells[i, 1].Text.ToString());
+            }
+            ObjWorkBook.Close(false, Type.Missing, Type.Missing); //закрыть не сохраняя
+            ObjWorkExcel.Quit(); // выйти из экселя
+            NewChimneyElements.Sorted = true;
 
         }
 
-        private void SumChimneyElements_Click(object sender, EventArgs e)
+        private void calculateChimneyElementsSum()
         {
-
+            double sum = 0;
+            foreach (DataGridViewRow row in ChimneyElements.Rows)
+            {
+                sum += Convert.ToDouble(row.Cells[4].Value);
+            }
+            SumChimneyElements.Text = sum.ToString() + " руб.";
         }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
+
+        private void addChimneyElements_Click(object sender, EventArgs e)
+        {
+            int n;
+            if (ChimneyElements.RowCount == 0)
+                n = 1;
+            else
+                n = ChimneyElements.RowCount + 1;
+            foreach (Object checkedItem in NewChimneyElements.CheckedItems)
+            {                
+               ChimneyElements.Rows.Add(n++, checkedItem.ToString(), "1",list[checkedItem.ToString()], list[checkedItem.ToString()]);
+            }
+            while( NewChimneyElements.CheckedItems.Count!=0)
+            {
+                NewChimneyElements.Items.Remove(NewChimneyElements.CheckedItems[0]);
+            }
+            calculateChimneyElementsSum();
+        }
+
+        private void deleteChimneyElements_Click(object sender, EventArgs e)
         {
 
+            while (ChimneyElements.SelectedRows.Count != 0)
+            {
+                if (list.ContainsKey(ChimneyElements.SelectedRows[0].Cells[1].Value.ToString()))
+                NewChimneyElements.Items.Add(ChimneyElements.SelectedRows[0].Cells[1].Value);
+                ChimneyElements.Rows.Remove(ChimneyElements.SelectedRows[0]);
+            }
+
+            for (int i = 0; i < ChimneyElements.RowCount-1; i++)
+            {
+                ChimneyElements.Rows[i].Cells[0].Value=i+1;                
+            }
+            calculateChimneyElementsSum();
+        }
+
+        private void ChimneyElements_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            
+            for (int i = 0; i < ChimneyElements.RowCount-1; i++)
+            {
+                ChimneyElements.Rows[i].Cells[0].Value = i + 1;
+            }
+        }
+
+        private void ChimneyElements_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            int nRow = e.RowIndex;
+            if(e.ColumnIndex==2 || e.ColumnIndex == 3)
+            {
+                ChimneyElements.Rows[nRow].Cells[4].Value = Convert.ToDouble(ChimneyElements.Rows[nRow].Cells[2].Value) * Convert.ToDouble(ChimneyElements.Rows[nRow].Cells[3].Value);
+                calculateChimneyElementsSum();
+            }
+            
+        }
+
+
+
+        private void d115_CheckedChanged(object sender, EventArgs e)
+        {
+
+            RadioButton radioButton = (RadioButton)sender;
+            if (radioButton.Checked)            
+               loadElD(2);
+            
+                        
+        }
+
+        private void d120_CheckedChanged(object sender, EventArgs e)
+        {
+            RadioButton radioButton = (RadioButton)sender;
+            if (radioButton.Checked)
+                loadElD(3);
+        }
+
+        private void d130_CheckedChanged(object sender, EventArgs e)
+        {
+            RadioButton radioButton = (RadioButton)sender;
+            if (radioButton.Checked)
+                loadElD(4);
+        }
+
+        private void d150_CheckedChanged(object sender, EventArgs e)
+        {
+            RadioButton radioButton = (RadioButton)sender;
+            if (radioButton.Checked)
+                loadElD(5);
+        }
+
+        private void d180_CheckedChanged(object sender, EventArgs e)
+        {
+            RadioButton radioButton = (RadioButton)sender;
+            if (radioButton.Checked)
+                loadElD(6);
+        }
+
+        private void d200_CheckedChanged(object sender, EventArgs e)
+        {
+            RadioButton radioButton = (RadioButton)sender;
+            if (radioButton.Checked)
+                loadElD(7);
+        }
+
+        private void d250_CheckedChanged(object sender, EventArgs e)
+        {
+            RadioButton radioButton = (RadioButton)sender;
+            if (radioButton.Checked)
+                loadElD(8);
+        }
+
+        private void d300_CheckedChanged(object sender, EventArgs e)
+        {
+            RadioButton radioButton = (RadioButton)sender;
+            if (radioButton.Checked)
+                loadElD(9);
         }
     }
 }
