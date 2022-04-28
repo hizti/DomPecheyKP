@@ -24,31 +24,31 @@ namespace DomPecheyKP
             InitializeComponent();
         }
         Dictionary<string, double> list;
-        private void radioButton2_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
+        Dictionary<string, double> listIC;
 
         
 
+        private PdfPCell getMidHeader(string str, iTextSharp.text.Font font)
+        {
+            PdfPCell cell = new PdfPCell(new Phrase(new Phrase(str, font)));
+            cell.Colspan = 5;
+            cell.BorderWidthLeft = 0;
+            cell.BorderWidthRight = 0;
+            cell.PaddingBottom = 10;
+            cell.HorizontalAlignment = Element.ALIGN_CENTER;
+            return cell;
+        }
 
-       
 
         private void button1_Click(object sender, EventArgs e)
         {
-            int countColumns = 2;
+            int countColumns = 5;
             string nameOfNewFile = @"newFile.pdf";
             //List<float> heightsRows = new List<float>();
             PdfPTable fTable = new PdfPTable(countColumns);
-
+            int[] firstTablecellwidth = { 10, 51, 17, 11, 11 };
             using (var reader = new PdfReader(@"oldFile.pdf"))
             {
-
                 //Запись в файл для подсчета высоты строк
                 using (var fileStream = new FileStream(nameOfNewFile, FileMode.Create, FileAccess.Write))
                 {
@@ -63,6 +63,15 @@ namespace DomPecheyKP
 
                     System.Text.EncodingProvider ppp = System.Text.CodePagesEncodingProvider.Instance;
                     Encoding.RegisterProvider(ppp);
+
+                    var fontHeaderName = "Sitka Text Bold";
+                    if (!FontFactory.IsRegistered(fontHeaderName))
+                    {
+                        var fontHeaderPath = Environment.GetEnvironmentVariable("SitkaText-Bold.ttf");
+                        FontFactory.Register("SitkaText-Bold.ttf");
+                    }
+                    iTextSharp.text.Font fontHeader = FontFactory.GetFont(fontHeaderName, BaseFont.IDENTITY_H);
+                    fontHeader.Size = 23;
                     var fontName = "Sitka Banner";
                     if (!FontFactory.IsRegistered(fontName))
                     {
@@ -70,58 +79,140 @@ namespace DomPecheyKP
                         FontFactory.Register("Sitka-Banner.ttf");
                     }
                     iTextSharp.text.Font font = FontFactory.GetFont(fontName, BaseFont.IDENTITY_H);
-                    font.Color = iTextSharp.text.BaseColor.WHITE;
-                    font.Size = 35;
+                    font.Color = iTextSharp.text.BaseColor.BLACK;
+                    font.Size = 25;
                     
                     fTable.WidthPercentage = 80;
-                    int[] firstTablecellwidth = { 25, 75 };
                     fTable.SetWidths(firstTablecellwidth);
                     //Добавим в таблицу общий заголовок
                     PdfPCell cell;
+                    cell = new PdfPCell(new Phrase(new Phrase("Номер", fontHeader)));
+                    cell.BorderWidthTop = 0;
+                    cell.BorderWidthLeft = 0;
+                    fTable.AddCell(cell);
+                    cell = new PdfPCell(new Phrase(new Phrase("Наименование", fontHeader)));
+                    cell.BorderWidthTop = 0;
+                    fTable.AddCell(cell);
+                    cell = new PdfPCell(new Phrase(new Phrase("Количество", fontHeader)));
+                    cell.BorderWidthTop = 0;
+                    fTable.AddCell(cell);
+                    cell = new PdfPCell(new Phrase(new Phrase("Цена за шт.", fontHeader)));
+                    cell.BorderWidthTop = 0;
+                    fTable.AddCell(cell);
+                    cell = new PdfPCell(new Phrase(new Phrase("Сумма", fontHeader)));
+                    cell.BorderWidthTop = 0;
+                    cell.BorderWidthRight = 0;
+                    fTable.AddCell(cell);
+                    /////////////////////////////////////////////////////////
 
-                    float sum = 0;
-                    int nRow = 0;
-                    string str = "рррррр ррррррррррррррррррррррррррррр";
-                    for (int j = 0; j < 10; j++)
+                    var a = from RadioButton r in ProductType.Controls where r.Checked == true select r.Text;
+
+                    fTable.AddCell(getMidHeader("1. " + a.First(), font));
+
+                    ///////////////////////////////////////////////////////////////////////////
+                    ///
+                    cell = new PdfPCell(new Phrase(new Phrase(NameOfKiln.Rows[0].Cells[0].Value.ToString(), font)));
+                    cell.BorderWidthTop = 0;
+                    cell.BorderWidthLeft = 0;
+                    fTable.AddCell(cell);
+                    cell = new PdfPCell(new Phrase(new Phrase(NameOfKiln.Rows[0].Cells[1].Value.ToString(), font)));
+                    cell.BorderWidthTop = 0;
+                    fTable.AddCell(cell);
+                    cell = new PdfPCell(new Phrase(new Phrase(NameOfKiln.Rows[0].Cells[2].Value.ToString(), font)));
+                    cell.BorderWidthTop = 0;
+                    fTable.AddCell(cell);
+                    cell = new PdfPCell(new Phrase(new Phrase(NameOfKiln.Rows[0].Cells[3].Value.ToString(), font)));
+                    cell.BorderWidthTop = 0;
+                    fTable.AddCell(cell);
+                    cell = new PdfPCell(new Phrase(new Phrase(NameOfKiln.Rows[0].Cells[4].Value.ToString(), font)));
+                    cell.BorderWidthTop = 0;
+                    cell.BorderWidthRight = 0;
+                    fTable.AddCell(cell);
+
+                    a = from RadioButton r in Manufacturer.Controls where r.Checked == true select r.Text;
+                    string str = "2. " + a.First();
+                    a = from RadioButton r in Diameter.Controls where r.Checked == true select r.Text;
+                    str += " D" + a.First() + " мм";
+                    a = from RadioButton r in MetalThickness.Controls where r.Checked == true select r.Text;
+                    str += " (" + a.First() + " мм)";
+                    
+                    fTable.AddCell(getMidHeader(str,font));
+
+                    for (int j = 0; j < ChimneyElements.RowCount-1; j++)
                     {
-                        for (int k = 0; k < 2; k++)
+                        for (int k = 0; k < countColumns; k++)
                         {
 
-                            cell = new PdfPCell(new Phrase(new Phrase(str, font)));
-                            str += " 123";
+                            cell = new PdfPCell(new Phrase(new Phrase(ChimneyElements.Rows[j].Cells[k].Value.ToString(), font)));
+                            if (k == 0)
+                                cell.BorderWidthLeft = 0;
+                            else if (k == countColumns - 1)
+                                cell.BorderWidthRight = 0;
+                            cell.PaddingBottom = 10;
+                            fTable.AddCell(cell);
+                        }   
+                    }
+
+                    
+                    fTable.AddCell(getMidHeader("3. Изоляционные и расходные материалы", font));
+
+
+
+                    for (int j = 0; j < InsulationСonsumables.RowCount - 1; j++)
+                    {
+                        for (int k = 0; k < countColumns; k++)
+                        {
+
+                            cell = new PdfPCell(new Phrase(new Phrase(InsulationСonsumables.Rows[j].Cells[k].Value.ToString(), font)));
+                            if (k == 0)
+                                cell.BorderWidthLeft = 0;
+                            else if (k == countColumns - 1)
+                                cell.BorderWidthRight = 0;
+                            cell.PaddingBottom = 10;
                             fTable.AddCell(cell);
                         }
-                        /*sum += fTable.GetRowHeight(j);
-                        nRow++;
-                        if (sum > 600)
-                        {
-                            Paragraph p1 = new Paragraph("     ");
-                            p1.SpacingAfter = 100;
-                            document.Add(p1);
-                            fTable.SpacingBefore = 100;
-                            document.Add(fTable);
-
-                            document.NewPage();
-                            importedPage = writer.GetImportedPage(reader, 1);
-                            contentByte = writer.DirectContent;
-                            contentByte.AddTemplate(importedPage, 0, 0);
-
-                            fTable = new PdfPTable(2);
-                            fTable.WidthPercentage = 80;
-                            fTable.SetWidths(firstTablecellwidth);
-
-                            fTable.DeleteRow(nRow);
-                            sum = 0;
-                            nRow = 0;
-                            j--;
-                        }*/
-
                     }
-                    document.Add(fTable);
-                    /*for (int i = 0; i < fTable.Rows.Count; i++)
+
+
+                    
+                    fTable.AddCell(getMidHeader("4. Монтажные работы,выезд на замер", font));
+
+                    for (int j = 0; j < InstallationWork.RowCount - 1; j++)
                     {
-                        heightsRows.Add(fTable.Rows[i].MaxHeights);
-                    }*/
+                        for (int k = 0; k < countColumns; k++)
+                        {
+
+                            cell = new PdfPCell(new Phrase(new Phrase(InstallationWork.Rows[j].Cells[k].Value.ToString(), font)));
+                            if (k == 0)
+                                cell.BorderWidthLeft = 0;
+                            else if (k == countColumns - 1)
+                                cell.BorderWidthRight = 0;
+                            cell.PaddingBottom = 10;
+                            fTable.AddCell(cell);
+                        }
+                    }
+
+
+                    fTable.AddCell(getMidHeader("5. Такелажные работы и доставка", font));
+
+                    for (int j = 0; j < RiggingDelivery.RowCount - 1; j++)
+                    {
+                        for (int k = 0; k < countColumns; k++)
+                        {
+
+                            cell = new PdfPCell(new Phrase(new Phrase(RiggingDelivery.Rows[j].Cells[k].Value.ToString(), font)));
+                            if (k == 0)
+                                cell.BorderWidthLeft = 0;
+                            else if (k == countColumns - 1)
+                                cell.BorderWidthRight = 0;
+                            cell.PaddingBottom = 10;
+                            fTable.AddCell(cell);
+                        }
+                    }
+
+
+                    document.Add(fTable); 
+                    
                     document.Close();
                     writer.Close();
                 }
@@ -170,7 +261,7 @@ namespace DomPecheyKP
                             contentByte.EndText();
                         }
 
-                        if (i == 1)
+                        if (i == 11)
                         {
 
                             System.Text.EncodingProvider ppp = System.Text.CodePagesEncodingProvider.Instance;
@@ -192,12 +283,15 @@ namespace DomPecheyKP
                             contentByte.EndText();
                         }
 
-                        if (i == 10)
+                        if (i == 8)//8
                         {
-                            int maxHeightTable = 800;
+                            int maxHeightTable = 330;
                             Paragraph p;
 
                             PdfPTable sTable = new PdfPTable(countColumns);
+                            sTable.WidthPercentage = 80;
+                            sTable.SetWidths(firstTablecellwidth);
+
                             float sumHeight = 0;
                             for (int j = 0; j < fTable.Rows.Count; j++)
                             {
@@ -213,6 +307,7 @@ namespace DomPecheyKP
                                     contentByte.AddTemplate(importedPage, 0, 0);
                                     sumHeight = 0;
                                     sTable = new PdfPTable(countColumns);
+                                    sTable.SetWidths(firstTablecellwidth);
                                 }
                                 sTable.Rows.Add(fTable.GetRow(j));
                                 sumHeight += fTable.Rows[j].MaxHeights;
@@ -240,6 +335,33 @@ namespace DomPecheyKP
         {
             loadElD(2);
             NameOfKiln.Rows.Add("1","","1","0","0");
+            loadIС();
+
+            //удалить
+            //foreach (Object checkedItem in NewChimneyElements.Items)
+            //{
+            //    ChimneyElements.Rows.Add("1", checkedItem.ToString(), "1", list[checkedItem.ToString()], list[checkedItem.ToString()]);
+            //}
+
+        }
+
+        private void loadIС()
+        {
+
+            listIC = new Dictionary<string, double>();
+            Excel.Application ObjWorkExcel = new Excel.Application(); //открыть эксель
+            Excel.Workbook ObjWorkBook = ObjWorkExcel.Workbooks.Open(Environment.CurrentDirectory + @"\ДанныеКП.xlsx", Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing); //открыть файл
+            Excel.Worksheet ObjWorkSheet = (Excel.Worksheet)ObjWorkBook.Sheets[3]; //получить 1 лист
+            var lastCell = ObjWorkSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell);//1 ячейку          
+            for (int i = 2; i < (int)lastCell.Row; i++) // по всем строкам
+            {
+                listIC.Add(ObjWorkSheet.Cells[i, 1].Text.ToString(), Convert.ToDouble(ObjWorkSheet.Cells[i, 2].Text.ToString()));//считываем текст в строку
+                NewInsulationСonsumables.Items.Add(ObjWorkSheet.Cells[i, 1].Text.ToString());
+            }
+            ObjWorkBook.Close(false, Type.Missing, Type.Missing); //закрыть не сохраняя
+            ObjWorkExcel.Quit(); // выйти из экселя
+            NewInsulationСonsumables.Sorted = true;
+
         }
 
         private void loadElD(int nColumn)
@@ -308,6 +430,25 @@ namespace DomPecheyKP
                 ChimneyElements.Rows[i].Cells[0].Value=i+1;                
             }
             calculateChimneyElementsSum();
+
+            checkAllChimneyElement();
+
+        }
+
+        private void checkAllChimneyElement()
+        {
+            NewChimneyElements.Items.Clear();
+            foreach (string str in list.Keys)
+            {
+                bool f = false;
+                for (int i = 0; i < ChimneyElements.RowCount - 1; i++)
+                {
+                    if (str == ChimneyElements.Rows[i].Cells[1].Value.ToString())
+                        f = true;                    
+                }
+                if (!f)
+                    NewChimneyElements.Items.Add(str);
+            }
         }
 
         private void ChimneyElements_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
@@ -327,7 +468,7 @@ namespace DomPecheyKP
                 ChimneyElements.Rows[nRow].Cells[4].Value = Convert.ToDouble(ChimneyElements.Rows[nRow].Cells[2].Value) * Convert.ToDouble(ChimneyElements.Rows[nRow].Cells[3].Value);
                 calculateChimneyElementsSum();
             }
-            
+            checkAllChimneyElement();
         }
 
 
