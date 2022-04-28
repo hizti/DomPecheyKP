@@ -336,7 +336,7 @@ namespace DomPecheyKP
         {
             loadElD(2);
             NameOfKiln.Rows.Add("1","","1","0","0");
-            loadIС();
+           //loadIС();
 
             //удалить
             //foreach (Object checkedItem in NewChimneyElements.Items)
@@ -474,7 +474,7 @@ namespace DomPecheyKP
             {
 
                 ChimneyElements.Rows[nRow].Cells[4].Value = Convert.ToDouble(ChimneyElements.Rows[nRow].Cells[2].Value) * Convert.ToDouble(ChimneyElements.Rows[nRow].Cells[3].Value);
-                calculateChimneyElementsSum();
+               calculateChimneyElementsSum();
             }
             checkAllChimneyElement();
         }
@@ -561,7 +561,7 @@ namespace DomPecheyKP
                 }
                 else if (currentDataGridView.CurrentCell.ColumnIndex == 3)
                 {
-                    if (!Regex.IsMatch(editingControl.Text + e.KeyChar, @"^[0-9,.]{0,10}$"))
+                    if (!Regex.IsMatch(editingControl.Text + e.KeyChar, @"^[0-9,]{0,10}$"))
                         e.Handled = true;
                 }
                    
@@ -577,10 +577,21 @@ namespace DomPecheyKP
 
         private void NameOfKiln_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            int nRow = e.RowIndex;            
+           int nRow = e.RowIndex;
+           var isValid = Regex.IsMatch(NameOfKiln.Rows[nRow].Cells[e.ColumnIndex].Value.ToString(), @"^[0-9]*[,]?[0-9]+$");
             if (e.ColumnIndex == 2 || e.ColumnIndex == 3)
+            {
+                if (!isValid)
+                {
+                    MessageBox.Show("Ошибка при вводе числа. Введите значение заново");
+                    NameOfKiln.Rows[nRow].Cells[e.ColumnIndex].Value = "0";
+                }          
                 NameOfKiln.Rows[nRow].Cells[4].Value = Convert.ToDouble(NameOfKiln.Rows[nRow].Cells[2].Value) * Convert.ToDouble(NameOfKiln.Rows[nRow].Cells[3].Value);
-                
+            }
+
+
+
+
         }
 
         private void ChimneyElements_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
