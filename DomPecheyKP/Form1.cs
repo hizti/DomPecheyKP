@@ -14,6 +14,7 @@ using iTextSharp;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using Excel = Microsoft.Office.Interop.Excel;
+using System.Text.RegularExpressions;
 
 namespace DomPecheyKP
 {
@@ -249,29 +250,35 @@ namespace DomPecheyKP
             ChimneyElements.Rows.Clear();
 
             list  = new Dictionary<string, double>();
-            Excel.Application ObjWorkExcel = new Excel.Application(); //открыть эксель
+            Excel.Application ObjWorkExcel = new Excel.Application(); 
             Excel.Workbook ObjWorkBook = ObjWorkExcel.Workbooks.Open(Environment.CurrentDirectory + @"\ДанныеКП.xlsx", Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing); //открыть файл
             Excel.Worksheet ObjWorkSheet = (Excel.Worksheet)ObjWorkBook.Sheets[1]; //получить 1 лист
             var lastCell = ObjWorkSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell);//1 ячейку          
             for (int i = 3; i < (int)lastCell.Row; i++) // по всем строкам
             {
-                list.Add(ObjWorkSheet.Cells[i, 1].Text.ToString(), Convert.ToDouble(ObjWorkSheet.Cells[i, nColumn].Text.ToString()));//считываем текст в строку
+                try
+                {
+                    list.Add(ObjWorkSheet.Cells[i, 1].Text.ToString(), Convert.ToDouble(ObjWorkSheet.Cells[i, nColumn].Text.ToString()));//считываем текст в строку
+                  
+                }
+                catch (Exception ex) 
+                {
+                    list.Add(ObjWorkSheet.Cells[i, 1].Text.ToString(), Convert.ToDouble("0"));//считываем текст в строку
+                    
+                }
                 NewChimneyElements.Items.Add(ObjWorkSheet.Cells[i, 1].Text.ToString());
             }
-            ObjWorkBook.Close(false, Type.Missing, Type.Missing); //закрыть не сохраняя
-            ObjWorkExcel.Quit(); // выйти из экселя
-            NewChimneyElements.Sorted = true;
-
+            ObjWorkBook.Close(false, Type.Missing, Type.Missing);
+            ObjWorkExcel.Quit(); 
+           
         }
 
         private void calculateChimneyElementsSum()
         {
             double sum = 0;
             foreach (DataGridViewRow row in ChimneyElements.Rows)
-            {
                 sum += Convert.ToDouble(row.Cells[4].Value);
-            }
-            SumChimneyElements.Text = sum.ToString() + " руб.";
+            SumChimneyElements.Text = sum.ToString() + " Руб.";
         }
 
 
@@ -324,13 +331,12 @@ namespace DomPecheyKP
             int nRow = e.RowIndex;
             if(e.ColumnIndex==2 || e.ColumnIndex == 3)
             {
+
                 ChimneyElements.Rows[nRow].Cells[4].Value = Convert.ToDouble(ChimneyElements.Rows[nRow].Cells[2].Value) * Convert.ToDouble(ChimneyElements.Rows[nRow].Cells[3].Value);
                 calculateChimneyElementsSum();
             }
             
         }
-
-
 
         private void d115_CheckedChanged(object sender, EventArgs e)
         {
@@ -389,6 +395,58 @@ namespace DomPecheyKP
             RadioButton radioButton = (RadioButton)sender;
             if (radioButton.Checked)
                 loadElD(9);
+        }
+
+        private void OwnD_CheckedChanged(object sender, EventArgs e)
+        {
+            RadioButton radioButton = (RadioButton)sender;
+            if (radioButton.Checked)
+                loadElD(0);
+        }
+
+
+        private DataGridView currentDataGridView;
+        
+        private void EditingControl_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar))
+            {
+                Control editingControl = (Control)sender;
+             
+                if (currentDataGridView.CurrentCell.ColumnIndex == 2)
+                {
+                    if (!Regex.IsMatch(editingControl.Text + e.KeyChar, "^[0-9]{0,4}$"))
+                        e.Handled = true;
+                }
+                else if (currentDataGridView.CurrentCell.ColumnIndex == 3)
+                {
+                    if (!Regex.IsMatch(editingControl.Text + e.KeyChar, @"^[0-9,.]{0,10}$"))
+                        e.Handled = true;
+                }
+                   
+            }
+        }
+     
+        private void NameOfKiln_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            currentDataGridView = NameOfKiln;
+            NameOfKiln.EditingControl.KeyPress -= EditingControl_KeyPress;
+            NameOfKiln.EditingControl.KeyPress += EditingControl_KeyPress;
+        }
+
+        private void NameOfKiln_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            int nRow = e.RowIndex;            
+            if (e.ColumnIndex == 2 || e.ColumnIndex == 3)
+                NameOfKiln.Rows[nRow].Cells[4].Value = Convert.ToDouble(NameOfKiln.Rows[nRow].Cells[2].Value) * Convert.ToDouble(NameOfKiln.Rows[nRow].Cells[3].Value);
+                
+        }
+
+        private void ChimneyElements_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            currentDataGridView = ChimneyElements;
+            ChimneyElements.EditingControl.KeyPress -= EditingControl_KeyPress;
+            ChimneyElements.EditingControl.KeyPress += EditingControl_KeyPress;
         }
     }
 }

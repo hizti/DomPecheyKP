@@ -29,8 +29,8 @@ namespace DomPecheyKP
         /// </summary>
         private void InitializeComponent()
         {
-            this.radioButton4 = new System.Windows.Forms.RadioButton();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
+            this.BathOven = new System.Windows.Forms.RadioButton();
+            this.StoveFireplace = new System.Windows.Forms.RadioButton();
             this.ManagerName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.ClientName = new System.Windows.Forms.TextBox();
@@ -48,6 +48,8 @@ namespace DomPecheyKP
             this.radioButton19 = new System.Windows.Forms.RadioButton();
             this.radioButton20 = new System.Windows.Forms.RadioButton();
             this.Diameter = new System.Windows.Forms.GroupBox();
+            this.OwnValue = new System.Windows.Forms.NumericUpDown();
+            this.OwnD = new System.Windows.Forms.RadioButton();
             this.d300 = new System.Windows.Forms.RadioButton();
             this.d250 = new System.Windows.Forms.RadioButton();
             this.d200 = new System.Windows.Forms.RadioButton();
@@ -56,8 +58,8 @@ namespace DomPecheyKP
             this.d130 = new System.Windows.Forms.RadioButton();
             this.d120 = new System.Windows.Forms.RadioButton();
             this.d115 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.FireplaceInsert = new System.Windows.Forms.RadioButton();
+            this.HeatingFurnace = new System.Windows.Forms.RadioButton();
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
@@ -129,6 +131,7 @@ namespace DomPecheyKP
             this.Manufacturer.SuspendLayout();
             this.MetalThickness.SuspendLayout();
             this.Diameter.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.OwnValue)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.InsulationСonsumables)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NameOfKiln)).BeginInit();
             this.ProductType.SuspendLayout();
@@ -138,29 +141,29 @@ namespace DomPecheyKP
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
-            // radioButton4
+            // BathOven
             // 
-            this.radioButton4.AutoSize = true;
-            this.radioButton4.Font = new System.Drawing.Font("Constantia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.radioButton4.Location = new System.Drawing.Point(561, 26);
-            this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(119, 23);
-            this.radioButton4.TabIndex = 3;
-            this.radioButton4.TabStop = true;
-            this.radioButton4.Text = "Банная печь";
-            this.radioButton4.UseVisualStyleBackColor = true;
+            this.BathOven.AutoSize = true;
+            this.BathOven.Font = new System.Drawing.Font("Constantia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.BathOven.Location = new System.Drawing.Point(561, 26);
+            this.BathOven.Name = "BathOven";
+            this.BathOven.Size = new System.Drawing.Size(119, 23);
+            this.BathOven.TabIndex = 3;
+            this.BathOven.TabStop = true;
+            this.BathOven.Text = "Банная печь";
+            this.BathOven.UseVisualStyleBackColor = true;
             // 
-            // radioButton3
+            // StoveFireplace
             // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Font = new System.Drawing.Font("Constantia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.radioButton3.Location = new System.Drawing.Point(387, 26);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(117, 23);
-            this.radioButton3.TabIndex = 2;
-            this.radioButton3.TabStop = true;
-            this.radioButton3.Text = "Печь-камин";
-            this.radioButton3.UseVisualStyleBackColor = true;
+            this.StoveFireplace.AutoSize = true;
+            this.StoveFireplace.Font = new System.Drawing.Font("Constantia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.StoveFireplace.Location = new System.Drawing.Point(387, 26);
+            this.StoveFireplace.Name = "StoveFireplace";
+            this.StoveFireplace.Size = new System.Drawing.Size(117, 23);
+            this.StoveFireplace.TabIndex = 2;
+            this.StoveFireplace.TabStop = true;
+            this.StoveFireplace.Text = "Печь-камин";
+            this.StoveFireplace.UseVisualStyleBackColor = true;
             // 
             // ManagerName
             // 
@@ -344,6 +347,8 @@ namespace DomPecheyKP
             // 
             // Diameter
             // 
+            this.Diameter.Controls.Add(this.OwnValue);
+            this.Diameter.Controls.Add(this.OwnD);
             this.Diameter.Controls.Add(this.d300);
             this.Diameter.Controls.Add(this.d250);
             this.Diameter.Controls.Add(this.d200);
@@ -355,16 +360,50 @@ namespace DomPecheyKP
             this.Diameter.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.Diameter.Location = new System.Drawing.Point(225, 303);
             this.Diameter.Name = "Diameter";
-            this.Diameter.Size = new System.Drawing.Size(522, 63);
+            this.Diameter.Size = new System.Drawing.Size(522, 81);
             this.Diameter.TabIndex = 63;
             this.Diameter.TabStop = false;
             this.Diameter.Text = "Диамметр";
+            // 
+            // OwnValue
+            // 
+            this.OwnValue.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.OwnValue.Location = new System.Drawing.Point(435, 45);
+            this.OwnValue.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.OwnValue.Name = "OwnValue";
+            this.OwnValue.Size = new System.Drawing.Size(64, 27);
+            this.OwnValue.TabIndex = 9;
+            this.OwnValue.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            // 
+            // OwnD
+            // 
+            this.OwnD.AutoSize = true;
+            this.OwnD.Font = new System.Drawing.Font("Constantia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.OwnD.Location = new System.Drawing.Point(435, 18);
+            this.OwnD.Name = "OwnD";
+            this.OwnD.Size = new System.Drawing.Size(64, 23);
+            this.OwnD.TabIndex = 8;
+            this.OwnD.Text = "Свой";
+            this.OwnD.UseVisualStyleBackColor = true;
+            this.OwnD.CheckedChanged += new System.EventHandler(this.OwnD_CheckedChanged);
             // 
             // d300
             // 
             this.d300.AutoSize = true;
             this.d300.Font = new System.Drawing.Font("Constantia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.d300.Location = new System.Drawing.Point(450, 28);
+            this.d300.Location = new System.Drawing.Point(366, 36);
             this.d300.Name = "d300";
             this.d300.Size = new System.Drawing.Size(52, 23);
             this.d300.TabIndex = 7;
@@ -376,7 +415,7 @@ namespace DomPecheyKP
             // 
             this.d250.AutoSize = true;
             this.d250.Font = new System.Drawing.Font("Constantia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.d250.Location = new System.Drawing.Point(384, 28);
+            this.d250.Location = new System.Drawing.Point(314, 36);
             this.d250.Name = "d250";
             this.d250.Size = new System.Drawing.Size(52, 23);
             this.d250.TabIndex = 6;
@@ -388,7 +427,7 @@ namespace DomPecheyKP
             // 
             this.d200.AutoSize = true;
             this.d200.Font = new System.Drawing.Font("Constantia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.d200.Location = new System.Drawing.Point(317, 28);
+            this.d200.Location = new System.Drawing.Point(261, 36);
             this.d200.Name = "d200";
             this.d200.Size = new System.Drawing.Size(53, 23);
             this.d200.TabIndex = 5;
@@ -400,7 +439,7 @@ namespace DomPecheyKP
             // 
             this.d180.AutoSize = true;
             this.d180.Font = new System.Drawing.Font("Constantia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.d180.Location = new System.Drawing.Point(253, 28);
+            this.d180.Location = new System.Drawing.Point(211, 36);
             this.d180.Name = "d180";
             this.d180.Size = new System.Drawing.Size(50, 23);
             this.d180.TabIndex = 4;
@@ -412,7 +451,7 @@ namespace DomPecheyKP
             // 
             this.d150.AutoSize = true;
             this.d150.Font = new System.Drawing.Font("Constantia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.d150.Location = new System.Drawing.Point(190, 26);
+            this.d150.Location = new System.Drawing.Point(162, 34);
             this.d150.Name = "d150";
             this.d150.Size = new System.Drawing.Size(49, 23);
             this.d150.TabIndex = 3;
@@ -424,7 +463,7 @@ namespace DomPecheyKP
             // 
             this.d130.AutoSize = true;
             this.d130.Font = new System.Drawing.Font("Constantia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.d130.Location = new System.Drawing.Point(128, 26);
+            this.d130.Location = new System.Drawing.Point(114, 34);
             this.d130.Name = "d130";
             this.d130.Size = new System.Drawing.Size(48, 23);
             this.d130.TabIndex = 2;
@@ -436,7 +475,7 @@ namespace DomPecheyKP
             // 
             this.d120.AutoSize = true;
             this.d120.Font = new System.Drawing.Font("Constantia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.d120.Location = new System.Drawing.Point(65, 26);
+            this.d120.Location = new System.Drawing.Point(65, 34);
             this.d120.Name = "d120";
             this.d120.Size = new System.Drawing.Size(49, 23);
             this.d120.TabIndex = 1;
@@ -449,7 +488,7 @@ namespace DomPecheyKP
             this.d115.AutoSize = true;
             this.d115.Checked = true;
             this.d115.Font = new System.Drawing.Font("Constantia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.d115.Location = new System.Drawing.Point(6, 26);
+            this.d115.Location = new System.Drawing.Point(20, 34);
             this.d115.Name = "d115";
             this.d115.Size = new System.Drawing.Size(45, 23);
             this.d115.TabIndex = 0;
@@ -458,29 +497,29 @@ namespace DomPecheyKP
             this.d115.UseVisualStyleBackColor = true;
             this.d115.CheckedChanged += new System.EventHandler(this.d115_CheckedChanged);
             // 
-            // radioButton2
+            // FireplaceInsert
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Font = new System.Drawing.Font("Constantia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.radioButton2.Location = new System.Drawing.Point(6, 26);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(149, 23);
-            this.radioButton2.TabIndex = 1;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "Каминная топка";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.FireplaceInsert.AutoSize = true;
+            this.FireplaceInsert.Font = new System.Drawing.Font("Constantia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.FireplaceInsert.Location = new System.Drawing.Point(6, 26);
+            this.FireplaceInsert.Name = "FireplaceInsert";
+            this.FireplaceInsert.Size = new System.Drawing.Size(149, 23);
+            this.FireplaceInsert.TabIndex = 1;
+            this.FireplaceInsert.TabStop = true;
+            this.FireplaceInsert.Text = "Каминная топка";
+            this.FireplaceInsert.UseVisualStyleBackColor = true;
             // 
-            // radioButton1
+            // HeatingFurnace
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Font = new System.Drawing.Font("Constantia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.radioButton1.Location = new System.Drawing.Point(169, 26);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(173, 23);
-            this.radioButton1.TabIndex = 0;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Отопительная печь";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.HeatingFurnace.AutoSize = true;
+            this.HeatingFurnace.Font = new System.Drawing.Font("Constantia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.HeatingFurnace.Location = new System.Drawing.Point(169, 26);
+            this.HeatingFurnace.Name = "HeatingFurnace";
+            this.HeatingFurnace.Size = new System.Drawing.Size(173, 23);
+            this.HeatingFurnace.TabIndex = 0;
+            this.HeatingFurnace.TabStop = true;
+            this.HeatingFurnace.Text = "Отопительная печь";
+            this.HeatingFurnace.UseVisualStyleBackColor = true;
             // 
             // button5
             // 
@@ -514,11 +553,13 @@ namespace DomPecheyKP
             // 
             // NewInsulationСonsumables
             // 
+            this.NewInsulationСonsumables.CheckOnClick = true;
             this.NewInsulationСonsumables.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.NewInsulationСonsumables.FormattingEnabled = true;
             this.NewInsulationСonsumables.Location = new System.Drawing.Point(23, 797);
             this.NewInsulationСonsumables.Name = "NewInsulationСonsumables";
             this.NewInsulationСonsumables.Size = new System.Drawing.Size(393, 92);
+            this.NewInsulationСonsumables.Sorted = true;
             this.NewInsulationСonsumables.TabIndex = 76;
             // 
             // label5
@@ -655,6 +696,8 @@ namespace DomPecheyKP
             this.NameOfKiln.RowTemplate.Height = 25;
             this.NameOfKiln.Size = new System.Drawing.Size(724, 81);
             this.NameOfKiln.TabIndex = 72;
+            this.NameOfKiln.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.NameOfKiln_CellEndEdit);
+            this.NameOfKiln.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.NameOfKiln_EditingControlShowing);
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -667,7 +710,6 @@ namespace DomPecheyKP
             this.dataGridViewTextBoxColumn2.FillWeight = 500F;
             this.dataGridViewTextBoxColumn2.HeaderText = "Наименование";
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn3
             // 
@@ -686,6 +728,7 @@ namespace DomPecheyKP
             // 
             // NewChimneyElements
             // 
+            this.NewChimneyElements.CheckOnClick = true;
             this.NewChimneyElements.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.NewChimneyElements.FormattingEnabled = true;
             this.NewChimneyElements.Location = new System.Drawing.Point(23, 550);
@@ -727,10 +770,10 @@ namespace DomPecheyKP
             // 
             // ProductType
             // 
-            this.ProductType.Controls.Add(this.radioButton4);
-            this.ProductType.Controls.Add(this.radioButton3);
-            this.ProductType.Controls.Add(this.radioButton2);
-            this.ProductType.Controls.Add(this.radioButton1);
+            this.ProductType.Controls.Add(this.BathOven);
+            this.ProductType.Controls.Add(this.StoveFireplace);
+            this.ProductType.Controls.Add(this.FireplaceInsert);
+            this.ProductType.Controls.Add(this.HeatingFurnace);
             this.ProductType.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ProductType.Location = new System.Drawing.Point(23, 46);
             this.ProductType.Name = "ProductType";
@@ -756,6 +799,7 @@ namespace DomPecheyKP
             this.ChimneyElements.Size = new System.Drawing.Size(724, 150);
             this.ChimneyElements.TabIndex = 64;
             this.ChimneyElements.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.ChimneyElements_CellEndEdit);
+            this.ChimneyElements.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.ChimneyElements_EditingControlShowing);
             this.ChimneyElements.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.ChimneyElements_RowsAdded);
             // 
             // Number
@@ -818,11 +862,13 @@ namespace DomPecheyKP
             // 
             // NewInstallationWork
             // 
+            this.NewInstallationWork.CheckOnClick = true;
             this.NewInstallationWork.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.NewInstallationWork.FormattingEnabled = true;
             this.NewInstallationWork.Location = new System.Drawing.Point(22, 1100);
             this.NewInstallationWork.Name = "NewInstallationWork";
             this.NewInstallationWork.Size = new System.Drawing.Size(393, 92);
+            this.NewInstallationWork.Sorted = true;
             this.NewInstallationWork.TabIndex = 88;
             // 
             // label11
@@ -932,11 +978,13 @@ namespace DomPecheyKP
             // 
             // NewRiggingDelivery
             // 
+            this.NewRiggingDelivery.CheckOnClick = true;
             this.NewRiggingDelivery.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.NewRiggingDelivery.FormattingEnabled = true;
             this.NewRiggingDelivery.Location = new System.Drawing.Point(23, 1358);
             this.NewRiggingDelivery.Name = "NewRiggingDelivery";
             this.NewRiggingDelivery.Size = new System.Drawing.Size(393, 92);
+            this.NewRiggingDelivery.Sorted = true;
             this.NewRiggingDelivery.TabIndex = 96;
             // 
             // label10
@@ -1177,6 +1225,7 @@ namespace DomPecheyKP
             this.MetalThickness.PerformLayout();
             this.Diameter.ResumeLayout(false);
             this.Diameter.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.OwnValue)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.InsulationСonsumables)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NameOfKiln)).EndInit();
             this.ProductType.ResumeLayout(false);
@@ -1191,8 +1240,8 @@ namespace DomPecheyKP
         }
 
         #endregion
-        private System.Windows.Forms.RadioButton radioButton4;
-        private System.Windows.Forms.RadioButton radioButton3;
+        private System.Windows.Forms.RadioButton BathOven;
+        private System.Windows.Forms.RadioButton StoveFireplace;
         private System.Windows.Forms.TextBox ManagerName;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox ClientName;
@@ -1218,8 +1267,8 @@ namespace DomPecheyKP
         private System.Windows.Forms.RadioButton d130;
         private System.Windows.Forms.RadioButton d120;
         private System.Windows.Forms.RadioButton d115;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton FireplaceInsert;
+        private System.Windows.Forms.RadioButton HeatingFurnace;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button7;
@@ -1238,11 +1287,6 @@ namespace DomPecheyKP
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.DataGridView NameOfKiln;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private System.Windows.Forms.CheckedListBox NewChimneyElements;
         private System.Windows.Forms.Button deleteChimneyElements;
         private System.Windows.Forms.Button addChimneyElements;
@@ -1288,6 +1332,13 @@ namespace DomPecheyKP
         private System.Windows.Forms.DataGridViewTextBoxColumn CountElement;
         private System.Windows.Forms.DataGridViewTextBoxColumn PriceElement;
         private System.Windows.Forms.DataGridViewTextBoxColumn SumElement;
+        private System.Windows.Forms.NumericUpDown OwnValue;
+        private System.Windows.Forms.RadioButton OwnD;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
     }
 }
 
