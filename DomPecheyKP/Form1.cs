@@ -28,7 +28,9 @@ namespace DomPecheyKP
         Dictionary<string, double> listIC;
         string nameOfSheet2 = "Изоляц и расход материалы";
         string nameOfSheet3 = "Монтажные работы";
-
+        Excel.Application ObjWorkExcel;
+        Excel.Worksheet ObjWorkSheet;
+        Excel.Workbook ObjWorkBook;
 
         private PdfPCell getMidHeader(string str, iTextSharp.text.Font font)
         {
@@ -133,16 +135,8 @@ namespace DomPecheyKP
 
                     a = from RadioButton r in Manufacturer.Controls where r.Checked == true select r.Text;
                     string str = "2. " + a.First();
-                    if (OwnD.Checked)
-                    {
-                        str += " D" + OwnValue.Value.ToString() + " мм";
-                    }
-                    else
-                    {
-                        a = from RadioButton r in Diameter.Controls.OfType<RadioButton>() where (r.Checked) == true select r.Text;
-                         
-                        str += " D" + a.First() + " мм";
-                    }                    
+                    a = from RadioButton r in Diameter.Controls where r.Checked == true select r.Text;
+                    str += " D" + a.First() + " мм";
                     a = from RadioButton r in MetalThickness.Controls where r.Checked == true select r.Text;
                     str += " (" + a.First() + " мм)";
                     
@@ -343,20 +337,20 @@ namespace DomPecheyKP
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            ObjWorkExcel = new Excel.Application();
+            ObjWorkBook = ObjWorkExcel.Workbooks.Open(Environment.CurrentDirectory + @"\ДанныеКП.xlsx", Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing); //открыть файл
             loadElD(2);
             NameOfKiln.Rows.Add("1","","1","0","0");
            loadIС();
 
-            //удалить
-            foreach (Object checkedItem in NewChimneyElements.Items)
-            {
-                ChimneyElements.Rows.Add("1", checkedItem.ToString(), "1", list[checkedItem.ToString()], list[checkedItem.ToString()]);
-            }
 
-            foreach (Object checkedItem in NewInsulationСonsumables.Items)
-            {
-                InsulationСonsumables.Rows.Add("1", checkedItem.ToString(), "1", listIC[checkedItem.ToString()], listIC[checkedItem.ToString()]);
-            }
+            //loadIС();
+
+            //удалить
+            //foreach (Object checkedItem in NewChimneyElements.Items)
+            //{
+            //    ChimneyElements.Rows.Add("1", checkedItem.ToString(), "1", list[checkedItem.ToString()], list[checkedItem.ToString()]);
+            //}
 
         }
 
@@ -364,9 +358,7 @@ namespace DomPecheyKP
         {
 
             listIC = new Dictionary<string, double>();
-            Excel.Application ObjWorkExcel = new Excel.Application(); //открыть эксель
-            Excel.Workbook ObjWorkBook = ObjWorkExcel.Workbooks.Open(Environment.CurrentDirectory + @"\ДанныеКП.xlsx", Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing); //открыть файл
-            Excel.Worksheet ObjWorkSheet = (Excel.Worksheet)ObjWorkBook.Sheets[nameOfSheet2]; //получить 1 лист
+            Excel.Worksheet ObjWorkSheet = (Excel.Worksheet)ObjWorkBook.Sheets[3]; //получить 1 лист
             var lastCell = ObjWorkSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell);//1 ячейку          
             for (int i = 2; i < (int)lastCell.Row; i++) // по всем строкам
             {
@@ -386,9 +378,8 @@ namespace DomPecheyKP
             ChimneyElements.Rows.Clear();
 
             list  = new Dictionary<string, double>();
-            Excel.Application ObjWorkExcel = new Excel.Application(); 
-            Excel.Workbook ObjWorkBook = ObjWorkExcel.Workbooks.Open(Environment.CurrentDirectory + @"\ДанныеКП.xlsx", Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing); //открыть файл
-            Excel.Worksheet ObjWorkSheet = (Excel.Worksheet)ObjWorkBook.Sheets[1]; //получить 1 лист
+             
+            ObjWorkSheet = (Excel.Worksheet)ObjWorkBook.Sheets[1]; //получить 1 лист
             var lastCell = ObjWorkSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell);//1 ячейку          
             for (int i = 3; i < (int)lastCell.Row; i++) // по всем строкам
             {
@@ -404,8 +395,6 @@ namespace DomPecheyKP
                 }
                 NewChimneyElements.Items.Add(ObjWorkSheet.Cells[i, 1].Text.ToString());
             }
-            ObjWorkBook.Close(false, Type.Missing, Type.Missing);
-            ObjWorkExcel.Quit(); 
            
         }
 
@@ -416,6 +405,7 @@ namespace DomPecheyKP
                 sum += Convert.ToDouble(row.Cells[4].Value);
             SumChimneyElements.Text = sum.ToString() + " Руб.";
         }
+
 
         private void addChimneyElements_Click(object sender, EventArgs e)
         {
@@ -441,7 +431,7 @@ namespace DomPecheyKP
             while (ChimneyElements.SelectedRows.Count != 0)
             {
                 if (list.ContainsKey(ChimneyElements.SelectedRows[0].Cells[1].Value.ToString()))
-                NewChimneyElements.Items.Add(ChimneyElements.SelectedRows[0].Cells[1].Value);
+                    NewChimneyElements.Items.Add(ChimneyElements.SelectedRows[0].Cells[1].Value);
                 ChimneyElements.Rows.Remove(ChimneyElements.SelectedRows[0]);
             }
 
@@ -470,7 +460,6 @@ namespace DomPecheyKP
             }
         }
 
-     
         private void ChimneyElements_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
             
@@ -491,92 +480,12 @@ namespace DomPecheyKP
             }
             checkAllChimneyElement();
         }
-        private void ChimneyElements_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+
+        private void d_CheckedChanged(object sender, EventArgs e)
         {
-            currentDataGridView = ChimneyElements;
-            ChimneyElements.EditingControl.KeyPress -= EditingControl_KeyPress;
-            ChimneyElements.EditingControl.KeyPress += EditingControl_KeyPress;
-        }
-
-        //////////////////////////////////////////////////////////////
-
-        private void deleteInsulationСonsumables_Click(object sender, EventArgs e)
-        {
-            while (InsulationСonsumables.SelectedRows.Count != 0)
-            {
-                if (listIC.ContainsKey(InsulationСonsumables.SelectedRows[0].Cells[1].Value.ToString()))
-                    NewInsulationСonsumables.Items.Add(InsulationСonsumables.SelectedRows[0].Cells[1].Value);
-                InsulationСonsumables.Rows.Remove(InsulationСonsumables.SelectedRows[0]);
-            }
-
-            for (int i = 0; i < InsulationСonsumables.RowCount - 1; i++)
-            {
-                InsulationСonsumables.Rows[i].Cells[0].Value = i + 1;
-            }
-            calculateInsulationСonsumablesSum();
-
-            checkAllInsulationСonsumables();
-        }
-        private void checkAllInsulationСonsumables()
-        {
-            NewInsulationСonsumables.Items.Clear();
-            foreach (string str in listIC.Keys)
-            {
-                bool f = false;
-                for (int i = 0; i < InsulationСonsumables.RowCount - 1; i++)
-                {
-                    if (str == InsulationСonsumables.Rows[i].Cells[1].Value.ToString())
-                        f = true;
-                }
-                if (!f)
-                    NewInsulationСonsumables.Items.Add(str);
-            }
-        }
-
-        private void calculateInsulationСonsumablesSum()
-        {
-            double sum = 0;
-            foreach (DataGridViewRow row in InsulationСonsumables.Rows)
-                sum += Convert.ToDouble(row.Cells[4].Value);
-            SumInsulationСonsumables.Text = sum.ToString() + " Руб.";
-        }
-
-        private void addInsulationСonsumables_Click(object sender, EventArgs e)
-        {
-            int n;
-            if (InsulationСonsumables.RowCount == 0)
-                n = 1;
-            else
-                n = InsulationСonsumables.RowCount + 1;
-            foreach (Object checkedItem in NewInsulationСonsumables.CheckedItems)
-            {
-                InsulationСonsumables.Rows.Add(n++, checkedItem.ToString(), "1", listIC[checkedItem.ToString()], listIC[checkedItem.ToString()]);
-            }
-            while (NewInsulationСonsumables.CheckedItems.Count != 0)
-            {
-                NewInsulationСonsumables.Items.Remove(NewInsulationСonsumables.CheckedItems[0]);
-            }
-            calculateInsulationСonsumablesSum();
-        }
-
-        private void InsulationСonsumables_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
-        {
-            for (int i = 0; i < InsulationСonsumables.RowCount - 1; i++)
-            {
-                InsulationСonsumables.Rows[i].Cells[0].Value = i + 1;
-            }
-        }
-
-        private void InsulationСonsumables_CellEndEdit(object sender, DataGridViewCellEventArgs e)
-        {
-            int nRow = e.RowIndex;
-            if (e.ColumnIndex == 2 || e.ColumnIndex == 3)
-            {
-
-                InsulationСonsumables.Rows[nRow].Cells[4].Value = Convert.ToDouble(InsulationСonsumables.Rows[nRow].Cells[2].Value) * Convert.ToDouble(InsulationСonsumables.Rows[nRow].Cells[3].Value);
-                calculateInsulationСonsumablesSum();
-            }
-            checkAllInsulationСonsumables();
+            RadioButton radioButton = (RadioButton)sender;
+            if (radioButton.Checked)
+                loadElD(Convert.ToInt32(radioButton.Tag));
         }
 
         private void d115_CheckedChanged(object sender, EventArgs e)
@@ -683,17 +592,25 @@ namespace DomPecheyKP
             {
                 if (!isValid)
                 {
-                    MessageBox.Show("Ошибка при вводе числа. Введите значение заново");
+                    MessageBox.Show("Ошибка при вводе числа. Введите значение заново.");
                     NameOfKiln.Rows[nRow].Cells[e.ColumnIndex].Value = "0";
                 }          
                 NameOfKiln.Rows[nRow].Cells[4].Value = Convert.ToDouble(NameOfKiln.Rows[nRow].Cells[2].Value) * Convert.ToDouble(NameOfKiln.Rows[nRow].Cells[3].Value);
             }
 
-
-
-
         }
 
-       
+        private void ChimneyElements_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            currentDataGridView = ChimneyElements;
+            ChimneyElements.EditingControl.KeyPress -= EditingControl_KeyPress;
+            ChimneyElements.EditingControl.KeyPress += EditingControl_KeyPress;
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            ObjWorkBook.Close(false, Type.Missing, Type.Missing);
+            ObjWorkExcel.Quit();
+        }
     }
 }
