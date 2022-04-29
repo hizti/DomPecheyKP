@@ -29,7 +29,7 @@ namespace DomPecheyKP
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.BathOven = new System.Windows.Forms.RadioButton();
             this.StoveFireplace = new System.Windows.Forms.RadioButton();
             this.ManagerName = new System.Windows.Forms.TextBox();
@@ -90,6 +90,11 @@ namespace DomPecheyKP
             this.button1 = new System.Windows.Forms.Button();
             this.ProductType = new System.Windows.Forms.GroupBox();
             this.ChimneyElements = new System.Windows.Forms.DataGridView();
+            this.Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NameElement = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CountElement = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PriceElement = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SumElement = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button8 = new System.Windows.Forms.Button();
             this.deleteInstallationWork = new System.Windows.Forms.Button();
             this.addInstallationWork = new System.Windows.Forms.Button();
@@ -124,11 +129,6 @@ namespace DomPecheyKP
             this.AllSum = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NameElement = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CountElement = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PriceElement = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SumElement = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Manufacturer.SuspendLayout();
             this.MetalThickness.SuspendLayout();
             this.Diameter.SuspendLayout();
@@ -600,8 +600,9 @@ namespace DomPecheyKP
             this.InsulationСonsumables.RowTemplate.Height = 25;
             this.InsulationСonsumables.Size = new System.Drawing.Size(724, 123);
             this.InsulationСonsumables.TabIndex = 74;
-            this.InsulationСonsumables.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.InsulationСonsumables_CellEndEdit);
-            this.InsulationСonsumables.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.InsulationСonsumables_RowsAdded);
+            this.InsulationСonsumables.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.currentDataGridView_CellEndEdit);
+            this.InsulationСonsumables.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.DataGridView_EditingControlShowing);
+            this.InsulationСonsumables.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.currentDataGridView_RowsAdded);
             // 
             // dataGridViewTextBoxColumn6
             // 
@@ -711,8 +712,8 @@ namespace DomPecheyKP
             this.NameOfKiln.RowTemplate.Height = 25;
             this.NameOfKiln.Size = new System.Drawing.Size(724, 81);
             this.NameOfKiln.TabIndex = 72;
-            this.NameOfKiln.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.NameOfKiln_CellEndEdit);
-            this.NameOfKiln.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.NameOfKiln_EditingControlShowing);
+            this.NameOfKiln.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.currentDataGridView_CellEndEdit);
+            this.NameOfKiln.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.DataGridView_EditingControlShowing);
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -814,9 +815,41 @@ namespace DomPecheyKP
             this.ChimneyElements.RowTemplate.Height = 25;
             this.ChimneyElements.Size = new System.Drawing.Size(724, 150);
             this.ChimneyElements.TabIndex = 64;
-            this.ChimneyElements.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.ChimneyElements_CellEndEdit);
-            this.ChimneyElements.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.ChimneyElements_EditingControlShowing);
-            this.ChimneyElements.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.ChimneyElements_RowsAdded);
+            this.ChimneyElements.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.currentDataGridView_CellEndEdit);
+            this.ChimneyElements.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.DataGridView_EditingControlShowing);
+            this.ChimneyElements.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.currentDataGridView_RowsAdded);
+            // 
+            // Number
+            // 
+            this.Number.FillWeight = 50F;
+            this.Number.HeaderText = "№ п.п.";
+            this.Number.Name = "Number";
+            this.Number.ReadOnly = true;
+            // 
+            // NameElement
+            // 
+            this.NameElement.FillWeight = 500F;
+            this.NameElement.HeaderText = "Наименование";
+            this.NameElement.Name = "NameElement";
+            // 
+            // CountElement
+            // 
+            this.CountElement.HeaderText = " Кол-во шт.";
+            this.CountElement.Name = "CountElement";
+            // 
+            // PriceElement
+            // 
+            dataGridViewCellStyle3.Format = "C2";
+            dataGridViewCellStyle3.NullValue = null;
+            this.PriceElement.DefaultCellStyle = dataGridViewCellStyle3;
+            this.PriceElement.HeaderText = "Цена за 1 шт. Руб.";
+            this.PriceElement.Name = "PriceElement";
+            // 
+            // SumElement
+            // 
+            this.SumElement.HeaderText = "Цена без скидки Руб.";
+            this.SumElement.Name = "SumElement";
+            this.SumElement.ReadOnly = true;
             // 
             // button8
             // 
@@ -887,8 +920,9 @@ namespace DomPecheyKP
             this.InstallationWork.RowTemplate.Height = 25;
             this.InstallationWork.Size = new System.Drawing.Size(724, 123);
             this.InstallationWork.TabIndex = 86;
-            this.InstallationWork.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.InstallationWork_CellEndEdit);
-            this.InstallationWork.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.InstallationWork_RowsAdded);
+            this.InstallationWork.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.currentDataGridView_CellEndEdit);
+            this.InstallationWork.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.DataGridView_EditingControlShowing);
+            this.InstallationWork.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.currentDataGridView_RowsAdded);
             // 
             // dataGridViewTextBoxColumn11
             // 
@@ -1008,8 +1042,9 @@ namespace DomPecheyKP
             this.RiggingDelivery.RowTemplate.Height = 25;
             this.RiggingDelivery.Size = new System.Drawing.Size(724, 123);
             this.RiggingDelivery.TabIndex = 94;
-            this.RiggingDelivery.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.RiggingDelivery_CellEndEdit);
-            this.RiggingDelivery.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.RiggingDelivery_RowsAdded);
+            this.RiggingDelivery.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.currentDataGridView_CellEndEdit);
+            this.RiggingDelivery.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.DataGridView_EditingControlShowing);
+            this.RiggingDelivery.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.currentDataGridView_RowsAdded);
             // 
             // dataGridViewTextBoxColumn16
             // 
@@ -1154,38 +1189,6 @@ namespace DomPecheyKP
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(120, 27);
             this.numericUpDown1.TabIndex = 112;
-            // 
-            // Number
-            // 
-            this.Number.FillWeight = 50F;
-            this.Number.HeaderText = "№ п.п.";
-            this.Number.Name = "Number";
-            this.Number.ReadOnly = true;
-            // 
-            // NameElement
-            // 
-            this.NameElement.FillWeight = 500F;
-            this.NameElement.HeaderText = "Наименование";
-            this.NameElement.Name = "NameElement";
-            // 
-            // CountElement
-            // 
-            this.CountElement.HeaderText = " Кол-во шт.";
-            this.CountElement.Name = "CountElement";
-            // 
-            // PriceElement
-            // 
-            dataGridViewCellStyle1.Format = "C2";
-            dataGridViewCellStyle1.NullValue = null;
-            this.PriceElement.DefaultCellStyle = dataGridViewCellStyle1;
-            this.PriceElement.HeaderText = "Цена за 1 шт. Руб.";
-            this.PriceElement.Name = "PriceElement";
-            // 
-            // SumElement
-            // 
-            this.SumElement.HeaderText = "Цена без скидки Руб.";
-            this.SumElement.Name = "SumElement";
-            this.SumElement.ReadOnly = true;
             // 
             // Form1
             // 

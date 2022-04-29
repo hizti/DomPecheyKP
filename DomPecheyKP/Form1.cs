@@ -24,6 +24,7 @@ namespace DomPecheyKP
         {
             InitializeComponent();
         }
+
         Dictionary<string, double> list;
         Dictionary<string, double> listIC;
         Dictionary<string, double> listIW;
@@ -35,6 +36,8 @@ namespace DomPecheyKP
         Excel.Application ObjWorkExcel;
         Excel.Worksheet ObjWorkSheet;
         Excel.Workbook ObjWorkBook;
+
+        DataGridView currentDataGridView;
 
         private PdfPCell getMidHeader(string str, iTextSharp.text.Font font)
         {
@@ -354,9 +357,9 @@ namespace DomPecheyKP
             loadElD(2);
             NameOfKiln.Rows.Add("1", "", "1", "0", "0");
 
-            loadIС();
-            loadIW(1);
-            loadRD();
+            //loadIС();
+           // loadIW(1);
+           // loadRD();
             //удалить
             foreach (Object checkedItem in NewChimneyElements.Items)
             {
@@ -512,26 +515,15 @@ namespace DomPecheyKP
             }
         }
 
-        private void ChimneyElements_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        private void currentDataGridView_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
+            DataGridView data = (DataGridView)sender;
 
-            for (int i = 0; i < ChimneyElements.RowCount - 1; i++)
-            {
-                ChimneyElements.Rows[i].Cells[0].Value = i + 1;
-            }
+            for (int i = 0; i < data.RowCount - 1; i++)
+                data.Rows[i].Cells[0].Value = i + 1;
+            
         }
 
-        private void ChimneyElements_CellEndEdit(object sender, DataGridViewCellEventArgs e)
-        {
-            int nRow = e.RowIndex;
-            if (e.ColumnIndex == 2 || e.ColumnIndex == 3)
-            {
-
-                ChimneyElements.Rows[nRow].Cells[4].Value = Convert.ToDouble(ChimneyElements.Rows[nRow].Cells[2].Value) * Convert.ToDouble(ChimneyElements.Rows[nRow].Cells[3].Value);
-                calculateChimneyElementsSum();
-            }
-            checkAllChimneyElement();
-        }
 
         private void d_CheckedChanged(object sender, EventArgs e)
         {
@@ -539,75 +531,6 @@ namespace DomPecheyKP
             if (radioButton.Checked)
                 loadElD(Convert.ToInt32(radioButton.Tag));
         }
-
-        private void d115_CheckedChanged(object sender, EventArgs e)
-        {
-
-            RadioButton radioButton = (RadioButton)sender;
-            if (radioButton.Checked)
-                loadElD(2);
-
-
-        }
-
-        private void d120_CheckedChanged(object sender, EventArgs e)
-        {
-            RadioButton radioButton = (RadioButton)sender;
-            if (radioButton.Checked)
-                loadElD(3);
-        }
-
-        private void d130_CheckedChanged(object sender, EventArgs e)
-        {
-            RadioButton radioButton = (RadioButton)sender;
-            if (radioButton.Checked)
-                loadElD(4);
-        }
-
-        private void d150_CheckedChanged(object sender, EventArgs e)
-        {
-            RadioButton radioButton = (RadioButton)sender;
-            if (radioButton.Checked)
-                loadElD(5);
-        }
-
-        private void d180_CheckedChanged(object sender, EventArgs e)
-        {
-            RadioButton radioButton = (RadioButton)sender;
-            if (radioButton.Checked)
-                loadElD(6);
-        }
-
-        private void d200_CheckedChanged(object sender, EventArgs e)
-        {
-            RadioButton radioButton = (RadioButton)sender;
-            if (radioButton.Checked)
-                loadElD(7);
-        }
-
-        private void d250_CheckedChanged(object sender, EventArgs e)
-        {
-            RadioButton radioButton = (RadioButton)sender;
-            if (radioButton.Checked)
-                loadElD(8);
-        }
-
-        private void d300_CheckedChanged(object sender, EventArgs e)
-        {
-            RadioButton radioButton = (RadioButton)sender;
-            if (radioButton.Checked)
-                loadElD(9);
-        }
-
-        private void OwnD_CheckedChanged(object sender, EventArgs e)
-        {
-            RadioButton radioButton = (RadioButton)sender;
-            if (radioButton.Checked)
-                loadElD(0);
-        }
-
-
-        private DataGridView currentDataGridView;
 
         private void EditingControl_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -629,34 +552,28 @@ namespace DomPecheyKP
             }
         }
 
-        private void NameOfKiln_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        private void DataGridView_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
-            currentDataGridView = NameOfKiln;
-            NameOfKiln.EditingControl.KeyPress -= EditingControl_KeyPress;
-            NameOfKiln.EditingControl.KeyPress += EditingControl_KeyPress;
+            DataGridView data = (DataGridView)sender;
+            currentDataGridView = data;
+            currentDataGridView.EditingControl.KeyPress -= EditingControl_KeyPress;
+            currentDataGridView.EditingControl.KeyPress += EditingControl_KeyPress;
         }
 
-        private void NameOfKiln_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        private void currentDataGridView_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             int nRow = e.RowIndex;
-            var isValid = Regex.IsMatch(NameOfKiln.Rows[nRow].Cells[e.ColumnIndex].Value.ToString(), @"^[0-9]*[,]?[0-9]+$");
+            var isValid = Regex.IsMatch(currentDataGridView.Rows[nRow].Cells[e.ColumnIndex].Value.ToString(), @"^[0-9]*[,]?[0-9]+$");
             if (e.ColumnIndex == 2 || e.ColumnIndex == 3)
             {
                 if (!isValid)
                 {
                     MessageBox.Show("Ошибка при вводе числа. Введите значение заново.");
-                    NameOfKiln.Rows[nRow].Cells[e.ColumnIndex].Value = "0";
+                    currentDataGridView.Rows[nRow].Cells[e.ColumnIndex].Value = "0";
                 }
-                NameOfKiln.Rows[nRow].Cells[4].Value = Convert.ToDouble(NameOfKiln.Rows[nRow].Cells[2].Value) * Convert.ToDouble(NameOfKiln.Rows[nRow].Cells[3].Value);
+                currentDataGridView.Rows[nRow].Cells[4].Value = Convert.ToDouble(currentDataGridView.Rows[nRow].Cells[2].Value) * Convert.ToDouble(currentDataGridView.Rows[nRow].Cells[3].Value);
             }
 
-        }
-
-        private void ChimneyElements_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
-        {
-            currentDataGridView = ChimneyElements;
-            ChimneyElements.EditingControl.KeyPress -= EditingControl_KeyPress;
-            ChimneyElements.EditingControl.KeyPress += EditingControl_KeyPress;
         }
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
@@ -665,9 +582,6 @@ namespace DomPecheyKP
             ObjWorkExcel.Quit();
         }
 
-
-
-        //////////////////////////////////////////////////////////////
 
         private void deleteInsulationСonsumables_Click(object sender, EventArgs e)
         {
@@ -727,26 +641,6 @@ namespace DomPecheyKP
                 NewInsulationСonsumables.Items.Remove(NewInsulationСonsumables.CheckedItems[0]);
             }
             calculateInsulationСonsumablesSum();
-        }
-
-        private void InsulationСonsumables_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
-        {
-            for (int i = 0; i < InsulationСonsumables.RowCount - 1; i++)
-            {
-                InsulationСonsumables.Rows[i].Cells[0].Value = i + 1;
-            }
-        }
-
-        private void InsulationСonsumables_CellEndEdit(object sender, DataGridViewCellEventArgs e)
-        {
-            int nRow = e.RowIndex;
-            if (e.ColumnIndex == 2 || e.ColumnIndex == 3)
-            {
-
-                InsulationСonsumables.Rows[nRow].Cells[4].Value = Convert.ToDouble(InsulationСonsumables.Rows[nRow].Cells[2].Value) * Convert.ToDouble(InsulationСonsumables.Rows[nRow].Cells[3].Value);
-                calculateInsulationСonsumablesSum();
-            }
-            checkAllInsulationСonsumables();
         }
 
 
@@ -812,27 +706,7 @@ namespace DomPecheyKP
             calculateInstallationWorkSum();
         }
 
-        private void InstallationWork_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
-        {
-            for (int i = 0; i < InstallationWork.RowCount - 1; i++)
-            {
-                InstallationWork.Rows[i].Cells[0].Value = i + 1;
-            }
-        }
-
-        private void InstallationWork_CellEndEdit(object sender, DataGridViewCellEventArgs e)
-        {
-            int nRow = e.RowIndex;
-            if (e.ColumnIndex == 2 || e.ColumnIndex == 3)
-            {
-
-                InstallationWork.Rows[nRow].Cells[4].Value = Convert.ToDouble(InstallationWork.Rows[nRow].Cells[2].Value) * Convert.ToDouble(InstallationWork.Rows[nRow].Cells[3].Value);
-                calculateInstallationWorkSum();
-            }
-            checkAllInstallationWork();
-        }
-
-
+      
         //////////////////////////////////////////////////////////////
 
         private void deleteRiggingDelivery_Click(object sender, EventArgs e)
@@ -895,25 +769,6 @@ namespace DomPecheyKP
             calculateRiggingDeliverySum();
         }
 
-        private void RiggingDelivery_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
-        {
-            for (int i = 0; i < RiggingDelivery.RowCount - 1; i++)
-            {
-                RiggingDelivery.Rows[i].Cells[0].Value = i + 1;
-            }
-        }
-
-        private void RiggingDelivery_CellEndEdit(object sender, DataGridViewCellEventArgs e)
-        {
-            int nRow = e.RowIndex;
-            if (e.ColumnIndex == 2 || e.ColumnIndex == 3)
-            {
-
-                RiggingDelivery.Rows[nRow].Cells[4].Value = Convert.ToDouble(RiggingDelivery.Rows[nRow].Cells[2].Value) * Convert.ToDouble(RiggingDelivery.Rows[nRow].Cells[3].Value);
-                calculateRiggingDeliverySum();
-            }
-            checkAllRiggingDelivery();
-        }
 
     }
 }
