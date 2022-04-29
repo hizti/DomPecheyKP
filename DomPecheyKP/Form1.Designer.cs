@@ -90,6 +90,11 @@ namespace DomPecheyKP
             this.button1 = new System.Windows.Forms.Button();
             this.ProductType = new System.Windows.Forms.GroupBox();
             this.ChimneyElements = new System.Windows.Forms.DataGridView();
+            this.Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NameElement = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CountElement = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PriceElement = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SumElement = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button8 = new System.Windows.Forms.Button();
             this.deleteInstallationWork = new System.Windows.Forms.Button();
             this.addInstallationWork = new System.Windows.Forms.Button();
@@ -124,11 +129,8 @@ namespace DomPecheyKP
             this.AllSum = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NameElement = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CountElement = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PriceElement = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SumElement = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.percentDiscount = new System.Windows.Forms.NumericUpDown();
+            this.label15 = new System.Windows.Forms.Label();
             this.Manufacturer.SuspendLayout();
             this.MetalThickness.SuspendLayout();
             this.Diameter.SuspendLayout();
@@ -140,6 +142,7 @@ namespace DomPecheyKP
             ((System.ComponentModel.ISupportInitialize)(this.InstallationWork)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.RiggingDelivery)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.percentDiscount)).BeginInit();
             this.SuspendLayout();
             // 
             // BathOven
@@ -818,6 +821,38 @@ namespace DomPecheyKP
             this.ChimneyElements.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.ChimneyElements_EditingControlShowing);
             this.ChimneyElements.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.ChimneyElements_RowsAdded);
             // 
+            // Number
+            // 
+            this.Number.FillWeight = 50F;
+            this.Number.HeaderText = "№ п.п.";
+            this.Number.Name = "Number";
+            this.Number.ReadOnly = true;
+            // 
+            // NameElement
+            // 
+            this.NameElement.FillWeight = 500F;
+            this.NameElement.HeaderText = "Наименование";
+            this.NameElement.Name = "NameElement";
+            // 
+            // CountElement
+            // 
+            this.CountElement.HeaderText = " Кол-во шт.";
+            this.CountElement.Name = "CountElement";
+            // 
+            // PriceElement
+            // 
+            dataGridViewCellStyle1.Format = "C2";
+            dataGridViewCellStyle1.NullValue = null;
+            this.PriceElement.DefaultCellStyle = dataGridViewCellStyle1;
+            this.PriceElement.HeaderText = "Цена за 1 шт. Руб.";
+            this.PriceElement.Name = "PriceElement";
+            // 
+            // SumElement
+            // 
+            this.SumElement.HeaderText = "Цена без скидки Руб.";
+            this.SumElement.Name = "SumElement";
+            this.SumElement.ReadOnly = true;
+            // 
             // button8
             // 
             this.button8.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -1108,7 +1143,7 @@ namespace DomPecheyKP
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label7.Location = new System.Drawing.Point(423, 1579);
+            this.label7.Location = new System.Drawing.Point(423, 1605);
             this.label7.Name = "label7";
             this.label7.Padding = new System.Windows.Forms.Padding(0, 0, 0, 30);
             this.label7.Size = new System.Drawing.Size(144, 49);
@@ -1119,7 +1154,7 @@ namespace DomPecheyKP
             // 
             this.AllSum.AutoSize = true;
             this.AllSum.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.AllSum.Location = new System.Drawing.Point(654, 1579);
+            this.AllSum.Location = new System.Drawing.Point(654, 1605);
             this.AllSum.Name = "AllSum";
             this.AllSum.Padding = new System.Windows.Forms.Padding(0, 0, 0, 30);
             this.AllSum.Size = new System.Drawing.Size(53, 49);
@@ -1154,44 +1189,35 @@ namespace DomPecheyKP
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(120, 27);
             this.numericUpDown1.TabIndex = 112;
+            this.numericUpDown1.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
             // 
-            // Number
+            // percentDiscount
             // 
-            this.Number.FillWeight = 50F;
-            this.Number.HeaderText = "№ п.п.";
-            this.Number.Name = "Number";
-            this.Number.ReadOnly = true;
+            this.percentDiscount.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.percentDiscount.Location = new System.Drawing.Point(586, 1575);
+            this.percentDiscount.Name = "percentDiscount";
+            this.percentDiscount.Size = new System.Drawing.Size(120, 27);
+            this.percentDiscount.TabIndex = 114;
+            this.percentDiscount.ValueChanged += new System.EventHandler(this.percentDiscount_ValueChanged);
             // 
-            // NameElement
+            // label15
             // 
-            this.NameElement.FillWeight = 500F;
-            this.NameElement.HeaderText = "Наименование";
-            this.NameElement.Name = "NameElement";
-            // 
-            // CountElement
-            // 
-            this.CountElement.HeaderText = " Кол-во шт.";
-            this.CountElement.Name = "CountElement";
-            // 
-            // PriceElement
-            // 
-            dataGridViewCellStyle1.Format = "C2";
-            dataGridViewCellStyle1.NullValue = null;
-            this.PriceElement.DefaultCellStyle = dataGridViewCellStyle1;
-            this.PriceElement.HeaderText = "Цена за 1 шт. Руб.";
-            this.PriceElement.Name = "PriceElement";
-            // 
-            // SumElement
-            // 
-            this.SumElement.HeaderText = "Цена без скидки Руб.";
-            this.SumElement.Name = "SumElement";
-            this.SumElement.ReadOnly = true;
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label15.Location = new System.Drawing.Point(422, 1575);
+            this.label15.Name = "label15";
+            this.label15.Padding = new System.Windows.Forms.Padding(0, 0, 0, 10);
+            this.label15.Size = new System.Drawing.Size(94, 29);
+            this.label15.TabIndex = 113;
+            this.label15.Text = "Скидка (%)";
             // 
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(767, 572);
+            this.Controls.Add(this.percentDiscount);
+            this.Controls.Add(this.label15);
             this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.label17);
             this.Controls.Add(this.label7);
@@ -1266,6 +1292,7 @@ namespace DomPecheyKP
             ((System.ComponentModel.ISupportInitialize)(this.InstallationWork)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.RiggingDelivery)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.percentDiscount)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1371,5 +1398,7 @@ namespace DomPecheyKP
         private System.Windows.Forms.DataGridViewTextBoxColumn CountElement;
         private System.Windows.Forms.DataGridViewTextBoxColumn PriceElement;
         private System.Windows.Forms.DataGridViewTextBoxColumn SumElement;
+        private System.Windows.Forms.NumericUpDown percentDiscount;
+        private System.Windows.Forms.Label label15;
     }
 }
