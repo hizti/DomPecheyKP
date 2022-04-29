@@ -341,7 +341,6 @@ namespace DomPecheyKP
             ObjWorkBook = ObjWorkExcel.Workbooks.Open(Environment.CurrentDirectory + @"\ДанныеКП.xlsx", Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing); //открыть файл
             loadElD(2);
             NameOfKiln.Rows.Add("1","","1","0","0");
-           loadIС();
 
 
             //loadIС();

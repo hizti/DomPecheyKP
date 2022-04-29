@@ -36,11 +36,11 @@ namespace DomPecheyKP
             this.ClientName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.Manufacturer = new System.Windows.Forms.GroupBox();
-            this.radioButton17 = new System.Windows.Forms.RadioButton();
-            this.radioButton5 = new System.Windows.Forms.RadioButton();
-            this.radioButton6 = new System.Windows.Forms.RadioButton();
-            this.radioButton7 = new System.Windows.Forms.RadioButton();
-            this.radioButton8 = new System.Windows.Forms.RadioButton();
+            this.Permetr = new System.Windows.Forms.RadioButton();
+            this.Craft = new System.Windows.Forms.RadioButton();
+            this.Ferrum = new System.Windows.Forms.RadioButton();
+            this.Vesuvius = new System.Windows.Forms.RadioButton();
+            this.Smoke = new System.Windows.Forms.RadioButton();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -66,6 +66,11 @@ namespace DomPecheyKP
             this.NewInsulationСonsumables = new System.Windows.Forms.CheckedListBox();
             this.label5 = new System.Windows.Forms.Label();
             this.InsulationСonsumables = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SumInsulationСonsumables = new System.Windows.Forms.Label();
             this.SumChimneyManufacturerAndInsulation = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -73,18 +78,33 @@ namespace DomPecheyKP
             this.label6 = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
             this.NameOfKiln = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NewChimneyElements = new System.Windows.Forms.CheckedListBox();
             this.deleteChimneyElements = new System.Windows.Forms.Button();
             this.addChimneyElements = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.ProductType = new System.Windows.Forms.GroupBox();
             this.ChimneyElements = new System.Windows.Forms.DataGridView();
+            this.Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NameElement = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CountElement = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PriceElement = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SumElement = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button8 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
             this.NewInstallationWork = new System.Windows.Forms.CheckedListBox();
             this.label11 = new System.Windows.Forms.Label();
             this.InstallationWork = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SumInstallationWork = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.button11 = new System.Windows.Forms.Button();
@@ -93,6 +113,11 @@ namespace DomPecheyKP
             this.NewRiggingDelivery = new System.Windows.Forms.CheckedListBox();
             this.label10 = new System.Windows.Forms.Label();
             this.RiggingDelivery = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SumRiggingDelivery = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
@@ -103,31 +128,6 @@ namespace DomPecheyKP
             this.AllSum = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NameElement = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CountElement = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PriceElement = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SumElement = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Manufacturer.SuspendLayout();
             this.MetalThickness.SuspendLayout();
             this.Diameter.SuspendLayout();
@@ -140,9 +140,9 @@ namespace DomPecheyKP
             ((System.ComponentModel.ISupportInitialize)(this.RiggingDelivery)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
-            //
+            // 
             // BathOven
-            //
+            // 
             this.BathOven.AutoSize = true;
             this.BathOven.Font = new System.Drawing.Font("Constantia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.BathOven.Location = new System.Drawing.Point(561, 26);
@@ -152,9 +152,9 @@ namespace DomPecheyKP
             this.BathOven.TabStop = true;
             this.BathOven.Text = "Банная печь";
             this.BathOven.UseVisualStyleBackColor = true;
-            //
+            // 
             // StoveFireplace
-            //
+            // 
             this.StoveFireplace.AutoSize = true;
             this.StoveFireplace.Font = new System.Drawing.Font("Constantia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.StoveFireplace.Location = new System.Drawing.Point(387, 26);
@@ -164,17 +164,17 @@ namespace DomPecheyKP
             this.StoveFireplace.TabStop = true;
             this.StoveFireplace.Text = "Печь-камин";
             this.StoveFireplace.UseVisualStyleBackColor = true;
-            //
+            // 
             // ManagerName
-            //
+            // 
             this.ManagerName.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ManagerName.Location = new System.Drawing.Point(423, 12);
             this.ManagerName.Name = "ManagerName";
             this.ManagerName.Size = new System.Drawing.Size(182, 26);
             this.ManagerName.TabIndex = 62;
-            //
+            // 
             // label2
-            //
+            // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label2.Location = new System.Drawing.Point(336, 15);
@@ -182,17 +182,17 @@ namespace DomPecheyKP
             this.label2.Size = new System.Drawing.Size(84, 19);
             this.label2.TabIndex = 60;
             this.label2.Text = "Менеджер";
-            //
+            // 
             // ClientName
-            //
+            // 
             this.ClientName.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ClientName.Location = new System.Drawing.Point(128, 12);
             this.ClientName.Name = "ClientName";
             this.ClientName.Size = new System.Drawing.Size(182, 26);
             this.ClientName.TabIndex = 59;
-            //
+            // 
             // label1
-            //
+            // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label1.Location = new System.Drawing.Point(23, 15);
@@ -200,14 +200,14 @@ namespace DomPecheyKP
             this.label1.Size = new System.Drawing.Size(102, 19);
             this.label1.TabIndex = 58;
             this.label1.Text = "Имя клиента";
-            //
+            // 
             // Manufacturer
-            //
-            this.Manufacturer.Controls.Add(this.radioButton17);
-            this.Manufacturer.Controls.Add(this.radioButton5);
-            this.Manufacturer.Controls.Add(this.radioButton6);
-            this.Manufacturer.Controls.Add(this.radioButton7);
-            this.Manufacturer.Controls.Add(this.radioButton8);
+            // 
+            this.Manufacturer.Controls.Add(this.Permetr);
+            this.Manufacturer.Controls.Add(this.Craft);
+            this.Manufacturer.Controls.Add(this.Ferrum);
+            this.Manufacturer.Controls.Add(this.Vesuvius);
+            this.Manufacturer.Controls.Add(this.Smoke);
             this.Manufacturer.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.Manufacturer.Location = new System.Drawing.Point(23, 234);
             this.Manufacturer.Name = "Manufacturer";
@@ -215,70 +215,70 @@ namespace DomPecheyKP
             this.Manufacturer.TabIndex = 61;
             this.Manufacturer.TabStop = false;
             this.Manufacturer.Text = "Производитель";
-            //
-            // radioButton17
-            //
-            this.radioButton17.AutoSize = true;
-            this.radioButton17.Font = new System.Drawing.Font("Constantia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.radioButton17.Location = new System.Drawing.Point(593, 26);
-            this.radioButton17.Name = "radioButton17";
-            this.radioButton17.Size = new System.Drawing.Size(84, 23);
-            this.radioButton17.TabIndex = 4;
-            this.radioButton17.TabStop = true;
-            this.radioButton17.Text = "Permetr";
-            this.radioButton17.UseVisualStyleBackColor = true;
-            //
-            // radioButton5
-            //
-            this.radioButton5.AutoSize = true;
-            this.radioButton5.Font = new System.Drawing.Font("Constantia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.radioButton5.Location = new System.Drawing.Point(467, 28);
-            this.radioButton5.Name = "radioButton5";
-            this.radioButton5.Size = new System.Drawing.Size(62, 23);
-            this.radioButton5.TabIndex = 3;
-            this.radioButton5.TabStop = true;
-            this.radioButton5.Text = "Craft";
-            this.radioButton5.UseVisualStyleBackColor = true;
-            //
-            // radioButton6
-            //
-            this.radioButton6.AutoSize = true;
-            this.radioButton6.Font = new System.Drawing.Font("Constantia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.radioButton6.Location = new System.Drawing.Point(325, 26);
-            this.radioButton6.Name = "radioButton6";
-            this.radioButton6.Size = new System.Drawing.Size(78, 23);
-            this.radioButton6.TabIndex = 2;
-            this.radioButton6.TabStop = true;
-            this.radioButton6.Text = "Ferrum";
-            this.radioButton6.UseVisualStyleBackColor = true;
-            //
-            // radioButton7
-            //
-            this.radioButton7.AutoSize = true;
-            this.radioButton7.Font = new System.Drawing.Font("Constantia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.radioButton7.Location = new System.Drawing.Point(173, 26);
-            this.radioButton7.Name = "radioButton7";
-            this.radioButton7.Size = new System.Drawing.Size(88, 23);
-            this.radioButton7.TabIndex = 1;
-            this.radioButton7.TabStop = true;
-            this.radioButton7.Text = "Везувий";
-            this.radioButton7.UseVisualStyleBackColor = true;
-            //
-            // radioButton8
-            //
-            this.radioButton8.AutoSize = true;
-            this.radioButton8.Checked = true;
-            this.radioButton8.Font = new System.Drawing.Font("Constantia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.radioButton8.Location = new System.Drawing.Point(31, 26);
-            this.radioButton8.Name = "radioButton8";
-            this.radioButton8.Size = new System.Drawing.Size(78, 23);
-            this.radioButton8.TabIndex = 0;
-            this.radioButton8.TabStop = true;
-            this.radioButton8.Text = "Дымок";
-            this.radioButton8.UseVisualStyleBackColor = true;
-            //
+            // 
+            // Permetr
+            // 
+            this.Permetr.AutoSize = true;
+            this.Permetr.Font = new System.Drawing.Font("Constantia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.Permetr.Location = new System.Drawing.Point(593, 26);
+            this.Permetr.Name = "Permetr";
+            this.Permetr.Size = new System.Drawing.Size(84, 23);
+            this.Permetr.TabIndex = 4;
+            this.Permetr.TabStop = true;
+            this.Permetr.Text = "Permetr";
+            this.Permetr.UseVisualStyleBackColor = true;
+            // 
+            // Craft
+            // 
+            this.Craft.AutoSize = true;
+            this.Craft.Font = new System.Drawing.Font("Constantia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.Craft.Location = new System.Drawing.Point(467, 28);
+            this.Craft.Name = "Craft";
+            this.Craft.Size = new System.Drawing.Size(62, 23);
+            this.Craft.TabIndex = 3;
+            this.Craft.TabStop = true;
+            this.Craft.Text = "Craft";
+            this.Craft.UseVisualStyleBackColor = true;
+            // 
+            // Ferrum
+            // 
+            this.Ferrum.AutoSize = true;
+            this.Ferrum.Font = new System.Drawing.Font("Constantia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.Ferrum.Location = new System.Drawing.Point(325, 26);
+            this.Ferrum.Name = "Ferrum";
+            this.Ferrum.Size = new System.Drawing.Size(78, 23);
+            this.Ferrum.TabIndex = 2;
+            this.Ferrum.TabStop = true;
+            this.Ferrum.Text = "Ferrum";
+            this.Ferrum.UseVisualStyleBackColor = true;
+            // 
+            // Vesuvius
+            // 
+            this.Vesuvius.AutoSize = true;
+            this.Vesuvius.Font = new System.Drawing.Font("Constantia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.Vesuvius.Location = new System.Drawing.Point(173, 26);
+            this.Vesuvius.Name = "Vesuvius";
+            this.Vesuvius.Size = new System.Drawing.Size(88, 23);
+            this.Vesuvius.TabIndex = 1;
+            this.Vesuvius.TabStop = true;
+            this.Vesuvius.Text = "Везувий";
+            this.Vesuvius.UseVisualStyleBackColor = true;
+            // 
+            // Smoke
+            // 
+            this.Smoke.AutoSize = true;
+            this.Smoke.Checked = true;
+            this.Smoke.Font = new System.Drawing.Font("Constantia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.Smoke.Location = new System.Drawing.Point(31, 26);
+            this.Smoke.Name = "Smoke";
+            this.Smoke.Size = new System.Drawing.Size(78, 23);
+            this.Smoke.TabIndex = 0;
+            this.Smoke.TabStop = true;
+            this.Smoke.Text = "Дымок";
+            this.Smoke.UseVisualStyleBackColor = true;
+            // 
             // label4
-            //
+            // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label4.Location = new System.Drawing.Point(23, 118);
@@ -286,9 +286,9 @@ namespace DomPecheyKP
             this.label4.Size = new System.Drawing.Size(73, 18);
             this.label4.TabIndex = 67;
             this.label4.Text = "Название";
-            //
+            // 
             // label3
-            //
+            // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label3.Location = new System.Drawing.Point(23, 368);
@@ -296,9 +296,9 @@ namespace DomPecheyKP
             this.label3.Size = new System.Drawing.Size(160, 19);
             this.label3.TabIndex = 66;
             this.label3.Text = "Элементы дымохода";
-            //
+            // 
             // label9
-            //
+            // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label9.Location = new System.Drawing.Point(273, 911);
@@ -307,9 +307,9 @@ namespace DomPecheyKP
             this.label9.Size = new System.Drawing.Size(381, 29);
             this.label9.TabIndex = 84;
             this.label9.Text = "Стоимость материалов и отопительного прибора:";
-            //
+            // 
             // MetalThickness
-            //
+            // 
             this.MetalThickness.Controls.Add(this.radioButton19);
             this.MetalThickness.Controls.Add(this.radioButton20);
             this.MetalThickness.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -319,9 +319,9 @@ namespace DomPecheyKP
             this.MetalThickness.TabIndex = 65;
             this.MetalThickness.TabStop = false;
             this.MetalThickness.Text = "Толщина металла";
-            //
+            // 
             // radioButton19
-            //
+            // 
             this.radioButton19.AutoSize = true;
             this.radioButton19.Font = new System.Drawing.Font("Constantia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.radioButton19.Location = new System.Drawing.Point(105, 26);
@@ -331,9 +331,9 @@ namespace DomPecheyKP
             this.radioButton19.TabStop = true;
             this.radioButton19.Text = "0,8 мм";
             this.radioButton19.UseVisualStyleBackColor = true;
-            //
+            // 
             // radioButton20
-            //
+            // 
             this.radioButton20.AutoSize = true;
             this.radioButton20.Checked = true;
             this.radioButton20.Font = new System.Drawing.Font("Constantia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -344,9 +344,9 @@ namespace DomPecheyKP
             this.radioButton20.TabStop = true;
             this.radioButton20.Text = "0,5 мм";
             this.radioButton20.UseVisualStyleBackColor = true;
-            //
+            // 
             // Diameter
-            //
+            // 
             this.Diameter.Controls.Add(this.OwnValue);
             this.Diameter.Controls.Add(this.OwnD);
             this.Diameter.Controls.Add(this.d300);
@@ -364,9 +364,9 @@ namespace DomPecheyKP
             this.Diameter.TabIndex = 63;
             this.Diameter.TabStop = false;
             this.Diameter.Text = "Диамметр";
-            //
+            // 
             // OwnValue
-            //
+            // 
             this.OwnValue.Increment = new decimal(new int[] {
             5,
             0,
@@ -386,105 +386,113 @@ namespace DomPecheyKP
             0,
             0,
             0});
-            //
+            // 
             // OwnD
-            //
+            // 
             this.OwnD.AutoSize = true;
             this.OwnD.Font = new System.Drawing.Font("Constantia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.OwnD.Location = new System.Drawing.Point(435, 18);
             this.OwnD.Name = "OwnD";
             this.OwnD.Size = new System.Drawing.Size(64, 23);
             this.OwnD.TabIndex = 8;
+            this.OwnD.Tag = "1";
             this.OwnD.Text = "Свой";
             this.OwnD.UseVisualStyleBackColor = true;
-            this.OwnD.CheckedChanged += new System.EventHandler(this.OwnD_CheckedChanged);
-            //
+            this.OwnD.CheckedChanged += new System.EventHandler(this.d_CheckedChanged);
+            // 
             // d300
-            //
+            // 
             this.d300.AutoSize = true;
             this.d300.Font = new System.Drawing.Font("Constantia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.d300.Location = new System.Drawing.Point(366, 36);
             this.d300.Name = "d300";
             this.d300.Size = new System.Drawing.Size(52, 23);
             this.d300.TabIndex = 7;
+            this.d300.Tag = "9";
             this.d300.Text = "300";
             this.d300.UseVisualStyleBackColor = true;
-            this.d300.CheckedChanged += new System.EventHandler(this.d300_CheckedChanged);
-            //
+            this.d300.CheckedChanged += new System.EventHandler(this.d_CheckedChanged);
+            // 
             // d250
-            //
+            // 
             this.d250.AutoSize = true;
             this.d250.Font = new System.Drawing.Font("Constantia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.d250.Location = new System.Drawing.Point(314, 36);
             this.d250.Name = "d250";
             this.d250.Size = new System.Drawing.Size(52, 23);
             this.d250.TabIndex = 6;
+            this.d250.Tag = "8";
             this.d250.Text = "250";
             this.d250.UseVisualStyleBackColor = true;
-            this.d250.CheckedChanged += new System.EventHandler(this.d250_CheckedChanged);
-            //
+            this.d250.CheckedChanged += new System.EventHandler(this.d_CheckedChanged);
+            // 
             // d200
-            //
+            // 
             this.d200.AutoSize = true;
             this.d200.Font = new System.Drawing.Font("Constantia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.d200.Location = new System.Drawing.Point(261, 36);
             this.d200.Name = "d200";
             this.d200.Size = new System.Drawing.Size(53, 23);
             this.d200.TabIndex = 5;
+            this.d200.Tag = "7";
             this.d200.Text = "200";
             this.d200.UseVisualStyleBackColor = true;
-            this.d200.CheckedChanged += new System.EventHandler(this.d200_CheckedChanged);
-            //
+            this.d200.CheckedChanged += new System.EventHandler(this.d_CheckedChanged);
+            // 
             // d180
-            //
+            // 
             this.d180.AutoSize = true;
             this.d180.Font = new System.Drawing.Font("Constantia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.d180.Location = new System.Drawing.Point(211, 36);
             this.d180.Name = "d180";
             this.d180.Size = new System.Drawing.Size(50, 23);
             this.d180.TabIndex = 4;
+            this.d180.Tag = "6";
             this.d180.Text = "180";
             this.d180.UseVisualStyleBackColor = true;
-            this.d180.CheckedChanged += new System.EventHandler(this.d180_CheckedChanged);
-            //
+            this.d180.CheckedChanged += new System.EventHandler(this.d_CheckedChanged);
+            // 
             // d150
-            //
+            // 
             this.d150.AutoSize = true;
             this.d150.Font = new System.Drawing.Font("Constantia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.d150.Location = new System.Drawing.Point(162, 34);
             this.d150.Name = "d150";
             this.d150.Size = new System.Drawing.Size(49, 23);
             this.d150.TabIndex = 3;
+            this.d150.Tag = "5";
             this.d150.Text = "150";
             this.d150.UseVisualStyleBackColor = true;
-            this.d150.CheckedChanged += new System.EventHandler(this.d150_CheckedChanged);
-            //
+            this.d150.CheckedChanged += new System.EventHandler(this.d_CheckedChanged);
+            // 
             // d130
-            //
+            // 
             this.d130.AutoSize = true;
             this.d130.Font = new System.Drawing.Font("Constantia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.d130.Location = new System.Drawing.Point(114, 34);
             this.d130.Name = "d130";
             this.d130.Size = new System.Drawing.Size(48, 23);
             this.d130.TabIndex = 2;
+            this.d130.Tag = "4";
             this.d130.Text = "130";
             this.d130.UseVisualStyleBackColor = true;
-            this.d130.CheckedChanged += new System.EventHandler(this.d130_CheckedChanged);
-            //
+            this.d130.CheckedChanged += new System.EventHandler(this.d_CheckedChanged);
+            // 
             // d120
-            //
+            // 
             this.d120.AutoSize = true;
             this.d120.Font = new System.Drawing.Font("Constantia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.d120.Location = new System.Drawing.Point(65, 34);
             this.d120.Name = "d120";
             this.d120.Size = new System.Drawing.Size(49, 23);
             this.d120.TabIndex = 1;
+            this.d120.Tag = "3";
             this.d120.Text = "120";
             this.d120.UseVisualStyleBackColor = true;
-            this.d120.CheckedChanged += new System.EventHandler(this.d120_CheckedChanged);
-            //
+            this.d120.CheckedChanged += new System.EventHandler(this.d_CheckedChanged);
+            // 
             // d115
-            //
+            // 
             this.d115.AutoSize = true;
             this.d115.Checked = true;
             this.d115.Font = new System.Drawing.Font("Constantia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -493,12 +501,13 @@ namespace DomPecheyKP
             this.d115.Size = new System.Drawing.Size(45, 23);
             this.d115.TabIndex = 0;
             this.d115.TabStop = true;
+            this.d115.Tag = "2";
             this.d115.Text = "115";
             this.d115.UseVisualStyleBackColor = true;
-            this.d115.CheckedChanged += new System.EventHandler(this.d115_CheckedChanged);
-            //
+            this.d115.CheckedChanged += new System.EventHandler(this.d_CheckedChanged);
+            // 
             // FireplaceInsert
-            //
+            // 
             this.FireplaceInsert.AutoSize = true;
             this.FireplaceInsert.Font = new System.Drawing.Font("Constantia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.FireplaceInsert.Location = new System.Drawing.Point(6, 26);
@@ -508,9 +517,9 @@ namespace DomPecheyKP
             this.FireplaceInsert.TabStop = true;
             this.FireplaceInsert.Text = "Каминная топка";
             this.FireplaceInsert.UseVisualStyleBackColor = true;
-            //
+            // 
             // HeatingFurnace
-            //
+            // 
             this.HeatingFurnace.AutoSize = true;
             this.HeatingFurnace.Font = new System.Drawing.Font("Constantia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.HeatingFurnace.Location = new System.Drawing.Point(169, 26);
@@ -520,9 +529,9 @@ namespace DomPecheyKP
             this.HeatingFurnace.TabStop = true;
             this.HeatingFurnace.Text = "Отопительная печь";
             this.HeatingFurnace.UseVisualStyleBackColor = true;
-            //
+            // 
             // button5
-            //
+            // 
             this.button5.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.button5.Location = new System.Drawing.Point(657, 797);
             this.button5.Name = "button5";
@@ -530,9 +539,9 @@ namespace DomPecheyKP
             this.button5.TabIndex = 79;
             this.button5.Text = "Очистить";
             this.button5.UseVisualStyleBackColor = true;
-            //
+            // 
             // deleteInsulationСonsumables
-            //
+            // 
             this.deleteInsulationСonsumables.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.deleteInsulationСonsumables.Location = new System.Drawing.Point(542, 797);
             this.deleteInsulationСonsumables.Name = "deleteInsulationСonsumables";
@@ -540,10 +549,9 @@ namespace DomPecheyKP
             this.deleteInsulationСonsumables.TabIndex = 78;
             this.deleteInsulationСonsumables.Text = "Удалить";
             this.deleteInsulationСonsumables.UseVisualStyleBackColor = true;
-            this.deleteInsulationСonsumables.Click += new System.EventHandler(this.deleteInsulationСonsumables_Click);
-            //
+            // 
             // addInsulationСonsumables
-            //
+            // 
             this.addInsulationСonsumables.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.addInsulationСonsumables.Location = new System.Drawing.Point(423, 798);
             this.addInsulationСonsumables.Name = "addInsulationСonsumables";
@@ -551,10 +559,9 @@ namespace DomPecheyKP
             this.addInsulationСonsumables.TabIndex = 77;
             this.addInsulationСonsumables.Text = "Добавить";
             this.addInsulationСonsumables.UseVisualStyleBackColor = true;
-            this.addInsulationСonsumables.Click += new System.EventHandler(this.addInsulationСonsumables_Click);
-            //
+            // 
             // NewInsulationСonsumables
-            //
+            // 
             this.NewInsulationСonsumables.CheckOnClick = true;
             this.NewInsulationСonsumables.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.NewInsulationСonsumables.FormattingEnabled = true;
@@ -563,9 +570,9 @@ namespace DomPecheyKP
             this.NewInsulationСonsumables.Size = new System.Drawing.Size(393, 92);
             this.NewInsulationСonsumables.Sorted = true;
             this.NewInsulationСonsumables.TabIndex = 76;
-            //
+            // 
             // label5
-            //
+            // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label5.Location = new System.Drawing.Point(24, 645);
@@ -573,9 +580,9 @@ namespace DomPecheyKP
             this.label5.Size = new System.Drawing.Size(299, 19);
             this.label5.TabIndex = 75;
             this.label5.Text = "Изоляционные и расходные материалы";
-            //
+            // 
             // InsulationСonsumables
-            //
+            // 
             this.InsulationСonsumables.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.InsulationСonsumables.BackgroundColor = System.Drawing.Color.Wheat;
             this.InsulationСonsumables.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -590,9 +597,38 @@ namespace DomPecheyKP
             this.InsulationСonsumables.RowTemplate.Height = 25;
             this.InsulationСonsumables.Size = new System.Drawing.Size(724, 123);
             this.InsulationСonsumables.TabIndex = 74;
-            //
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.FillWeight = 50F;
+            this.dataGridViewTextBoxColumn6.HeaderText = "№ п.п.";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.dataGridViewTextBoxColumn6.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            this.dataGridViewTextBoxColumn7.FillWeight = 500F;
+            this.dataGridViewTextBoxColumn7.HeaderText = "Наименование";
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            this.dataGridViewTextBoxColumn7.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn8
+            // 
+            this.dataGridViewTextBoxColumn8.HeaderText = " Кол-во шт.";
+            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            // 
+            // dataGridViewTextBoxColumn9
+            // 
+            this.dataGridViewTextBoxColumn9.HeaderText = "Цена за 1 шт. Руб.";
+            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
+            // 
+            // dataGridViewTextBoxColumn10
+            // 
+            this.dataGridViewTextBoxColumn10.HeaderText = "Цена без скидки Руб.";
+            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
+            // 
             // SumInsulationСonsumables
-            //
+            // 
             this.SumInsulationСonsumables.AutoSize = true;
             this.SumInsulationСonsumables.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.SumInsulationСonsumables.Location = new System.Drawing.Point(655, 853);
@@ -600,9 +636,9 @@ namespace DomPecheyKP
             this.SumInsulationСonsumables.Size = new System.Drawing.Size(59, 19);
             this.SumInsulationСonsumables.TabIndex = 83;
             this.SumInsulationСonsumables.Text = "Итого:";
-            //
+            // 
             // SumChimneyManufacturerAndInsulation
-            //
+            // 
             this.SumChimneyManufacturerAndInsulation.AutoSize = true;
             this.SumChimneyManufacturerAndInsulation.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.SumChimneyManufacturerAndInsulation.Location = new System.Drawing.Point(654, 911);
@@ -611,9 +647,9 @@ namespace DomPecheyKP
             this.SumChimneyManufacturerAndInsulation.Size = new System.Drawing.Size(59, 29);
             this.SumChimneyManufacturerAndInsulation.TabIndex = 85;
             this.SumChimneyManufacturerAndInsulation.Text = "Итого:";
-            //
+            // 
             // label8
-            //
+            // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label8.Location = new System.Drawing.Point(423, 851);
@@ -621,9 +657,9 @@ namespace DomPecheyKP
             this.label8.Size = new System.Drawing.Size(212, 38);
             this.label8.TabIndex = 82;
             this.label8.Text = "Стоимость изоляционных и\r\nрасходных материалов:";
-            //
+            // 
             // SumChimneyElements
-            //
+            // 
             this.SumChimneyElements.AutoSize = true;
             this.SumChimneyElements.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.SumChimneyElements.Location = new System.Drawing.Point(628, 598);
@@ -631,9 +667,9 @@ namespace DomPecheyKP
             this.SumChimneyElements.Size = new System.Drawing.Size(59, 19);
             this.SumChimneyElements.TabIndex = 81;
             this.SumChimneyElements.Text = "Итого:";
-            //
+            // 
             // label6
-            //
+            // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label6.Location = new System.Drawing.Point(424, 598);
@@ -641,9 +677,9 @@ namespace DomPecheyKP
             this.label6.Size = new System.Drawing.Size(169, 38);
             this.label6.TabIndex = 80;
             this.label6.Text = "Стоимость элементов\r\nдымохода:";
-            //
+            // 
             // button4
-            //
+            // 
             this.button4.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.button4.Location = new System.Drawing.Point(658, 551);
             this.button4.Name = "button4";
@@ -651,9 +687,9 @@ namespace DomPecheyKP
             this.button4.TabIndex = 73;
             this.button4.Text = "Очистить";
             this.button4.UseVisualStyleBackColor = true;
-            //
+            // 
             // NameOfKiln
-            //
+            // 
             this.NameOfKiln.AllowUserToAddRows = false;
             this.NameOfKiln.AllowUserToDeleteRows = false;
             this.NameOfKiln.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
@@ -672,9 +708,37 @@ namespace DomPecheyKP
             this.NameOfKiln.TabIndex = 72;
             this.NameOfKiln.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.NameOfKiln_CellEndEdit);
             this.NameOfKiln.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.NameOfKiln_EditingControlShowing);
-            //
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.FillWeight = 50F;
+            this.dataGridViewTextBoxColumn1.HeaderText = "№ п.п.";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.FillWeight = 500F;
+            this.dataGridViewTextBoxColumn2.HeaderText = "Наименование";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.HeaderText = " Кол-во шт.";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.HeaderText = "Цена за 1 шт. Руб.";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.HeaderText = "Цена без скидки Руб.";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            // 
             // NewChimneyElements
-            //
+            // 
             this.NewChimneyElements.CheckOnClick = true;
             this.NewChimneyElements.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.NewChimneyElements.FormattingEnabled = true;
@@ -682,9 +746,9 @@ namespace DomPecheyKP
             this.NewChimneyElements.Name = "NewChimneyElements";
             this.NewChimneyElements.Size = new System.Drawing.Size(393, 92);
             this.NewChimneyElements.TabIndex = 69;
-            //
+            // 
             // deleteChimneyElements
-            //
+            // 
             this.deleteChimneyElements.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.deleteChimneyElements.Location = new System.Drawing.Point(538, 552);
             this.deleteChimneyElements.Name = "deleteChimneyElements";
@@ -693,9 +757,9 @@ namespace DomPecheyKP
             this.deleteChimneyElements.Text = "Удалить";
             this.deleteChimneyElements.UseVisualStyleBackColor = true;
             this.deleteChimneyElements.Click += new System.EventHandler(this.deleteChimneyElements_Click);
-            //
+            // 
             // addChimneyElements
-            //
+            // 
             this.addChimneyElements.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.addChimneyElements.Location = new System.Drawing.Point(424, 551);
             this.addChimneyElements.Name = "addChimneyElements";
@@ -704,9 +768,9 @@ namespace DomPecheyKP
             this.addChimneyElements.Text = "Добавить";
             this.addChimneyElements.UseVisualStyleBackColor = true;
             this.addChimneyElements.Click += new System.EventHandler(this.addChimneyElements_Click);
-            //
+            // 
             // button1
-            //
+            // 
             this.button1.Location = new System.Drawing.Point(672, 114);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
@@ -714,9 +778,9 @@ namespace DomPecheyKP
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-            //
+            // 
             // ProductType
-            //
+            // 
             this.ProductType.Controls.Add(this.BathOven);
             this.ProductType.Controls.Add(this.StoveFireplace);
             this.ProductType.Controls.Add(this.FireplaceInsert);
@@ -728,9 +792,9 @@ namespace DomPecheyKP
             this.ProductType.TabIndex = 57;
             this.ProductType.TabStop = false;
             this.ProductType.Text = "Тип товара";
-            //
+            // 
             // ChimneyElements
-            //
+            // 
             this.ChimneyElements.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.ChimneyElements.BackgroundColor = System.Drawing.Color.Wheat;
             this.ChimneyElements.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -748,9 +812,38 @@ namespace DomPecheyKP
             this.ChimneyElements.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.ChimneyElements_CellEndEdit);
             this.ChimneyElements.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.ChimneyElements_EditingControlShowing);
             this.ChimneyElements.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.ChimneyElements_RowsAdded);
-            //
+            // 
+            // Number
+            // 
+            this.Number.FillWeight = 50F;
+            this.Number.HeaderText = "№ п.п.";
+            this.Number.Name = "Number";
+            this.Number.ReadOnly = true;
+            // 
+            // NameElement
+            // 
+            this.NameElement.FillWeight = 500F;
+            this.NameElement.HeaderText = "Наименование";
+            this.NameElement.Name = "NameElement";
+            // 
+            // CountElement
+            // 
+            this.CountElement.HeaderText = " Кол-во шт.";
+            this.CountElement.Name = "CountElement";
+            // 
+            // PriceElement
+            // 
+            this.PriceElement.HeaderText = "Цена за 1 шт. Руб.";
+            this.PriceElement.Name = "PriceElement";
+            // 
+            // SumElement
+            // 
+            this.SumElement.HeaderText = "Цена без скидки Руб.";
+            this.SumElement.Name = "SumElement";
+            this.SumElement.ReadOnly = true;
+            // 
             // button8
-            //
+            // 
             this.button8.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.button8.Location = new System.Drawing.Point(654, 1101);
             this.button8.Name = "button8";
@@ -758,9 +851,9 @@ namespace DomPecheyKP
             this.button8.TabIndex = 91;
             this.button8.Text = "Очистить";
             this.button8.UseVisualStyleBackColor = true;
-            //
+            // 
             // button9
-            //
+            // 
             this.button9.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.button9.Location = new System.Drawing.Point(535, 1101);
             this.button9.Name = "button9";
@@ -768,9 +861,9 @@ namespace DomPecheyKP
             this.button9.TabIndex = 90;
             this.button9.Text = "Удалить";
             this.button9.UseVisualStyleBackColor = true;
-            //
+            // 
             // button10
-            //
+            // 
             this.button10.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.button10.Location = new System.Drawing.Point(422, 1101);
             this.button10.Name = "button10";
@@ -778,9 +871,9 @@ namespace DomPecheyKP
             this.button10.TabIndex = 89;
             this.button10.Text = "Добавить";
             this.button10.UseVisualStyleBackColor = true;
-            //
+            // 
             // NewInstallationWork
-            //
+            // 
             this.NewInstallationWork.CheckOnClick = true;
             this.NewInstallationWork.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.NewInstallationWork.FormattingEnabled = true;
@@ -789,9 +882,9 @@ namespace DomPecheyKP
             this.NewInstallationWork.Size = new System.Drawing.Size(393, 92);
             this.NewInstallationWork.Sorted = true;
             this.NewInstallationWork.TabIndex = 88;
-            //
+            // 
             // label11
-            //
+            // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label11.Location = new System.Drawing.Point(24, 948);
@@ -799,9 +892,9 @@ namespace DomPecheyKP
             this.label11.Size = new System.Drawing.Size(271, 19);
             this.label11.TabIndex = 87;
             this.label11.Text = "Монтажные работы,выезд на замер";
-            //
+            // 
             // InstallationWork
-            //
+            // 
             this.InstallationWork.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.InstallationWork.BackgroundColor = System.Drawing.Color.Wheat;
             this.InstallationWork.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -816,9 +909,38 @@ namespace DomPecheyKP
             this.InstallationWork.RowTemplate.Height = 25;
             this.InstallationWork.Size = new System.Drawing.Size(724, 123);
             this.InstallationWork.TabIndex = 86;
-            //
+            // 
+            // dataGridViewTextBoxColumn11
+            // 
+            this.dataGridViewTextBoxColumn11.FillWeight = 50F;
+            this.dataGridViewTextBoxColumn11.HeaderText = "№ п.п.";
+            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
+            this.dataGridViewTextBoxColumn11.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn12
+            // 
+            this.dataGridViewTextBoxColumn12.FillWeight = 500F;
+            this.dataGridViewTextBoxColumn12.HeaderText = "Наименование";
+            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
+            this.dataGridViewTextBoxColumn12.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn13
+            // 
+            this.dataGridViewTextBoxColumn13.HeaderText = " Кол-во шт.";
+            this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
+            // 
+            // dataGridViewTextBoxColumn14
+            // 
+            this.dataGridViewTextBoxColumn14.HeaderText = "Цена за 1 шт. Руб.";
+            this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
+            // 
+            // dataGridViewTextBoxColumn15
+            // 
+            this.dataGridViewTextBoxColumn15.HeaderText = "Цена без скидки Руб.";
+            this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
+            // 
             // SumInstallationWork
-            //
+            // 
             this.SumInstallationWork.AutoSize = true;
             this.SumInstallationWork.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.SumInstallationWork.Location = new System.Drawing.Point(653, 1163);
@@ -826,9 +948,9 @@ namespace DomPecheyKP
             this.SumInstallationWork.Size = new System.Drawing.Size(59, 19);
             this.SumInstallationWork.TabIndex = 93;
             this.SumInstallationWork.Text = "Итого:";
-            //
+            // 
             // label14
-            //
+            // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label14.Location = new System.Drawing.Point(422, 1154);
@@ -836,9 +958,9 @@ namespace DomPecheyKP
             this.label14.Size = new System.Drawing.Size(229, 38);
             this.label14.TabIndex = 92;
             this.label14.Text = "Стоимость монтажных работ,\r\nвыезд на замер:";
-            //
+            // 
             // button11
-            //
+            // 
             this.button11.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.button11.Location = new System.Drawing.Point(656, 1359);
             this.button11.Name = "button11";
@@ -846,9 +968,9 @@ namespace DomPecheyKP
             this.button11.TabIndex = 99;
             this.button11.Text = "Очистить";
             this.button11.UseVisualStyleBackColor = true;
-            //
+            // 
             // button12
-            //
+            // 
             this.button12.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.button12.Location = new System.Drawing.Point(541, 1359);
             this.button12.Name = "button12";
@@ -856,9 +978,9 @@ namespace DomPecheyKP
             this.button12.TabIndex = 98;
             this.button12.Text = "Удалить";
             this.button12.UseVisualStyleBackColor = true;
-            //
+            // 
             // button13
-            //
+            // 
             this.button13.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.button13.Location = new System.Drawing.Point(423, 1359);
             this.button13.Name = "button13";
@@ -866,9 +988,9 @@ namespace DomPecheyKP
             this.button13.TabIndex = 97;
             this.button13.Text = "Добавить";
             this.button13.UseVisualStyleBackColor = true;
-            //
+            // 
             // NewRiggingDelivery
-            //
+            // 
             this.NewRiggingDelivery.CheckOnClick = true;
             this.NewRiggingDelivery.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.NewRiggingDelivery.FormattingEnabled = true;
@@ -877,9 +999,9 @@ namespace DomPecheyKP
             this.NewRiggingDelivery.Size = new System.Drawing.Size(393, 92);
             this.NewRiggingDelivery.Sorted = true;
             this.NewRiggingDelivery.TabIndex = 96;
-            //
+            // 
             // label10
-            //
+            // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label10.Location = new System.Drawing.Point(25, 1206);
@@ -887,9 +1009,9 @@ namespace DomPecheyKP
             this.label10.Size = new System.Drawing.Size(243, 19);
             this.label10.TabIndex = 95;
             this.label10.Text = "Такелажные работы и доставка";
-            //
+            // 
             // RiggingDelivery
-            //
+            // 
             this.RiggingDelivery.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.RiggingDelivery.BackgroundColor = System.Drawing.Color.Wheat;
             this.RiggingDelivery.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -904,9 +1026,38 @@ namespace DomPecheyKP
             this.RiggingDelivery.RowTemplate.Height = 25;
             this.RiggingDelivery.Size = new System.Drawing.Size(724, 123);
             this.RiggingDelivery.TabIndex = 94;
-            //
+            // 
+            // dataGridViewTextBoxColumn16
+            // 
+            this.dataGridViewTextBoxColumn16.FillWeight = 50F;
+            this.dataGridViewTextBoxColumn16.HeaderText = "№ п.п.";
+            this.dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
+            this.dataGridViewTextBoxColumn16.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn17
+            // 
+            this.dataGridViewTextBoxColumn17.FillWeight = 500F;
+            this.dataGridViewTextBoxColumn17.HeaderText = "Наименование";
+            this.dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
+            this.dataGridViewTextBoxColumn17.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn18
+            // 
+            this.dataGridViewTextBoxColumn18.HeaderText = " Кол-во шт.";
+            this.dataGridViewTextBoxColumn18.Name = "dataGridViewTextBoxColumn18";
+            // 
+            // dataGridViewTextBoxColumn19
+            // 
+            this.dataGridViewTextBoxColumn19.HeaderText = "Цена за 1 шт. Руб.";
+            this.dataGridViewTextBoxColumn19.Name = "dataGridViewTextBoxColumn19";
+            // 
+            // dataGridViewTextBoxColumn20
+            // 
+            this.dataGridViewTextBoxColumn20.HeaderText = "Цена без скидки Руб.";
+            this.dataGridViewTextBoxColumn20.Name = "dataGridViewTextBoxColumn20";
+            // 
             // SumRiggingDelivery
-            //
+            // 
             this.SumRiggingDelivery.AutoSize = true;
             this.SumRiggingDelivery.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.SumRiggingDelivery.Location = new System.Drawing.Point(654, 1409);
@@ -914,9 +1065,9 @@ namespace DomPecheyKP
             this.SumRiggingDelivery.Size = new System.Drawing.Size(59, 19);
             this.SumRiggingDelivery.TabIndex = 101;
             this.SumRiggingDelivery.Text = "Итого:";
-            //
+            // 
             // label13
-            //
+            // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label13.Location = new System.Drawing.Point(423, 1406);
@@ -924,9 +1075,9 @@ namespace DomPecheyKP
             this.label13.Size = new System.Drawing.Size(181, 38);
             this.label13.TabIndex = 100;
             this.label13.Text = "Стоимость такелажных\r\nработ и доставки:";
-            //
+            // 
             // label16
-            //
+            // 
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label16.Location = new System.Drawing.Point(422, 1469);
@@ -935,9 +1086,9 @@ namespace DomPecheyKP
             this.label16.Size = new System.Drawing.Size(218, 29);
             this.label16.TabIndex = 104;
             this.label16.Text = "Стоимость работ+доставка:\t";
-            //
+            // 
             // SumRiggingAndInstall
-            //
+            // 
             this.SumRiggingAndInstall.AutoSize = true;
             this.SumRiggingAndInstall.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.SumRiggingAndInstall.Location = new System.Drawing.Point(653, 1469);
@@ -946,9 +1097,9 @@ namespace DomPecheyKP
             this.SumRiggingAndInstall.Size = new System.Drawing.Size(59, 29);
             this.SumRiggingAndInstall.TabIndex = 105;
             this.SumRiggingAndInstall.Text = "Итого:";
-            //
+            // 
             // label12
-            //
+            // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label12.Location = new System.Drawing.Point(422, 1507);
@@ -957,9 +1108,9 @@ namespace DomPecheyKP
             this.label12.Size = new System.Drawing.Size(143, 29);
             this.label12.TabIndex = 106;
             this.label12.Text = "Итого без скидки:";
-            //
+            // 
             // SumNotDiscount
-            //
+            // 
             this.SumNotDiscount.AutoSize = true;
             this.SumNotDiscount.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.SumNotDiscount.Location = new System.Drawing.Point(653, 1507);
@@ -968,31 +1119,31 @@ namespace DomPecheyKP
             this.SumNotDiscount.Size = new System.Drawing.Size(53, 29);
             this.SumNotDiscount.TabIndex = 107;
             this.SumNotDiscount.Text = "Итого";
-            //
+            // 
             // label7
-            //
+            // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label7.Location = new System.Drawing.Point(423, 1579);
             this.label7.Name = "label7";
-            this.label7.Padding = new System.Windows.Forms.Padding(0, 0, 0, 10);
-            this.label7.Size = new System.Drawing.Size(144, 29);
+            this.label7.Padding = new System.Windows.Forms.Padding(0, 0, 0, 30);
+            this.label7.Size = new System.Drawing.Size(144, 49);
             this.label7.TabIndex = 108;
             this.label7.Text = "Итого со скидкой:";
-            //
+            // 
             // AllSum
-            //
+            // 
             this.AllSum.AutoSize = true;
             this.AllSum.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.AllSum.Location = new System.Drawing.Point(654, 1579);
             this.AllSum.Name = "AllSum";
-            this.AllSum.Padding = new System.Windows.Forms.Padding(0, 0, 0, 10);
-            this.AllSum.Size = new System.Drawing.Size(53, 29);
+            this.AllSum.Padding = new System.Windows.Forms.Padding(0, 0, 0, 30);
+            this.AllSum.Size = new System.Drawing.Size(53, 49);
             this.AllSum.TabIndex = 109;
             this.AllSum.Text = "Итого";
-            //
+            // 
             // label17
-            //
+            // 
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label17.Location = new System.Drawing.Point(423, 1539);
@@ -1001,9 +1152,9 @@ namespace DomPecheyKP
             this.label17.Size = new System.Drawing.Size(109, 29);
             this.label17.TabIndex = 110;
             this.label17.Text = "Скидка (Руб.)";
-            //
+            // 
             // numericUpDown1
-            //
+            // 
             this.numericUpDown1.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.numericUpDown1.Increment = new decimal(new int[] {
             500,
@@ -1019,157 +1170,12 @@ namespace DomPecheyKP
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(120, 27);
             this.numericUpDown1.TabIndex = 112;
-            //
-            // dataGridViewTextBoxColumn1
-            //
-            this.dataGridViewTextBoxColumn1.FillWeight = 50F;
-            this.dataGridViewTextBoxColumn1.HeaderText = "№ п.п.";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            //
-            // dataGridViewTextBoxColumn2
-            //
-            this.dataGridViewTextBoxColumn2.FillWeight = 500F;
-            this.dataGridViewTextBoxColumn2.HeaderText = "Наименование";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            //
-            // dataGridViewTextBoxColumn3
-            //
-            this.dataGridViewTextBoxColumn3.HeaderText = " Кол-во шт.";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            //
-            // dataGridViewTextBoxColumn4
-            //
-            this.dataGridViewTextBoxColumn4.HeaderText = "Цена за 1 шт. Руб.";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            //
-            // dataGridViewTextBoxColumn5
-            //
-            this.dataGridViewTextBoxColumn5.HeaderText = "Цена без скидки Руб.";
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            //
-            // Number
-            //
-            this.Number.FillWeight = 50F;
-            this.Number.HeaderText = "№ п.п.";
-            this.Number.Name = "Number";
-            this.Number.ReadOnly = true;
-            //
-            // NameElement
-            //
-            this.NameElement.FillWeight = 500F;
-            this.NameElement.HeaderText = "Наименование";
-            this.NameElement.Name = "NameElement";
-            //
-            // CountElement
-            //
-            this.CountElement.HeaderText = " Кол-во шт.";
-            this.CountElement.Name = "CountElement";
-            //
-            // PriceElement
-            //
-            this.PriceElement.HeaderText = "Цена за 1 шт. Руб.";
-            this.PriceElement.Name = "PriceElement";
-            //
-            // SumElement
-            //
-            this.SumElement.HeaderText = "Цена без скидки Руб.";
-            this.SumElement.Name = "SumElement";
-            this.SumElement.ReadOnly = true;
-            //
-            // dataGridViewTextBoxColumn6
-            //
-            this.dataGridViewTextBoxColumn6.FillWeight = 50F;
-            this.dataGridViewTextBoxColumn6.HeaderText = "№ п.п.";
-            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            this.dataGridViewTextBoxColumn6.ReadOnly = true;
-            //
-            // dataGridViewTextBoxColumn7
-            //
-            this.dataGridViewTextBoxColumn7.FillWeight = 500F;
-            this.dataGridViewTextBoxColumn7.HeaderText = "Наименование";
-            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-            this.dataGridViewTextBoxColumn7.ReadOnly = true;
-            //
-            // dataGridViewTextBoxColumn8
-            //
-            this.dataGridViewTextBoxColumn8.HeaderText = " Кол-во шт.";
-            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
-            //
-            // dataGridViewTextBoxColumn9
-            //
-            this.dataGridViewTextBoxColumn9.HeaderText = "Цена за 1 шт. Руб.";
-            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
-            //
-            // dataGridViewTextBoxColumn10
-            //
-            this.dataGridViewTextBoxColumn10.HeaderText = "Цена без скидки Руб.";
-            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
-            //
-            // dataGridViewTextBoxColumn11
-            //
-            this.dataGridViewTextBoxColumn11.FillWeight = 50F;
-            this.dataGridViewTextBoxColumn11.HeaderText = "№ п.п.";
-            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
-            this.dataGridViewTextBoxColumn11.ReadOnly = true;
-            //
-            // dataGridViewTextBoxColumn12
-            //
-            this.dataGridViewTextBoxColumn12.FillWeight = 500F;
-            this.dataGridViewTextBoxColumn12.HeaderText = "Наименование";
-            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
-            this.dataGridViewTextBoxColumn12.ReadOnly = true;
-            //
-            // dataGridViewTextBoxColumn13
-            //
-            this.dataGridViewTextBoxColumn13.HeaderText = " Кол-во шт.";
-            this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
-            //
-            // dataGridViewTextBoxColumn14
-            //
-            this.dataGridViewTextBoxColumn14.HeaderText = "Цена за 1 шт. Руб.";
-            this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
-            //
-            // dataGridViewTextBoxColumn15
-            //
-            this.dataGridViewTextBoxColumn15.HeaderText = "Цена без скидки Руб.";
-            this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
-            //
-            // dataGridViewTextBoxColumn16
-            //
-            this.dataGridViewTextBoxColumn16.FillWeight = 50F;
-            this.dataGridViewTextBoxColumn16.HeaderText = "№ п.п.";
-            this.dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
-            this.dataGridViewTextBoxColumn16.ReadOnly = true;
-            //
-            // dataGridViewTextBoxColumn17
-            //
-            this.dataGridViewTextBoxColumn17.FillWeight = 500F;
-            this.dataGridViewTextBoxColumn17.HeaderText = "Наименование";
-            this.dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
-            this.dataGridViewTextBoxColumn17.ReadOnly = true;
-            //
-            // dataGridViewTextBoxColumn18
-            //
-            this.dataGridViewTextBoxColumn18.HeaderText = " Кол-во шт.";
-            this.dataGridViewTextBoxColumn18.Name = "dataGridViewTextBoxColumn18";
-            //
-            // dataGridViewTextBoxColumn19
-            //
-            this.dataGridViewTextBoxColumn19.HeaderText = "Цена за 1 шт. Руб.";
-            this.dataGridViewTextBoxColumn19.Name = "dataGridViewTextBoxColumn19";
-            //
-            // dataGridViewTextBoxColumn20
-            //
-            this.dataGridViewTextBoxColumn20.HeaderText = "Цена без скидки Руб.";
-            this.dataGridViewTextBoxColumn20.Name = "dataGridViewTextBoxColumn20";
-            //
+            // 
             // Form1
-            //
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            // 
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(771, 618);
+            this.ClientSize = new System.Drawing.Size(767, 572);
             this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.label17);
             this.Controls.Add(this.label7);
@@ -1223,8 +1229,11 @@ namespace DomPecheyKP
             this.Controls.Add(this.button1);
             this.Controls.Add(this.ProductType);
             this.Controls.Add(this.ChimneyElements);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximumSize = new System.Drawing.Size(783, 3000);
             this.Name = "Form1";
             this.Text = "Комерческое предложение";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Manufacturer.ResumeLayout(false);
             this.Manufacturer.PerformLayout();
@@ -1254,11 +1263,11 @@ namespace DomPecheyKP
         private System.Windows.Forms.TextBox ClientName;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox Manufacturer;
-        private System.Windows.Forms.RadioButton radioButton17;
-        private System.Windows.Forms.RadioButton radioButton5;
-        private System.Windows.Forms.RadioButton radioButton6;
-        private System.Windows.Forms.RadioButton radioButton7;
-        private System.Windows.Forms.RadioButton radioButton8;
+        private System.Windows.Forms.RadioButton Permetr;
+        private System.Windows.Forms.RadioButton Craft;
+        private System.Windows.Forms.RadioButton Ferrum;
+        private System.Windows.Forms.RadioButton Vesuvius;
+        private System.Windows.Forms.RadioButton Smoke;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label9;
