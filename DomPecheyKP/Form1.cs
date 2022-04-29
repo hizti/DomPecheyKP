@@ -26,8 +26,9 @@ namespace DomPecheyKP
         }
         Dictionary<string, double> list;
         Dictionary<string, double> listIC;
+        string nameOfSheet2 = "Изоляц и расход материалы";
+        string nameOfSheet3 = "Монтажные работы";
 
-        
 
         private PdfPCell getMidHeader(string str, iTextSharp.text.Font font)
         {
@@ -344,7 +345,7 @@ namespace DomPecheyKP
         {
             loadElD(2);
             NameOfKiln.Rows.Add("1","","1","0","0");
-           //loadIС();
+           loadIС();
 
             //удалить
             foreach (Object checkedItem in NewChimneyElements.Items)
@@ -365,7 +366,7 @@ namespace DomPecheyKP
             listIC = new Dictionary<string, double>();
             Excel.Application ObjWorkExcel = new Excel.Application(); //открыть эксель
             Excel.Workbook ObjWorkBook = ObjWorkExcel.Workbooks.Open(Environment.CurrentDirectory + @"\ДанныеКП.xlsx", Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing); //открыть файл
-            Excel.Worksheet ObjWorkSheet = (Excel.Worksheet)ObjWorkBook.Sheets[3]; //получить 1 лист
+            Excel.Worksheet ObjWorkSheet = (Excel.Worksheet)ObjWorkBook.Sheets[nameOfSheet2]; //получить 1 лист
             var lastCell = ObjWorkSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell);//1 ячейку          
             for (int i = 2; i < (int)lastCell.Row; i++) // по всем строкам
             {
@@ -449,7 +450,6 @@ namespace DomPecheyKP
                 ChimneyElements.Rows[i].Cells[0].Value=i+1;                
             }
             calculateChimneyElementsSum();
-
             checkAllChimneyElement();
 
         }
