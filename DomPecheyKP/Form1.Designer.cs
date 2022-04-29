@@ -29,6 +29,7 @@ namespace DomPecheyKP
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.BathOven = new System.Windows.Forms.RadioButton();
             this.StoveFireplace = new System.Windows.Forms.RadioButton();
             this.ManagerName = new System.Windows.Forms.TextBox();
@@ -89,14 +90,9 @@ namespace DomPecheyKP
             this.button1 = new System.Windows.Forms.Button();
             this.ProductType = new System.Windows.Forms.GroupBox();
             this.ChimneyElements = new System.Windows.Forms.DataGridView();
-            this.Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NameElement = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CountElement = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PriceElement = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SumElement = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button8 = new System.Windows.Forms.Button();
-            this.button9 = new System.Windows.Forms.Button();
-            this.button10 = new System.Windows.Forms.Button();
+            this.deleteInstallationWork = new System.Windows.Forms.Button();
+            this.addInstallationWork = new System.Windows.Forms.Button();
             this.NewInstallationWork = new System.Windows.Forms.CheckedListBox();
             this.label11 = new System.Windows.Forms.Label();
             this.InstallationWork = new System.Windows.Forms.DataGridView();
@@ -108,8 +104,8 @@ namespace DomPecheyKP
             this.SumInstallationWork = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.button11 = new System.Windows.Forms.Button();
-            this.button12 = new System.Windows.Forms.Button();
-            this.button13 = new System.Windows.Forms.Button();
+            this.deleteRiggingDelivery = new System.Windows.Forms.Button();
+            this.addRiggingDelivery = new System.Windows.Forms.Button();
             this.NewRiggingDelivery = new System.Windows.Forms.CheckedListBox();
             this.label10 = new System.Windows.Forms.Label();
             this.RiggingDelivery = new System.Windows.Forms.DataGridView();
@@ -128,6 +124,11 @@ namespace DomPecheyKP
             this.AllSum = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NameElement = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CountElement = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PriceElement = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SumElement = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Manufacturer.SuspendLayout();
             this.MetalThickness.SuspendLayout();
             this.Diameter.SuspendLayout();
@@ -549,6 +550,7 @@ namespace DomPecheyKP
             this.deleteInsulationСonsumables.TabIndex = 78;
             this.deleteInsulationСonsumables.Text = "Удалить";
             this.deleteInsulationСonsumables.UseVisualStyleBackColor = true;
+            this.deleteInsulationСonsumables.Click += new System.EventHandler(this.deleteInsulationСonsumables_Click);
             // 
             // addInsulationСonsumables
             // 
@@ -559,6 +561,7 @@ namespace DomPecheyKP
             this.addInsulationСonsumables.TabIndex = 77;
             this.addInsulationСonsumables.Text = "Добавить";
             this.addInsulationСonsumables.UseVisualStyleBackColor = true;
+            this.addInsulationСonsumables.Click += new System.EventHandler(this.addInsulationСonsumables_Click);
             // 
             // NewInsulationСonsumables
             // 
@@ -597,6 +600,8 @@ namespace DomPecheyKP
             this.InsulationСonsumables.RowTemplate.Height = 25;
             this.InsulationСonsumables.Size = new System.Drawing.Size(724, 123);
             this.InsulationСonsumables.TabIndex = 74;
+            this.InsulationСonsumables.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.InsulationСonsumables_CellEndEdit);
+            this.InsulationСonsumables.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.InsulationСonsumables_RowsAdded);
             // 
             // dataGridViewTextBoxColumn6
             // 
@@ -813,35 +818,6 @@ namespace DomPecheyKP
             this.ChimneyElements.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.ChimneyElements_EditingControlShowing);
             this.ChimneyElements.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.ChimneyElements_RowsAdded);
             // 
-            // Number
-            // 
-            this.Number.FillWeight = 50F;
-            this.Number.HeaderText = "№ п.п.";
-            this.Number.Name = "Number";
-            this.Number.ReadOnly = true;
-            // 
-            // NameElement
-            // 
-            this.NameElement.FillWeight = 500F;
-            this.NameElement.HeaderText = "Наименование";
-            this.NameElement.Name = "NameElement";
-            // 
-            // CountElement
-            // 
-            this.CountElement.HeaderText = " Кол-во шт.";
-            this.CountElement.Name = "CountElement";
-            // 
-            // PriceElement
-            // 
-            this.PriceElement.HeaderText = "Цена за 1 шт. Руб.";
-            this.PriceElement.Name = "PriceElement";
-            // 
-            // SumElement
-            // 
-            this.SumElement.HeaderText = "Цена без скидки Руб.";
-            this.SumElement.Name = "SumElement";
-            this.SumElement.ReadOnly = true;
-            // 
             // button8
             // 
             this.button8.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -852,25 +828,27 @@ namespace DomPecheyKP
             this.button8.Text = "Очистить";
             this.button8.UseVisualStyleBackColor = true;
             // 
-            // button9
+            // deleteInstallationWork
             // 
-            this.button9.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button9.Location = new System.Drawing.Point(535, 1101);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(96, 35);
-            this.button9.TabIndex = 90;
-            this.button9.Text = "Удалить";
-            this.button9.UseVisualStyleBackColor = true;
+            this.deleteInstallationWork.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.deleteInstallationWork.Location = new System.Drawing.Point(535, 1101);
+            this.deleteInstallationWork.Name = "deleteInstallationWork";
+            this.deleteInstallationWork.Size = new System.Drawing.Size(96, 35);
+            this.deleteInstallationWork.TabIndex = 90;
+            this.deleteInstallationWork.Text = "Удалить";
+            this.deleteInstallationWork.UseVisualStyleBackColor = true;
+            this.deleteInstallationWork.Click += new System.EventHandler(this.deleteInstallationWork_Click);
             // 
-            // button10
+            // addInstallationWork
             // 
-            this.button10.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button10.Location = new System.Drawing.Point(422, 1101);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(90, 35);
-            this.button10.TabIndex = 89;
-            this.button10.Text = "Добавить";
-            this.button10.UseVisualStyleBackColor = true;
+            this.addInstallationWork.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.addInstallationWork.Location = new System.Drawing.Point(422, 1101);
+            this.addInstallationWork.Name = "addInstallationWork";
+            this.addInstallationWork.Size = new System.Drawing.Size(90, 35);
+            this.addInstallationWork.TabIndex = 89;
+            this.addInstallationWork.Text = "Добавить";
+            this.addInstallationWork.UseVisualStyleBackColor = true;
+            this.addInstallationWork.Click += new System.EventHandler(this.addInstallationWork_Click);
             // 
             // NewInstallationWork
             // 
@@ -909,6 +887,8 @@ namespace DomPecheyKP
             this.InstallationWork.RowTemplate.Height = 25;
             this.InstallationWork.Size = new System.Drawing.Size(724, 123);
             this.InstallationWork.TabIndex = 86;
+            this.InstallationWork.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.InstallationWork_CellEndEdit);
+            this.InstallationWork.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.InstallationWork_RowsAdded);
             // 
             // dataGridViewTextBoxColumn11
             // 
@@ -969,25 +949,27 @@ namespace DomPecheyKP
             this.button11.Text = "Очистить";
             this.button11.UseVisualStyleBackColor = true;
             // 
-            // button12
+            // deleteRiggingDelivery
             // 
-            this.button12.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button12.Location = new System.Drawing.Point(541, 1359);
-            this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(96, 35);
-            this.button12.TabIndex = 98;
-            this.button12.Text = "Удалить";
-            this.button12.UseVisualStyleBackColor = true;
+            this.deleteRiggingDelivery.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.deleteRiggingDelivery.Location = new System.Drawing.Point(541, 1359);
+            this.deleteRiggingDelivery.Name = "deleteRiggingDelivery";
+            this.deleteRiggingDelivery.Size = new System.Drawing.Size(96, 35);
+            this.deleteRiggingDelivery.TabIndex = 98;
+            this.deleteRiggingDelivery.Text = "Удалить";
+            this.deleteRiggingDelivery.UseVisualStyleBackColor = true;
+            this.deleteRiggingDelivery.Click += new System.EventHandler(this.deleteRiggingDelivery_Click);
             // 
-            // button13
+            // addRiggingDelivery
             // 
-            this.button13.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button13.Location = new System.Drawing.Point(423, 1359);
-            this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(90, 35);
-            this.button13.TabIndex = 97;
-            this.button13.Text = "Добавить";
-            this.button13.UseVisualStyleBackColor = true;
+            this.addRiggingDelivery.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.addRiggingDelivery.Location = new System.Drawing.Point(423, 1359);
+            this.addRiggingDelivery.Name = "addRiggingDelivery";
+            this.addRiggingDelivery.Size = new System.Drawing.Size(90, 35);
+            this.addRiggingDelivery.TabIndex = 97;
+            this.addRiggingDelivery.Text = "Добавить";
+            this.addRiggingDelivery.UseVisualStyleBackColor = true;
+            this.addRiggingDelivery.Click += new System.EventHandler(this.addRiggingDelivery_Click);
             // 
             // NewRiggingDelivery
             // 
@@ -1026,6 +1008,8 @@ namespace DomPecheyKP
             this.RiggingDelivery.RowTemplate.Height = 25;
             this.RiggingDelivery.Size = new System.Drawing.Size(724, 123);
             this.RiggingDelivery.TabIndex = 94;
+            this.RiggingDelivery.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.RiggingDelivery_CellEndEdit);
+            this.RiggingDelivery.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.RiggingDelivery_RowsAdded);
             // 
             // dataGridViewTextBoxColumn16
             // 
@@ -1171,6 +1155,38 @@ namespace DomPecheyKP
             this.numericUpDown1.Size = new System.Drawing.Size(120, 27);
             this.numericUpDown1.TabIndex = 112;
             // 
+            // Number
+            // 
+            this.Number.FillWeight = 50F;
+            this.Number.HeaderText = "№ п.п.";
+            this.Number.Name = "Number";
+            this.Number.ReadOnly = true;
+            // 
+            // NameElement
+            // 
+            this.NameElement.FillWeight = 500F;
+            this.NameElement.HeaderText = "Наименование";
+            this.NameElement.Name = "NameElement";
+            // 
+            // CountElement
+            // 
+            this.CountElement.HeaderText = " Кол-во шт.";
+            this.CountElement.Name = "CountElement";
+            // 
+            // PriceElement
+            // 
+            dataGridViewCellStyle1.Format = "C2";
+            dataGridViewCellStyle1.NullValue = null;
+            this.PriceElement.DefaultCellStyle = dataGridViewCellStyle1;
+            this.PriceElement.HeaderText = "Цена за 1 шт. Руб.";
+            this.PriceElement.Name = "PriceElement";
+            // 
+            // SumElement
+            // 
+            this.SumElement.HeaderText = "Цена без скидки Руб.";
+            this.SumElement.Name = "SumElement";
+            this.SumElement.ReadOnly = true;
+            // 
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1185,16 +1201,16 @@ namespace DomPecheyKP
             this.Controls.Add(this.label16);
             this.Controls.Add(this.SumRiggingAndInstall);
             this.Controls.Add(this.button11);
-            this.Controls.Add(this.button12);
-            this.Controls.Add(this.button13);
+            this.Controls.Add(this.deleteRiggingDelivery);
+            this.Controls.Add(this.addRiggingDelivery);
             this.Controls.Add(this.NewRiggingDelivery);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.RiggingDelivery);
             this.Controls.Add(this.SumRiggingDelivery);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.button8);
-            this.Controls.Add(this.button9);
-            this.Controls.Add(this.button10);
+            this.Controls.Add(this.deleteInstallationWork);
+            this.Controls.Add(this.addInstallationWork);
             this.Controls.Add(this.NewInstallationWork);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.InstallationWork);
@@ -1305,16 +1321,16 @@ namespace DomPecheyKP
         private System.Windows.Forms.GroupBox ProductType;
         private System.Windows.Forms.DataGridView ChimneyElements;
         private System.Windows.Forms.Button button8;
-        private System.Windows.Forms.Button button9;
-        private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.Button deleteInstallationWork;
+        private System.Windows.Forms.Button addInstallationWork;
         private System.Windows.Forms.CheckedListBox NewInstallationWork;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.DataGridView InstallationWork;
         private System.Windows.Forms.Label SumInstallationWork;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Button button11;
-        private System.Windows.Forms.Button button12;
-        private System.Windows.Forms.Button button13;
+        private System.Windows.Forms.Button deleteRiggingDelivery;
+        private System.Windows.Forms.Button addRiggingDelivery;
         private System.Windows.Forms.CheckedListBox NewRiggingDelivery;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.DataGridView RiggingDelivery;
@@ -1340,11 +1356,6 @@ namespace DomPecheyKP
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Number;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NameElement;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CountElement;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PriceElement;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SumElement;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
@@ -1355,5 +1366,10 @@ namespace DomPecheyKP
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn18;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn19;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn20;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Number;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NameElement;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CountElement;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PriceElement;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SumElement;
     }
 }
