@@ -29,6 +29,13 @@ namespace DomPecheyKP
         Dictionary<string, double> listIC;
         Dictionary<string, double> listIW;
         Dictionary<string, double> listRD;
+
+        double sumCE = 0;
+        double sumIC = 0;
+        double sumIW = 0;
+        double sumRD = 0;
+        double sumND = 0;
+
         string nameOfSheetIC = "Изоляц и расход материалы";
         string nameOfSheetIW = "Монтажные работы";
         string nameOfSheetRD = "Такелажные работы";
@@ -327,6 +334,8 @@ namespace DomPecheyKP
                                     sumHeight = 0;
                                     sTable = new PdfPTable(countColumns);
                                     sTable.SetWidths(firstTablecellwidth);
+                                    sTable.Rows.Add(fTable.GetRow(0));
+                                    sumHeight += fTable.Rows[0].MaxHeights;
                                 }
                                 sTable.Rows.Add(fTable.GetRow(j));
                                 sumHeight += fTable.Rows[j].MaxHeights;
@@ -388,7 +397,7 @@ namespace DomPecheyKP
             listIC = new Dictionary<string, double>();
             Excel.Worksheet ObjWorkSheet = (Excel.Worksheet)ObjWorkBook.Sheets[nameOfSheetIC]; //получить 1 лист
             var lastCell = ObjWorkSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell);//1 ячейку          
-            for (int i = 2; i < (int)lastCell.Row; i++) // по всем строкам
+            for (int i = 2; i <= (int)lastCell.Row; i++) // по всем строкам
             {
                 listIC.Add(ObjWorkSheet.Cells[i, 1].Text.ToString(), Convert.ToDouble(ObjWorkSheet.Cells[i, 2].Text.ToString()));//считываем текст в строку
                 NewInsulationСonsumables.Items.Add(ObjWorkSheet.Cells[i, 1].Text.ToString());
@@ -408,7 +417,7 @@ namespace DomPecheyKP
 
             ObjWorkSheet = (Excel.Worksheet)ObjWorkBook.Sheets[1]; //получить 1 лист
             var lastCell = ObjWorkSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell);//1 ячейку          
-            for (int i = 3; i < (int)lastCell.Row; i++) // по всем строкам
+            for (int i = 3; i <= (int)lastCell.Row; i++) // по всем строкам
             {
                 try
                 {
@@ -425,13 +434,29 @@ namespace DomPecheyKP
 
         }
 
+        private void calculateResults()
+        {
+            double sumC = Convert.ToDouble(NameOfKiln.Rows[0].Cells[4].Value.ToString());
+            double sum1 = sumCE + sumIC + sumC;
+            SumChimneyManufacturerAndInsulation.Text = (sum1).ToString() + " Руб.";
+            double sum2 = sumRD + sumIW;
+            SumRiggingAndInstall.Text = (sum2).ToString() + " Руб.";
+            sumND = sum1 + sum2;
+            SumNotDiscount.Text = (sumND).ToString() + " Руб.";
+            AllSum.Text = (sumND - Convert.ToDouble(numericUpDown1.Value)).ToString() + " Руб.";
+
+        }
+
         private void calculateChimneyElementsSum()
         {
-            double sum = 0;
+            sumCE = 0;
             foreach (DataGridViewRow row in ChimneyElements.Rows)
-                sum += Convert.ToDouble(row.Cells[4].Value);
-            SumChimneyElements.Text = sum.ToString() + " Руб.";
+                sumCE += Convert.ToDouble(row.Cells[4].Value);
+            SumChimneyElements.Text = sumCE.ToString() + " Руб.";
+            calculateResults();
         }
+
+        
 
         private void loadIW(int nColumn)
         {
@@ -439,7 +464,7 @@ namespace DomPecheyKP
             listIW = new Dictionary<string, double>();
             Excel.Worksheet ObjWorkSheet = (Excel.Worksheet)ObjWorkBook.Sheets[nameOfSheetIW]; //получить 1 лист
             var lastCell = ObjWorkSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell);//1 ячейку          
-            for (int i = 2; i < (int)lastCell.Row; i++) // по всем строкам
+            for (int i = 2; i <= (int)lastCell.Row; i++) // по всем строкам
             {
                 listIW.Add(ObjWorkSheet.Cells[i, nColumn].Text.ToString(), Convert.ToDouble(ObjWorkSheet.Cells[i, nColumn+1].Text.ToString()));//считываем текст в строку
                 NewInstallationWork.Items.Add(ObjWorkSheet.Cells[i, 1].Text.ToString());
@@ -453,7 +478,7 @@ namespace DomPecheyKP
             listRD = new Dictionary<string, double>();
             Excel.Worksheet ObjWorkSheet = (Excel.Worksheet)ObjWorkBook.Sheets[nameOfSheetRD]; //получить 1 лист
             var lastCell = ObjWorkSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell);//1 ячейку          
-            for (int i = 2; i < (int)lastCell.Row; i++) // по всем строкам
+            for (int i = 2; i <= (int)lastCell.Row; i++) // по всем строкам
             {
                 listRD.Add(ObjWorkSheet.Cells[i, 1].Text.ToString(), Convert.ToDouble(ObjWorkSheet.Cells[i, 2].Text.ToString()));//считываем текст в строку
                 NewRiggingDelivery.Items.Add(ObjWorkSheet.Cells[i, 1].Text.ToString());
@@ -618,10 +643,11 @@ namespace DomPecheyKP
 
         private void calculateInsulationСonsumablesSum()
         {
-            double sum = 0;
+            sumIC = 0;
             foreach (DataGridViewRow row in InsulationСonsumables.Rows)
-                sum += Convert.ToDouble(row.Cells[4].Value);
-            SumInsulationСonsumables.Text = sum.ToString() + " Руб.";
+                sumIC += Convert.ToDouble(row.Cells[4].Value);
+            SumInsulationСonsumables.Text = sumIC.ToString() + " Руб.";
+            calculateResults();
         }
         
 
@@ -681,10 +707,11 @@ namespace DomPecheyKP
 
         private void calculateInstallationWorkSum()
         {
-            double sum = 0;
+            sumIW = 0;
             foreach (DataGridViewRow row in InstallationWork.Rows)
-                sum += Convert.ToDouble(row.Cells[4].Value);
-            SumInstallationWork.Text = sum.ToString() + " Руб.";
+                sumIW += Convert.ToDouble(row.Cells[4].Value);
+            SumInstallationWork.Text = sumIW.ToString() + " Руб.";
+            calculateResults();
         }
 
 
@@ -744,10 +771,11 @@ namespace DomPecheyKP
 
         private void calculateRiggingDeliverySum()
         {
-            double sum = 0;
+            sumRD = 0;
             foreach (DataGridViewRow row in RiggingDelivery.Rows)
-                sum += Convert.ToDouble(row.Cells[4].Value);
-            SumRiggingDelivery.Text = sum.ToString() + " Руб.";
+                sumRD += Convert.ToDouble(row.Cells[4].Value);
+            SumRiggingDelivery.Text = sumRD.ToString() + " Руб.";
+            calculateResults();
         }
 
 
@@ -770,5 +798,26 @@ namespace DomPecheyKP
         }
 
 
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+            calculateResults();
+            if (sumND != 0)
+            {
+                decimal percentD = Convert.ToDecimal(Convert.ToDouble(numericUpDown1.Value) / sumND) * 100;
+                if (percentD > 100)
+                    percentD = 100;
+                else if (percentD < 0)
+                    percentD = 0;
+                percentDiscount.Value = percentD;
+            }
+        }
+
+        private void percentDiscount_ValueChanged(object sender, EventArgs e)
+        {
+            if (sumND != 0)
+            {
+                numericUpDown1.Value = Convert.ToDecimal(Math.Round(sumND * (Convert.ToDouble(percentDiscount.Value) / 100), 0));
+            }
+        }
     }
 }
