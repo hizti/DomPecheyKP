@@ -29,7 +29,7 @@ namespace DomPecheyKP
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.BathOven = new System.Windows.Forms.RadioButton();
             this.StoveFireplace = new System.Windows.Forms.RadioButton();
             this.ManagerName = new System.Windows.Forms.TextBox();
@@ -127,6 +127,8 @@ namespace DomPecheyKP
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.percentDiscount = new System.Windows.Forms.NumericUpDown();
             this.label18 = new System.Windows.Forms.Label();
+            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.Manufacturer.SuspendLayout();
             this.MetalThickness.SuspendLayout();
             this.Diameter.SuspendLayout();
@@ -837,8 +839,8 @@ namespace DomPecheyKP
             // 
             // PriceElement
             // 
-            dataGridViewCellStyle2.NullValue = null;
-            this.PriceElement.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.NullValue = null;
+            this.PriceElement.DefaultCellStyle = dataGridViewCellStyle1;
             this.PriceElement.HeaderText = "Цена за 1 шт. Руб.";
             this.PriceElement.Name = "PriceElement";
             // 
@@ -1383,5 +1385,7 @@ namespace DomPecheyKP
         private System.Windows.Forms.DataGridViewTextBoxColumn CountElement;
         private System.Windows.Forms.DataGridViewTextBoxColumn PriceElement;
         private System.Windows.Forms.DataGridViewTextBoxColumn SumElement;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }
 }
