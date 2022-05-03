@@ -35,6 +35,8 @@ namespace DomPecheyKP
         double sumIW = 0;
         double sumRD = 0;
         double sumND = 0;
+        double resultSum1 = 0;
+        double resultSum2 = 0; 
         double sumFinal = 0;
         string nameOfSheetIC = "Изоляц и расход материалы";
         string nameOfSheetIW = "Монтажные работы и выезд";
@@ -678,11 +680,11 @@ namespace DomPecheyKP
         private void calculateResults()
         {
             double sumC = Convert.ToDouble(NameOfKiln.Rows[0].Cells[4].Value.ToString());
-            double sum1 = sumCE + sumIC + sumC;
-            SumChimneyManufacturerAndInsulation.Text = (sum1).ToString() + " Руб.";
-            double sum2 = sumRD + sumIW;
-            SumRiggingAndInstall.Text = (sum2).ToString() + " Руб.";
-            sumND = sum1 + sum2;
+            resultSum1 = sumCE + sumIC + sumC;
+            SumChimneyManufacturerAndInsulation.Text = (resultSum1).ToString() + " Руб.";
+            resultSum2 = sumRD + sumIW;
+            SumRiggingAndInstall.Text = (resultSum2).ToString() + " Руб.";
+            sumND = resultSum1 + resultSum2;
             SumNotDiscount.Text = (sumND).ToString() + " Руб.";
             sumFinal = sumND - Convert.ToDouble(numericUpDown1.Value);
             AllSum.Text = (sumFinal).ToString() + " Руб.";
@@ -755,10 +757,10 @@ namespace DomPecheyKP
 
         private void deleteChimneyElements_Click(object sender, EventArgs e)
         {
-
+            
             while (ChimneyElements.SelectedRows.Count != 0)
             {
-                if (list.ContainsKey(ChimneyElements.SelectedRows[0].Cells[1].Value.ToString()))
+                if (list.ContainsKey(this.ChimneyElements.SelectedRows[0].Cells[1].Value.ToString()))
                     NewChimneyElements.Items.Add(ChimneyElements.SelectedRows[0].Cells[1].Value);
                 ChimneyElements.Rows.Remove(ChimneyElements.SelectedRows[0]);
             }
@@ -769,7 +771,6 @@ namespace DomPecheyKP
             }
             calculateChimneyElementsSum();
             checkAllChimneyElement();
-
         }
 
         private void checkAllChimneyElement()
@@ -1149,6 +1150,155 @@ namespace DomPecheyKP
 
         private void button2_Click(object sender, EventArgs e)
         {
+            int nRow=10;
+            int s1=12, s2, f1, f2;
+             Excel.Application excelApp;
+
+            string fileTarget = Environment.CurrentDirectory + @"/template/2.xlsx";
+            string fileTemplate = Environment.CurrentDirectory + @"/template/template1.xlsx";
+            excelApp = new Excel.Application();
+            Excel.Workbook wbTemp, wbTarget;
+            Excel.Worksheet sh;
+
+            //Create target workbook
+            wbTarget = excelApp.Workbooks.Open(fileTemplate);
+
+            //Fill target workbook
+            //Open the template sheet
+            sh = wbTarget.Worksheets[1];
+            sh.Name = "Коммерческое предложение";
+
+            //Вывод первой таблицы
+            var a = from RadioButton r in ProductType.Controls where r.Checked == true select r.Text;
+            sh.Cells[9,1] = "1. " + a.First();
+            for (int j = 0; j < 5; j++)
+                sh.Cells[nRow, j+1] = NameOfKiln.Rows[0].Cells[j].Value.ToString();
+            nRow++;
+            //Вывод второй таблицы
+
+            a = from RadioButton r in Manufacturer.Controls where r.Checked == true select r.Text;
+            string str = "2. " + a.First();
+            if (OwnD.Checked)
+            {
+                str += " D" + OwnValue.Value.ToString() + " мм";
+            }
+            else
+            {
+                a = from RadioButton r in Diameter.Controls.OfType<RadioButton>() where (r.Checked) == true select r.Text;
+
+                str += " D" + a.First() + " мм";
+            }
+            a = from RadioButton r in MetalThickness.Controls where r.Checked == true select r.Text;
+            str += " (" + a.First() + ")";
+            sh.Cells[nRow, 1] = str;
+            nRow++;
+
+            for(int i = 0; i < ChimneyElements.RowCount-1; i++)
+            {
+                if (i != 0)
+                {
+                    Excel.Range cellRange = (Excel.Range)sh.Cells[nRow, 1];
+                    Excel.Range rowRange = cellRange.EntireRow;
+                    rowRange.Insert(Excel.XlInsertShiftDirection.xlShiftDown, false);
+                }
+                for (int j = 0; j < 5; j++)
+                {
+                    sh.Cells[nRow, j + 1] = ChimneyElements.Rows[i].Cells[j].Value.ToString();                    
+                }
+
+                nRow++;
+            }
+            nRow++;
+            //вывод третьей таблицы
+            for (int i = 0; i < InsulationСonsumables.RowCount - 1; i++)
+            {
+                if (i != 0)
+                {
+                    Excel.Range cellRange = (Excel.Range)sh.Cells[nRow, 1];
+                    Excel.Range rowRange = cellRange.EntireRow;
+                    rowRange.Insert(Excel.XlInsertShiftDirection.xlShiftDown, false);
+                }
+                for (int j = 0; j < 5; j++)
+                    sh.Cells[nRow, j + 1] = InsulationСonsumables.Rows[i].Cells[j].Value.ToString();
+                nRow++;
+            }
+            f1 = nRow;
+            nRow ++;
+            sh.Cells[nRow++, 5] = resultSum1;
+            double disc = Convert.ToDouble(numericUpDown1.Value);
+            sh.Cells[nRow++, 5] = disc;
+            sh.Cells[nRow++, 5] = resultSum1 - disc;
+            nRow+=2;
+            s2 = nRow+1;
+            //вывод четвертой таблицы
+            for (int i = 0; i < InstallationWork.RowCount - 1; i++)
+            {
+                if (i != 0)
+                {
+                    Excel.Range cellRange = (Excel.Range)sh.Cells[nRow, 1];
+                    Excel.Range rowRange = cellRange.EntireRow;
+                    rowRange.Insert(Excel.XlInsertShiftDirection.xlShiftDown, false);
+                }
+                for (int j = 0; j < 5; j++)
+                    sh.Cells[nRow, j + 1] = InstallationWork.Rows[i].Cells[j].Value.ToString();
+                nRow++;
+            }
+            nRow++;
+            //вывод пятой таблицы
+            for (int i = 0; i < RiggingDelivery.RowCount - 1; i++)
+            {
+                if (i != 0)
+                {
+                    Excel.Range cellRange = (Excel.Range)sh.Cells[nRow, 1];
+                    Excel.Range rowRange = cellRange.EntireRow;
+                    rowRange.Insert(Excel.XlInsertShiftDirection.xlShiftDown, false);
+                }
+                for (int j = 0; j < 5; j++)
+                    sh.Cells[nRow, j + 1] = RiggingDelivery.Rows[i].Cells[j].Value.ToString();
+                nRow++;
+            }
+            f2 = nRow;
+            nRow++;
+            sh.Cells[nRow++, 5] = resultSum2;
+            sh.Cells[nRow++, 5] = 0; 
+            sh.Cells[nRow++, 5] = resultSum2;
+            nRow++;
+            sh.Cells[nRow++, 5] = sumFinal;
+            sh.Cells[nRow++, 5] = disc;
+            sh.Cells[nRow++, 5] = sumFinal - disc;
+            sh.Cells[10, 8].Borders.LineStyle = Microsoft.Office.Interop.Excel.XlLineStyle.xlDot;
+            sh.Cells[12, 8].Borders.LineStyle = Microsoft.Office.Interop.Excel.XlLineStyle.xlDash;
+            sh.Cells[14, 8].Borders.LineStyle = Microsoft.Office.Interop.Excel.XlLineStyle.xlDashDotDot;
+            sh.Cells[16, 8].Borders.LineStyle = Microsoft.Office.Interop.Excel.XlLineStyle.xlDouble;            
+            sh.Cells[18, 8].Borders.LineStyle = Microsoft.Office.Interop.Excel.XlLineStyle.xlDashDot;
+            sh.Cells[20, 8].Borders.LineStyle = Microsoft.Office.Interop.Excel.XlLineStyle.xlContinuous;
+            sh.Cells[22, 8].Borders.LineStyle = Microsoft.Office.Interop.Excel.XlLineStyle.xlLineStyleNone;
+            //Excel.Range cellRange = (Excel.Range)sh.Cells[11, 1];
+            //Excel.Range rowRange = cellRange.EntireRow;
+            //rowRange.Insert(Excel.XlInsertShiftDirection.xlShiftDown, false);
+
+            //Excel.Range excelcells = sh.get_Range(sh.Cells[10,1], sh.Cells[10, 20]);          // Устанавливаем ссылку ячеек на ячейку A1
+            //excelcells.Copy(Type.Missing);
+            //excelcells = sh.get_Range(sh.Cells[11, 1], sh.Cells[11, 20]);          // Устанавливаем ссылку ячеек на ячейку A1
+            //excelcells.PasteSpecial(Microsoft.Office.Interop.Excel.XlPasteType.xlPasteAll, Microsoft.Office.Interop.Excel.XlPasteSpecialOperation.xlPasteSpecialOperationNone, false, false);
+
+
+            Excel.Range workSheet_range = sh.get_Range("A"+s1, "E"+f1);
+            workSheet_range.Borders.Color = System.Drawing.Color.Black.ToArgb();
+            workSheet_range = sh.get_Range("A" + s2, "E" + f2);
+            workSheet_range.Borders.Color = System.Drawing.Color.Black.ToArgb();
+            nRow++;
+
+
+
+
+
+            //Save file
+            wbTarget.SaveAs(fileTarget);
+            //Close and save target workbook
+            wbTarget.Close(true);
+            //Kill excelapp
+            excelApp.Quit();
 
         }
     }
