@@ -35,22 +35,20 @@ namespace DomPecheyKP
         double sumIW = 0;
         double sumRD = 0;
         double sumND = 0;
-        double sumFinal = 0;
+
         string nameOfSheetIC = "Изоляц и расход материалы";
-        string nameOfSheetIW = "Монтажные работы и выезд";
-        string nameOfSheetRD = "Такелажные работы и доставка";
+        string nameOfSheetIW = "Монтажные работы";
+        string nameOfSheetRD = "Такелажные работы";
         
         Excel.Application ObjWorkExcel;
         Excel.Worksheet ObjWorkSheet;
         Excel.Workbook ObjWorkBook;
 
         DataGridView currentDataGridView;
-        BaseColor borderColor = BaseColor.BLACK;
 
         private PdfPCell getMidHeader(string str, iTextSharp.text.Font font)
         {
             PdfPCell cell = new PdfPCell(new Phrase(new Phrase(str, font)));
-            cell.BorderColor = borderColor;
             cell.Colspan = 5;
             cell.BorderWidthLeft = 0;
             cell.BorderWidthRight = 0;
@@ -62,551 +60,315 @@ namespace DomPecheyKP
 
         private void button1_Click(object sender, EventArgs e)
         {
+            int countColumns = 5;
             string nameOfNewFile = @"newFile.pdf";
-            if (true)//(saveFileDialog1.ShowDialog() == DialogResult.OK)
+            //List<float> heightsRows = new List<float>();
+            PdfPTable fTable = new PdfPTable(countColumns);
+            int[] firstTablecellwidth = { 10, 51, 17, 11, 11 };
+            using (var reader = new PdfReader(@"oldFile.pdf"))
             {
-                //nameOfNewFile = saveFileDialog1.FileName + ".pdf";
-
-                int numberOfFile = 3;
-                string fileName = "";
-                int pageClientName = 0;
-                int pageTable = 0;
-                int pageManagerName = 0;
-                int firstMaxHeightTable = 0;
-                int secondMaxHeightTable = 0;
-                int firstTableMarginTop = 0;
-                int secongTableMarginTop = 0;
-                string fontClientNameName = "";
-                string fontClientNamePath = "";
-                string fontManagerNameName = "";
-                string fontManagerNamePath = "";
-                string fontHeaderTableName = "";
-                string fontHeaderTablePath = "";
-                string fontTableName = "";
-                string fontTablePath = "";
-                BaseColor mainColor = new BaseColor(55, 55, 55);
-
-                if (numberOfFile == 0)
+                //Запись в файл для подсчета высоты строк
+                using (var fileStream = new FileStream(nameOfNewFile, FileMode.Create, FileAccess.Write))
                 {
-                    fileName = @"template/КП Банные Печи индивид.pdf";
-                    pageClientName = 2;
-                    pageTable = 7;
-                    pageManagerName = 11;
-                    firstMaxHeightTable = 460;
-                    secondMaxHeightTable = 520;
-                    firstTableMarginTop = 100;
-                    secongTableMarginTop = 0;
-                    fontClientNameName = "Sitka Text Italic";
-                    fontClientNamePath = "Fonts/SitkaText.ttf";
-                    fontManagerNameName = "Sitka Text Bold";
-                    fontManagerNamePath = "Fonts/SitkaText-Bold.ttf";
-                    fontHeaderTableName = "Roboto Bold";
-                    fontHeaderTablePath = "Fonts/Roboto-Bold.ttf";
-                    fontTableName = "Roboto";
-                    fontTablePath = "Fonts/Roboto-Regular.ttf";
+                    var document = new Document(reader.GetPageSizeWithRotation(1));
+                    var writer = PdfWriter.GetInstance(document, fileStream);
 
-                }
-                else if (numberOfFile == 1)
-                {
-                    fileName = @"template/КП - Банные Печи.pdf";
-                    pageClientName = 0;
-                    pageTable = 4;
-                    pageManagerName = 0;
-                    firstMaxHeightTable = 310;
-                    secondMaxHeightTable = 520;
-                    firstTableMarginTop = 250;
-                    secongTableMarginTop = 0;
-                    fontClientNameName = "Sitka Text Italic";
-                    fontClientNamePath = "Fonts/SitkaText.ttf";
-                    fontManagerNameName = "Sitka Text Bold";
-                    fontManagerNamePath = "Fonts/SitkaText-Bold.ttf";
-                    fontHeaderTableName = "Roboto Bold";
-                    fontHeaderTablePath = "Fonts/Roboto-Bold.ttf";
-                    fontTableName = "Roboto";
-                    fontTablePath = "Fonts/Roboto-Regular.ttf";
-                    mainColor = new BaseColor(100, 52, 13);
-                    borderColor = new BaseColor(100, 52, 13);
-                }
-                else if (numberOfFile == 2)
-                {
-                    fileName = @"template/КП Камины индивид.pdf";
-                    pageClientName = 2;
-                    pageTable = 5;
-                    pageManagerName = 9;
-                    firstMaxHeightTable = 420;
-                    secondMaxHeightTable = 520;
-                    firstTableMarginTop = 140;
-                    secongTableMarginTop = 0;
-                    fontClientNameName = "Sitka Text Italic";
-                    fontClientNamePath = "Fonts/SitkaText.ttf";
-                    fontManagerNameName = "Sitka Text Bold";
-                    fontManagerNamePath = "Fonts/SitkaText-Bold.ttf";
-                    fontHeaderTableName = "Roboto Bold";
-                    fontHeaderTablePath = "Fonts/Roboto-Bold.ttf";
-                    fontTableName = "Roboto";
-                    fontTablePath = "Fonts/Roboto-Regular.ttf";
-                }
-                else if (numberOfFile == 3)
-                {
-                    fileName = @"template/КП Камины.pdf";
-                    pageClientName = 0;
-                    pageTable = 8;
-                    pageManagerName = 0;
-                    firstMaxHeightTable = 460;
-                    secondMaxHeightTable = 520;
-                    firstTableMarginTop = 0;
-                    secongTableMarginTop = 0;
-                    fontClientNameName = "Sitka Text Italic";
-                    fontClientNamePath = "Fonts/SitkaText.ttf";
-                    fontManagerNameName = "Sitka Text Bold";
-                    fontManagerNamePath = "Fonts/SitkaText-Bold.ttf";
-                    fontHeaderTableName = "Roboto Bold";
-                    fontHeaderTablePath = "Fonts/Roboto-Bold.ttf";
-                    fontTableName = "Roboto";
-                    fontTablePath = "Fonts/Roboto-Regular.ttf";
-                }
+                    document.Open();
+                    document.NewPage();
+                    var importedPage = writer.GetImportedPage(reader, 1);
+                    var contentByte = writer.DirectContent;
+                    contentByte.AddTemplate(importedPage, 0, 0);
 
+                    System.Text.EncodingProvider ppp = System.Text.CodePagesEncodingProvider.Instance;
+                    Encoding.RegisterProvider(ppp);
 
-
-                int countColumns = 5;
-                PdfPTable fTable = new PdfPTable(countColumns);
-                int[] firstTablecellwidth = { 12, 53, 19, 12, 12 };
-                using (var reader = new PdfReader(fileName))
-                {
-                    //Запись в файл для подсчета высоты строк
-                    using (var fileStream = new FileStream(nameOfNewFile, FileMode.Create, FileAccess.Write))
+                    var fontHeaderName = "Sitka Text Bold";
+                    if (!FontFactory.IsRegistered(fontHeaderName))
                     {
-                        var document = new Document(reader.GetPageSizeWithRotation(1));
-                        var writer = PdfWriter.GetInstance(document, fileStream);
+                        var fontHeaderPath = Environment.GetEnvironmentVariable("SitkaText-Bold.ttf");
+                        FontFactory.Register("SitkaText-Bold.ttf");
+                    }
+                    iTextSharp.text.Font fontHeader = FontFactory.GetFont(fontHeaderName, BaseFont.IDENTITY_H);
+                    fontHeader.Size = 23;
+                    var fontName = "Sitka Banner";
+                    if (!FontFactory.IsRegistered(fontName))
+                    {
+                        var fontPath = Environment.GetEnvironmentVariable("Sitka-Banner.ttf");
+                        FontFactory.Register("Sitka-Banner.ttf");
+                    }
+                    iTextSharp.text.Font font = FontFactory.GetFont(fontName, BaseFont.IDENTITY_H);
+                    font.Color = iTextSharp.text.BaseColor.BLACK;
+                    font.Size = 25;
 
-                        document.Open();
+                    fTable.WidthPercentage = 80;
+                    fTable.SetWidths(firstTablecellwidth);
+                    //Добавим в таблицу общий заголовок
+                    PdfPCell cell;
+                    cell = new PdfPCell(new Phrase(new Phrase("Номер", fontHeader)));
+                    cell.BorderWidthTop = 0;
+                    cell.BorderWidthLeft = 0;
+                    fTable.AddCell(cell);
+                    cell = new PdfPCell(new Phrase(new Phrase("Наименование", fontHeader)));
+                    cell.BorderWidthTop = 0;
+                    fTable.AddCell(cell);
+                    cell = new PdfPCell(new Phrase(new Phrase("Количество", fontHeader)));
+                    cell.BorderWidthTop = 0;
+                    fTable.AddCell(cell);
+                    cell = new PdfPCell(new Phrase(new Phrase("Цена за шт.", fontHeader)));
+                    cell.BorderWidthTop = 0;
+                    fTable.AddCell(cell);
+                    cell = new PdfPCell(new Phrase(new Phrase("Сумма", fontHeader)));
+                    cell.BorderWidthTop = 0;
+                    cell.BorderWidthRight = 0;
+                    fTable.AddCell(cell);
+                    /////////////////////////////////////////////////////////
+
+                    var a = from RadioButton r in ProductType.Controls where r.Checked == true select r.Text;
+
+                    fTable.AddCell(getMidHeader("1. " + a.First(), font));
+
+                    ///////////////////////////////////////////////////////////////////////////
+                    ///
+                    cell = new PdfPCell(new Phrase(new Phrase(NameOfKiln.Rows[0].Cells[0].Value.ToString(), font)));
+                    cell.BorderWidthTop = 0;
+                    cell.BorderWidthLeft = 0;
+                    fTable.AddCell(cell);
+                    cell = new PdfPCell(new Phrase(new Phrase(NameOfKiln.Rows[0].Cells[1].Value.ToString(), font)));
+                    cell.BorderWidthTop = 0;
+                    fTable.AddCell(cell);
+                    cell = new PdfPCell(new Phrase(new Phrase(NameOfKiln.Rows[0].Cells[2].Value.ToString(), font)));
+                    cell.BorderWidthTop = 0;
+                    fTable.AddCell(cell);
+                    cell = new PdfPCell(new Phrase(new Phrase(NameOfKiln.Rows[0].Cells[3].Value.ToString(), font)));
+                    cell.BorderWidthTop = 0;
+                    fTable.AddCell(cell);
+                    cell = new PdfPCell(new Phrase(new Phrase(NameOfKiln.Rows[0].Cells[4].Value.ToString(), font)));
+                    cell.BorderWidthTop = 0;
+                    cell.BorderWidthRight = 0;
+                    fTable.AddCell(cell);
+
+                    a = from RadioButton r in Manufacturer.Controls where r.Checked == true select r.Text;
+                    string str = "2. " + a.First();
+                    if (OwnD.Checked)
+                    {
+                        str += " D" + OwnValue.Value.ToString() + " мм";
+                    }
+                    else
+                    {
+                        a = from RadioButton r in Diameter.Controls.OfType<RadioButton>() where (r.Checked) == true select r.Text;
+
+                        str += " D" + a.First() + " мм";
+                    }
+                    a = from RadioButton r in MetalThickness.Controls where r.Checked == true select r.Text;
+                    str += " (" + a.First() + " мм)";
+
+                    fTable.AddCell(getMidHeader(str, font));
+
+                    for (int j = 0; j < ChimneyElements.RowCount - 1; j++)
+                    {
+                        for (int k = 0; k < countColumns; k++)
+                        {
+
+                            cell = new PdfPCell(new Phrase(new Phrase(ChimneyElements.Rows[j].Cells[k].Value.ToString(), font)));
+                            if (k == 0)
+                                cell.BorderWidthLeft = 0;
+                            else if (k == countColumns - 1)
+                                cell.BorderWidthRight = 0;
+                            cell.PaddingBottom = 10;
+                            fTable.AddCell(cell);
+                        }
+                    }
+
+
+                    fTable.AddCell(getMidHeader("3. Изоляционные и расходные материалы", font));
+
+
+
+                    for (int j = 0; j < InsulationСonsumables.RowCount - 1; j++)
+                    {
+                        for (int k = 0; k < countColumns; k++)
+                        {
+
+                            cell = new PdfPCell(new Phrase(new Phrase(InsulationСonsumables.Rows[j].Cells[k].Value.ToString(), font)));
+                            if (k == 0)
+                                cell.BorderWidthLeft = 0;
+                            else if (k == countColumns - 1)
+                                cell.BorderWidthRight = 0;
+                            cell.PaddingBottom = 10;
+                            fTable.AddCell(cell);
+                        }
+                    }
+
+
+
+                    fTable.AddCell(getMidHeader("4. Монтажные работы,выезд на замер", font));
+
+                    for (int j = 0; j < InstallationWork.RowCount - 1; j++)
+                    {
+                        for (int k = 0; k < countColumns; k++)
+                        {
+
+                            cell = new PdfPCell(new Phrase(new Phrase(InstallationWork.Rows[j].Cells[k].Value.ToString(), font)));
+                            if (k == 0)
+                                cell.BorderWidthLeft = 0;
+                            else if (k == countColumns - 1)
+                                cell.BorderWidthRight = 0;
+                            cell.PaddingBottom = 10;
+                            fTable.AddCell(cell);
+                        }
+                    }
+
+
+                    fTable.AddCell(getMidHeader("5. Такелажные работы и доставка", font));
+
+                    for (int j = 0; j < RiggingDelivery.RowCount - 1; j++)
+                    {
+                        for (int k = 0; k < countColumns; k++)
+                        {
+
+                            cell = new PdfPCell(new Phrase(new Phrase(RiggingDelivery.Rows[j].Cells[k].Value.ToString()+ " ₽", font)));
+                            if (k == 0)
+                                cell.BorderWidthLeft = 0;
+                            else if (k == countColumns - 1)
+                                cell.BorderWidthRight = 0;
+                            cell.PaddingBottom = 10;
+                            fTable.AddCell(cell);
+                        }
+                    }
+
+
+                    document.Add(fTable);
+
+                    document.Close();
+                    writer.Close();
+                }
+
+
+                using (var fileStream = new FileStream(nameOfNewFile, FileMode.Create, FileAccess.Write))
+                {
+                    var document = new Document(reader.GetPageSizeWithRotation(1));
+                    var writer = PdfWriter.GetInstance(document, fileStream);
+
+                    document.Open();
+
+                    for (var i = 1; i <= reader.NumberOfPages; i++)
+                    {
                         document.NewPage();
-                        var importedPage = writer.GetImportedPage(reader, 1);
+                        var importedPage = writer.GetImportedPage(reader, i);
                         var contentByte = writer.DirectContent;
                         contentByte.AddTemplate(importedPage, 0, 0);
 
-                        System.Text.EncodingProvider ppp = System.Text.CodePagesEncodingProvider.Instance;
-                        Encoding.RegisterProvider(ppp);
 
-                        //var fontName = "Sitka Banner";
-                        //if (!FontFactory.IsRegistered(fontName))
-                        //{
-                        //    var fontPath = Environment.GetEnvironmentVariable("Sitka-Banner.ttf");
-                        //    FontFactory.Register("Sitka-Banner.ttf");
-                        //}
-                        //iTextSharp.text.Font font = FontFactory.GetFont(fontName, BaseFont.IDENTITY_H);
-                        //font.Color = iTextSharp.text.BaseColor.BLACK;
-                        //font.Size = 25;
-
-                        var fontName = fontHeaderTableName;
-                        if (!FontFactory.IsRegistered(fontName))
+                        if (i == 2)
                         {
-                            var fontPath = Environment.GetEnvironmentVariable(fontHeaderTablePath);
-                            FontFactory.Register(fontHeaderTablePath);
-                        }
-                        iTextSharp.text.Font fontHeaderTable = FontFactory.GetFont(fontName, BaseFont.IDENTITY_H);
-                        //BaseColor col = new BaseColor(55, 55, 55);
-                        fontHeaderTable.Color = mainColor;// iTextSharp.text.BaseColor.BLACK;
-                        fontHeaderTable.Size = 28;
 
-                        fontName = fontTableName;
-                        if (!FontFactory.IsRegistered(fontName))
-                        {
-                            var fontPath = Environment.GetEnvironmentVariable(fontTablePath);
-                            FontFactory.Register(fontTablePath);
-                        }
-                        iTextSharp.text.Font fontTable = FontFactory.GetFont(fontName, BaseFont.IDENTITY_H);
-                        fontTable.Color = mainColor;// iTextSharp.text.BaseColor.BLACK;
-                        fontTable.Size = 25;
-
-
-                        fTable.WidthPercentage = 80;
-                        fTable.SetWidths(firstTablecellwidth);
-                        //Добавим в таблицу общий заголовок
-                        int paddingLeft = 5;
-                        int paddingTop = 13;
-                        if (numberOfFile == 1)
-                        {
-                            fTable.DefaultCell.BorderColor = mainColor;
-                            fTable.DefaultCell.BorderColorBottom = mainColor;
-                        }
-
-                        PdfPCell cell;
-                        cell = new PdfPCell(new Phrase(new Phrase("Номер", fontHeaderTable)));
-                        cell.BorderColor = borderColor;
-                        cell.BorderWidthTop = 0;
-                        cell.BorderWidthLeft = 0;
-                        cell.PaddingLeft = paddingLeft;
-                        cell.PaddingTop = paddingTop;
-                        //cell.BorderColor = mainColor;
-                        cell.VerticalAlignment = Element.ALIGN_CENTER;
-                        fTable.AddCell(cell);
-                        cell = new PdfPCell(new Phrase(new Phrase("Наименование", fontHeaderTable)));
-                        cell.BorderColor = borderColor;
-
-                        cell.BorderWidthTop = 0;
-                        cell.PaddingLeft = paddingLeft;
-                        cell.PaddingTop = paddingTop;
-                        fTable.AddCell(cell);
-                        cell = new PdfPCell(new Phrase(new Phrase("Количество", fontHeaderTable)));
-                        cell.BorderColor = borderColor;
-                        cell.BorderWidthTop = 0;
-                        cell.PaddingLeft = paddingLeft;
-                        cell.PaddingTop = paddingTop;
-                        fTable.AddCell(cell);
-                        cell = new PdfPCell(new Phrase(new Phrase("Цена за шт.", fontHeaderTable)));
-                        cell.BorderColor = borderColor;
-                        cell.BorderWidthTop = 0;
-                        cell.PaddingLeft = paddingLeft;
-                        cell.PaddingBottom = 5;
-                        fTable.AddCell(cell);
-                        cell = new PdfPCell(new Phrase(new Phrase("Сумма", fontHeaderTable)));
-                        cell.BorderColor = borderColor;
-                        cell.BorderWidthTop = 0;
-                        cell.BorderWidthRight = 0;
-                        cell.PaddingLeft = paddingLeft;
-                        cell.PaddingTop = paddingTop;
-                        fTable.AddCell(cell);
-                        /////////////////////////////////////////////////////////
-
-                        var a = from RadioButton r in ProductType.Controls where r.Checked == true select r.Text;
-
-                        fTable.AddCell(getMidHeader("1. " + a.First(), fontTable));
-
-
-                        cell = new PdfPCell(new Phrase(new Phrase(NameOfKiln.Rows[0].Cells[0].Value.ToString(), fontTable)));
-                        cell.BorderColor = borderColor;
-                        cell.BorderWidthTop = 0;
-                        cell.BorderWidthLeft = 0;
-                        cell.HorizontalAlignment = Element.ALIGN_CENTER;
-                        fTable.AddCell(cell);
-                        cell = new PdfPCell(new Phrase(new Phrase(NameOfKiln.Rows[0].Cells[1].Value.ToString(), fontTable)));
-                        cell.BorderColor = borderColor;
-                        cell.BorderWidthTop = 0;
-                        fTable.AddCell(cell);
-                        cell = new PdfPCell(new Phrase(new Phrase(NameOfKiln.Rows[0].Cells[2].Value.ToString(), fontTable)));
-                        cell.BorderColor = borderColor;
-                        cell.BorderWidthTop = 0;
-                        cell.HorizontalAlignment = Element.ALIGN_CENTER;
-                        fTable.AddCell(cell);
-                        cell = new PdfPCell(new Phrase(new Phrase(NameOfKiln.Rows[0].Cells[3].Value.ToString() + " ₽", fontTable)));
-                        cell.BorderColor = borderColor;
-                        cell.BorderWidthTop = 0;
-                        fTable.AddCell(cell);
-                        cell = new PdfPCell(new Phrase(new Phrase(NameOfKiln.Rows[0].Cells[4].Value.ToString() + " ₽", fontTable)));
-                        cell.BorderColor = borderColor;
-                        cell.BorderWidthTop = 0;
-                        cell.BorderWidthRight = 0;
-                        fTable.AddCell(cell);
-
-                        a = from RadioButton r in Manufacturer.Controls where r.Checked == true select r.Text;
-                        string str = "2. " + a.First();
-                        if (OwnD.Checked)
-                        {
-                            str += " D" + OwnValue.Value.ToString() + " мм";
-                        }
-                        else
-                        {
-                            a = from RadioButton r in Diameter.Controls.OfType<RadioButton>() where (r.Checked) == true select r.Text;
-
-                            str += " D" + a.First() + " мм";
-                        }
-                        a = from RadioButton r in MetalThickness.Controls where r.Checked == true select r.Text;
-                        str += " (" + a.First() + ")";
-
-                        fTable.AddCell(getMidHeader(str, fontTable));
-
-                        for (int j = 0; j < ChimneyElements.RowCount - 1; j++)
-                        {
-                            for (int k = 0; k < countColumns; k++)
+                            System.Text.EncodingProvider ppp = System.Text.CodePagesEncodingProvider.Instance;
+                            Encoding.RegisterProvider(ppp);
+                            var fontName = "Sitka Text Italic";
+                            if (!FontFactory.IsRegistered(fontName))
                             {
-                                
-                                string val = ChimneyElements.Rows[j].Cells[k].Value.ToString();
-                                if (k > 2)
-                                    val += " ₽";
-                                cell = new PdfPCell(new Phrase(new Phrase(val, fontTable)));
-                                cell.BorderColor = borderColor;
-                                if (k == 0)
-                                {
-                                    cell.HorizontalAlignment = Element.ALIGN_CENTER;
-                                    cell.BorderWidthLeft = 0;
-                                }
-                                else if (k == countColumns - 1)
-                                    cell.BorderWidthRight = 0;
-                                else if (k == 2)
-                                {
-                                    cell.HorizontalAlignment = Element.ALIGN_CENTER;
-                                }
-                                cell.PaddingBottom = 10;
-                                cell.PaddingTop = 0;
-                                cell.VerticalAlignment = Element.ALIGN_TOP;
-                                fTable.AddCell(cell);
+                                var fontPath = Environment.GetEnvironmentVariable("SitkaText.ttf");
+                                FontFactory.Register("SitkaText.ttf");
                             }
-                        }
+                            iTextSharp.text.Font font1 = FontFactory.GetFont(fontName, BaseFont.IDENTITY_H);
+                            font1.Color = iTextSharp.text.BaseColor.WHITE;
 
 
-                        fTable.AddCell(getMidHeader("3. Изоляционные и расходные материалы", fontTable));
-
-
-
-                        for (int j = 0; j < InsulationСonsumables.RowCount - 1; j++)
-                        {
-                            for (int k = 0; k < countColumns; k++)
+                            contentByte.BeginText();
+                            contentByte.SetColorFill(BaseColor.WHITE);
+                            contentByte.SetFontAndSize(font1.BaseFont, 70);
+                            var multiLineString = "Александр,\nДобрый день!".Split('\n');
+                            int y = 550;
+                            foreach (var line in multiLineString)
                             {
-                                string val = InsulationСonsumables.Rows[j].Cells[k].Value.ToString();
-                                if (k > 2)
-                                    val += " ₽";
-                                cell = new PdfPCell(new Phrase(new Phrase(val, fontTable)));
-                                cell.BorderColor = borderColor;
-                                if (k == 0)
-                                {
-                                    cell.HorizontalAlignment = Element.ALIGN_CENTER;
-                                    cell.BorderWidthLeft = 0;
-                                }
-                                else if (k == countColumns - 1)
-                                    cell.BorderWidthRight = 0;
-                                else if (k == 2)
-                                {
-                                    cell.HorizontalAlignment = Element.ALIGN_CENTER;
-                                }
-                                cell.PaddingBottom = 10;
-                                fTable.AddCell(cell);
-                            }
-                        }
-
-
-
-                        fTable.AddCell(getMidHeader("4. Монтажные работы,выезд на замер", fontTable));
-
-                        for (int j = 0; j < InstallationWork.RowCount - 1; j++)
-                        {
-                            for (int k = 0; k < countColumns; k++)
-                            {
-                                string val = InstallationWork.Rows[j].Cells[k].Value.ToString();
-                                if (k > 2)
-                                    val += " ₽";
-                                cell = new PdfPCell(new Phrase(new Phrase(val, fontTable)));
-                                cell.BorderColor = borderColor;
-                                if (k == 0)
-                                {
-                                    cell.HorizontalAlignment = Element.ALIGN_CENTER;
-                                    cell.BorderWidthLeft = 0;
-                                }
-                                else if (k == countColumns - 1)
-                                    cell.BorderWidthRight = 0;
-                                else if (k == 2)
-                                {
-                                    cell.HorizontalAlignment = Element.ALIGN_CENTER;
-                                }
-                                cell.PaddingBottom = 10;
-                                fTable.AddCell(cell);
-                            }
-                        }
-
-
-                        fTable.AddCell(getMidHeader("5. Такелажные работы и доставка", fontTable));
-
-                        for (int j = 0; j < RiggingDelivery.RowCount - 1; j++)
-                        {
-                            for (int k = 0; k < countColumns; k++)
-                            {
-                                string val = RiggingDelivery.Rows[j].Cells[k].Value.ToString();
-                                if (k > 2)
-                                    val += " ₽";
-                                cell = new PdfPCell(new Phrase(new Phrase(val, fontTable)));
-                                cell.BorderColor = borderColor;
-                                if (k == 0)
-                                {
-                                    cell.HorizontalAlignment = Element.ALIGN_CENTER;
-                                    cell.BorderWidthLeft = 0;
-                                }
-                                else if (k == countColumns - 1)
-                                    cell.BorderWidthRight = 0;
-                                else if (k == 2)
-                                {
-                                    cell.HorizontalAlignment = Element.ALIGN_CENTER;
-                                }
-                                cell.PaddingBottom = 10;
-                                fTable.AddCell(cell);
-                            }
-                        }
-
-
-                        cell = new PdfPCell(new Phrase(new Phrase("Скидка:", fontHeaderTable)));
-                        cell.BorderColor = borderColor;
-                        cell.Colspan = 2;
-                        cell.BorderWidthLeft = 0;
-                        cell.BorderWidthRight = 0;
-                        cell.PaddingBottom = 10;
-                        cell.HorizontalAlignment = Element.ALIGN_LEFT;
-                        fTable.AddCell(cell);
-
-                        cell = new PdfPCell(new Phrase(new Phrase(numericUpDown1.Value.ToString(), fontHeaderTable)));
-                        cell.BorderColor = borderColor;
-                        cell.Colspan = 3;
-                        cell.BorderWidthLeft = 0;
-                        cell.BorderWidthRight = 0;
-                        cell.BorderWidthRight = 0;
-                        cell.PaddingBottom = 10;
-                        cell.HorizontalAlignment = Element.ALIGN_RIGHT;
-                        fTable.AddCell(cell);
-
-                        cell = new PdfPCell(new Phrase(new Phrase("Итого:", fontHeaderTable)));
-                        cell.BorderColor = borderColor;
-                        cell.Colspan = 2;
-                        cell.BorderWidthLeft = 0;
-                        cell.BorderWidthRight = 0;
-                        cell.PaddingBottom = 10;
-                        cell.HorizontalAlignment = Element.ALIGN_LEFT;
-                        fTable.AddCell(cell);
-
-                        cell = new PdfPCell(new Phrase(new Phrase(sumFinal.ToString(), fontHeaderTable)));
-                        cell.BorderColor = borderColor;
-                        cell.Colspan = 3;
-                        cell.BorderWidthLeft = 0;
-                        cell.BorderWidthRight = 0;
-                        cell.BorderWidthRight = 0;
-                        cell.PaddingBottom = 10;
-                        cell.HorizontalAlignment = Element.ALIGN_RIGHT;
-                        fTable.AddCell(cell);
-                        document.Add(fTable);
-
-                        document.Close();
-                        writer.Close();
-                    }
-
-
-                    using (var fileStream = new FileStream(nameOfNewFile, FileMode.Create, FileAccess.Write))
-                    {
-                        var document = new Document(reader.GetPageSizeWithRotation(1));
-                        var writer = PdfWriter.GetInstance(document, fileStream);
-                        document.Open();
-
-                        System.Text.EncodingProvider ppp = System.Text.CodePagesEncodingProvider.Instance;
-                        Encoding.RegisterProvider(ppp);
-                        var fontName = fontClientNameName;
-                        if (!FontFactory.IsRegistered(fontName))
-                        {
-                            var fontPath = Environment.GetEnvironmentVariable(fontClientNamePath);
-                            FontFactory.Register(fontClientNamePath);
-                        }
-                        iTextSharp.text.Font fontClientName = FontFactory.GetFont(fontName, BaseFont.IDENTITY_H);
-                        fontClientName.Color = iTextSharp.text.BaseColor.WHITE;
-
-                        fontName = fontManagerNameName;
-                        if (!FontFactory.IsRegistered(fontName))
-                        {
-                            var fontPath = Environment.GetEnvironmentVariable(fontManagerNamePath);
-                            FontFactory.Register(fontManagerNamePath);
-                        }
-                        iTextSharp.text.Font fontManagerName = FontFactory.GetFont(fontName, BaseFont.IDENTITY_H);
-                        fontManagerName.Color = iTextSharp.text.BaseColor.WHITE;
-
-
-
-                        for (var i = 1; i <= reader.NumberOfPages; i++)
-                        {
-                            document.NewPage();
-                            var importedPage = writer.GetImportedPage(reader, i);
-                            var contentByte = writer.DirectContent;
-                            contentByte.AddTemplate(importedPage, 0, 0);
-
-
-
-                            if (i == pageClientName)
-                            {
-                                contentByte.BeginText();
-                                contentByte.SetColorFill(BaseColor.WHITE);
-                                contentByte.SetFontAndSize(fontClientName.BaseFont, 70);
-                                string name = ClientName.Text.ToString();
-                                int y = 550;
-                                contentByte.ShowTextAligned(PdfContentByte.ALIGN_CENTER, name + ",", 650, y, 0);
+                                contentByte.ShowTextAligned(PdfContentByte.ALIGN_CENTER, line, 650, y, 0);
                                 y -= 80;
-                                contentByte.ShowTextAligned(PdfContentByte.ALIGN_CENTER, "Добрый день!", 650, y, 0);
-                                contentByte.EndText();
                             }
-
-                            if (i == pageTable)
-                            {
-                                int maxHeightTable = firstMaxHeightTable;
-                                Paragraph p;
-
-                                PdfPTable sTable = new PdfPTable(countColumns);
-                                sTable.WidthPercentage = 80;
-                                sTable.SetWidths(firstTablecellwidth);
-                                sTable.SpacingBefore = firstTableMarginTop;
-                                float sumHeight = 0;
-                                for (int j = 0; j < fTable.Rows.Count; j++)
-                                {
-                                    int q = fTable.Rows[j].GetCells()[0].Colspan;
-                                    bool isHeightMoreMaxHeight = (sumHeight + fTable.Rows[j].MaxHeights) > maxHeightTable;
-                                    bool isHeaderLastRow = fTable.Rows[j].GetCells()[0].Colspan == 5 && ((sumHeight + fTable.Rows[j + 1].MaxHeights + fTable.Rows[j].MaxHeights) > maxHeightTable);
-                                    bool isFooterNotNextRow = fTable.Rows[j].GetCells()[0].Colspan != 2;
-                                    if ((isHeightMoreMaxHeight || isHeaderLastRow) && isFooterNotNextRow)
-                                    {
-
-                                        //new table
-                                        p = new Paragraph("     ");
-                                        p.SpacingAfter = 90;
-                                        document.Add(p);
-                                        document.Add(sTable);
-                                        document.NewPage();
-                                        if (i == pageTable)
-                                        {
-                                            i++;
-                                            importedPage = writer.GetImportedPage(reader, i);
-                                            sTable.SpacingBefore = secongTableMarginTop;
-                                            maxHeightTable = secondMaxHeightTable;
-                                        }
-                                        contentByte = writer.DirectContent;
-                                        contentByte.AddTemplate(importedPage, 0, 0);
-                                        sumHeight = 0;
-                                        sTable = new PdfPTable(countColumns);
-                                        sTable.SetWidths(firstTablecellwidth);
-                                        sTable.Rows.Add(fTable.GetRow(0));
-                                        sumHeight += fTable.Rows[0].MaxHeights;
-
-                                    }
-                                    sTable.Rows.Add(fTable.GetRow(j));
-                                    sumHeight += fTable.Rows[j].MaxHeights;
-                                }
-
-
-                                p = new Paragraph("     ");
-                                p.SpacingAfter = 90;
-                                document.Add(p);
-                                //sTable.SpacingBefore = secongTableMarginTop[numberOfFile];
-                                document.Add(sTable);
-                            }
-                            if (i == pageManagerName)
-                            {
-                                contentByte.BeginText();
-                                contentByte.SetColorFill(BaseColor.WHITE);
-                                contentByte.SetFontAndSize(fontManagerName.BaseFont, 36);
-                                contentByte.ShowTextAligned(PdfContentByte.ALIGN_CENTER, ManagerName.Text, 640, 93, 0);
-                                contentByte.EndText();
-                            }
-
+                            contentByte.EndText();
                         }
-                        document.Close();
-                        writer.Close();
+
+                        if (i == 11)
+                        {
+
+                            System.Text.EncodingProvider ppp = System.Text.CodePagesEncodingProvider.Instance;
+                            Encoding.RegisterProvider(ppp);
+                            var fontName = "Sitka Text Bold";
+                            if (!FontFactory.IsRegistered(fontName))
+                            {
+                                var fontPath = Environment.GetEnvironmentVariable("SitkaText-Bold.ttf");
+                                FontFactory.Register("SitkaText-Bold.ttf");
+                            }
+                            iTextSharp.text.Font font1 = FontFactory.GetFont(fontName, BaseFont.IDENTITY_H);
+                            font1.Color = iTextSharp.text.BaseColor.WHITE;
+
+
+                            contentByte.BeginText();
+                            contentByte.SetColorFill(BaseColor.WHITE);
+                            contentByte.SetFontAndSize(font1.BaseFont, 36);
+                            contentByte.ShowTextAligned(PdfContentByte.ALIGN_CENTER, "Николай Макаркин", 640, 93, 0);
+                            contentByte.EndText();
+                        }
+
+                        if (i == 8)//8
+                        {
+                            int maxHeightTable = 330;
+                            Paragraph p;
+
+                            PdfPTable sTable = new PdfPTable(countColumns);
+                            sTable.WidthPercentage = 80;
+                            sTable.SetWidths(firstTablecellwidth);
+
+                            float sumHeight = 0;
+                            for (int j = 0; j < fTable.Rows.Count; j++)
+                            {
+                                if ((sumHeight + fTable.Rows[j].MaxHeights) > maxHeightTable)
+                                {
+                                    p = new Paragraph("     ");
+                                    p.SpacingAfter = 100;
+                                    document.Add(p);
+                                    sTable.SpacingBefore = 100;
+                                    document.Add(sTable);
+                                    document.NewPage();
+                                    contentByte = writer.DirectContent;
+                                    contentByte.AddTemplate(importedPage, 0, 0);
+                                    sumHeight = 0;
+                                    sTable = new PdfPTable(countColumns);
+                                    sTable.SetWidths(firstTablecellwidth);
+                                    sTable.Rows.Add(fTable.GetRow(0));
+                                    sumHeight += fTable.Rows[0].MaxHeights;
+                                }
+                                sTable.Rows.Add(fTable.GetRow(j));
+                                sumHeight += fTable.Rows[j].MaxHeights;
+                            }
+
+
+                            p = new Paragraph("     ");
+                            p.SpacingAfter = 100;
+                            document.Add(p);
+                            sTable.SpacingBefore = 100;
+                            document.Add(sTable);
+                        }
+
                     }
-
+                    document.Close();
+                    writer.Close();
                 }
-            }
 
+            }
         }
+
+
 
         private void Form1_Load(object sender, EventArgs e)
         {
             ObjWorkExcel = new Excel.Application();
             ObjWorkBook = ObjWorkExcel.Workbooks.Open(Environment.CurrentDirectory + @"\ДанныеКП.xlsx", Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing); //открыть файл
-            loadElD("Дымок 0,5", 2);
+            loadElD(2);
             NameOfKiln.Rows.Add("1", "", "1", "0", "0");
 
-            loadIС();
-            loadIW(1);
-            loadRD();
+            //loadIС();
+           // loadIW(1);
+           // loadRD();
             //удалить
             foreach (Object checkedItem in NewChimneyElements.Items)
             {
@@ -631,7 +393,7 @@ namespace DomPecheyKP
 
         private void loadIС()
         {
-            sumIC = 0;
+
             listIC = new Dictionary<string, double>();
             Excel.Worksheet ObjWorkSheet = (Excel.Worksheet)ObjWorkBook.Sheets[nameOfSheetIC]; //получить 1 лист
             var lastCell = ObjWorkSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell);//1 ячейку          
@@ -645,32 +407,29 @@ namespace DomPecheyKP
 
         }
 
-        private void loadElD(string nameOfPage, int nColumn)
+        private void loadElD(int nColumn)
         {
-            sumCE = 0;
+
             NewChimneyElements.Items.Clear();
             ChimneyElements.Rows.Clear();
 
             list = new Dictionary<string, double>();
 
-            ObjWorkSheet = (Excel.Worksheet)ObjWorkBook.Sheets[nameOfPage]; //получить 1 лист
+            ObjWorkSheet = (Excel.Worksheet)ObjWorkBook.Sheets[1]; //получить 1 лист
             var lastCell = ObjWorkSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell);//1 ячейку          
             for (int i = 3; i <= (int)lastCell.Row; i++) // по всем строкам
             {
-                if (ObjWorkSheet.Cells[i, 1].Text.ToString() != "" && !list.ContainsKey(ObjWorkSheet.Cells[i, 1].Text.ToString()))
+                try
                 {
-                    try
-                    {
-                        list.Add(ObjWorkSheet.Cells[i, 1].Text.ToString(), Convert.ToDouble(ObjWorkSheet.Cells[i, nColumn].Text.ToString()));//считываем текст в строку
-                    }
-                    catch (Exception ex)
-                    {                        
-                        list.Add(ObjWorkSheet.Cells[i, 1].Text.ToString(), 0);//считываем текст в строку
-                        
-                    }
-                    NewChimneyElements.Items.Add(ObjWorkSheet.Cells[i, 1].Text.ToString());  
+                    list.Add(ObjWorkSheet.Cells[i, 1].Text.ToString(), Convert.ToDouble(ObjWorkSheet.Cells[i, nColumn].Text.ToString()));//считываем текст в строку
+
                 }
-               
+                catch (Exception ex)
+                {
+                    list.Add(ObjWorkSheet.Cells[i, 1].Text.ToString(), Convert.ToDouble("0"));//считываем текст в строку
+
+                }
+                NewChimneyElements.Items.Add(ObjWorkSheet.Cells[i, 1].Text.ToString());
             }
 
         }
@@ -684,8 +443,7 @@ namespace DomPecheyKP
             SumRiggingAndInstall.Text = (sum2).ToString() + " Руб.";
             sumND = sum1 + sum2;
             SumNotDiscount.Text = (sumND).ToString() + " Руб.";
-            sumFinal = sumND - Convert.ToDouble(numericUpDown1.Value);
-            AllSum.Text = (sumFinal).ToString() + " Руб.";
+            AllSum.Text = (sumND - Convert.ToDouble(numericUpDown1.Value)).ToString() + " Руб.";
 
         }
 
@@ -702,27 +460,21 @@ namespace DomPecheyKP
 
         private void loadIW(int nColumn)
         {
-            sumIW = 0;
-            NewInstallationWork.Items.Clear();
-            InstallationWork.Rows.Clear();
+
             listIW = new Dictionary<string, double>();
             Excel.Worksheet ObjWorkSheet = (Excel.Worksheet)ObjWorkBook.Sheets[nameOfSheetIW]; //получить 1 лист
-            var lastCell = ObjWorkSheet.Columns[nColumn].Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell);//1 ячейку          
-            for (int i = 3; i <= (int)lastCell.Row; i++) // по всем строкам
+            var lastCell = ObjWorkSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell);//1 ячейку          
+            for (int i = 2; i <= (int)lastCell.Row; i++) // по всем строкам
             {
-                if (ObjWorkSheet.Cells[i, nColumn].Text.ToString() != "")
-                {
-                    listIW.Add(ObjWorkSheet.Cells[i, nColumn].Text.ToString(), Convert.ToDouble(ObjWorkSheet.Cells[i, nColumn + 1].Text.ToString()));//считываем текст в строку
-                    NewInstallationWork.Items.Add(ObjWorkSheet.Cells[i, 1].Text.ToString());
-                }
-                    
+                listIW.Add(ObjWorkSheet.Cells[i, nColumn].Text.ToString(), Convert.ToDouble(ObjWorkSheet.Cells[i, nColumn+1].Text.ToString()));//считываем текст в строку
+                NewInstallationWork.Items.Add(ObjWorkSheet.Cells[i, 1].Text.ToString());
             }
             NewInstallationWork.Sorted = true;
         }
 
         private void loadRD()
         {
-            sumRD = 0;
+
             listRD = new Dictionary<string, double>();
             Excel.Worksheet ObjWorkSheet = (Excel.Worksheet)ObjWorkBook.Sheets[nameOfSheetRD]; //получить 1 лист
             var lastCell = ObjWorkSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell);//1 ячейку          
@@ -800,88 +552,10 @@ namespace DomPecheyKP
 
         private void d_CheckedChanged(object sender, EventArgs e)
         {
-            var a = from RadioButton r in Manufacturer.Controls where r.Checked == true select r.Text;
-            var b = from RadioButton r in MetalThickness.Controls where r.Checked == true select r.Tag;
-            var c = from RadioButton r in Diameter.Controls.OfType<RadioButton>() where r.Checked == true select r.Tag;
             RadioButton radioButton = (RadioButton)sender;
             if (radioButton.Checked)
-            {
-                string page = a.First().ToString() + " " + b.First().ToString();
-                int col = Convert.ToInt32(c.First().ToString());
-                loadElD(page, col);
-                SumChimneyElements.Text = "Итого:";
-                calculateResults();
-            }
-                
+                loadElD(Convert.ToInt32(radioButton.Tag));
         }
-
-         private void mt_CheckedChanged(object sender, EventArgs e)
-        {
-            var a = from RadioButton r in Manufacturer.Controls where r.Checked == true select r.Text;
-            var b = from RadioButton r in MetalThickness.Controls where r.Checked == true select r.Tag;
-            var c = from RadioButton r in Diameter.Controls.OfType<RadioButton>() where r.Checked == true select r.Tag;
-            RadioButton radioButton = (RadioButton)sender;
-            if (radioButton.Checked)
-            {
-                string page = a.First().ToString() + " " + b.First().ToString();                
-                int col = Convert.ToInt32(c.First().ToString());
-                loadElD(page,col);
-                SumChimneyElements.Text = "Итого:";
-                calculateResults();
-            }
-                
-        }
-
-        private void m_CheckedChanged(object sender, EventArgs e)
-        {
-            
-
-            var a = from RadioButton r in Manufacturer.Controls where r.Checked == true select r.Text;
-            if (a.First().ToString() == "Schiedel")
-            {
-                MetalThickness1.Text = "PM25";
-                MetalThickness2.Text = "PM50";
-                MetalThickness1.Tag = "PM25";
-                MetalThickness2.Tag = "PM50";
-                MetalThickness.Text = "Толщина изоляции";
-            }
-            else
-            {
-                MetalThickness1.Text = "0,5";
-                MetalThickness2.Text = "0,8";
-                MetalThickness1.Tag = "0,5";
-                MetalThickness2.Tag = "0,8";
-                MetalThickness.Text = "Толщина металла";
-            }
-            var b = from RadioButton r in MetalThickness.Controls where r.Checked == true select r.Tag;
-            var c = from RadioButton r in Diameter.Controls.OfType<RadioButton>() where r.Checked == true select r.Tag;
-
-
-
-            RadioButton radioButton = (RadioButton)sender;
-            if (radioButton.Checked)
-            {
-                string page = a.First().ToString() + " " + b.First().ToString();
-                int col = Convert.ToInt32(c.First().ToString());
-                loadElD(page, col);
-                SumChimneyElements.Text = "Итого:";
-                calculateResults();
-            }
-
-
-        }
-
-        private void iw_CheckedChanged(object sender, EventArgs e)
-        {
-            RadioButton radioButton = (RadioButton)sender;
-            if (radioButton.Checked)
-            {
-                loadIW(Convert.ToInt32(radioButton.Tag));
-                SumInstallationWork.Text = "Итого:";
-                calculateResults();
-            }
-        }
-
 
         private void EditingControl_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -924,7 +598,6 @@ namespace DomPecheyKP
                 }
                 currentDataGridView.Rows[nRow].Cells[4].Value = Convert.ToDouble(currentDataGridView.Rows[nRow].Cells[2].Value) * Convert.ToDouble(currentDataGridView.Rows[nRow].Cells[3].Value);
             }
-            calculateResults();
 
         }
 
