@@ -29,7 +29,7 @@ namespace DomPecheyKP
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.BathOven = new System.Windows.Forms.RadioButton();
             this.StoveFireplace = new System.Windows.Forms.RadioButton();
             this.ManagerName = new System.Windows.Forms.TextBox();
@@ -313,12 +313,12 @@ namespace DomPecheyKP
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label9.Location = new System.Drawing.Point(273, 911);
+            this.label9.Location = new System.Drawing.Point(377, 911);
             this.label9.Name = "label9";
             this.label9.Padding = new System.Windows.Forms.Padding(0, 0, 0, 10);
-            this.label9.Size = new System.Drawing.Size(381, 29);
+            this.label9.Size = new System.Drawing.Size(197, 48);
             this.label9.TabIndex = 84;
-            this.label9.Text = "Стоимость материалов и отопительного прибора:";
+            this.label9.Text = "Стоимость материалов и \r\nотопительного прибора:";
             // 
             // MetalThickness
             // 
@@ -649,9 +649,9 @@ namespace DomPecheyKP
             this.SumInsulationСonsumables.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.SumInsulationСonsumables.Location = new System.Drawing.Point(655, 853);
             this.SumInsulationСonsumables.Name = "SumInsulationСonsumables";
-            this.SumInsulationСonsumables.Size = new System.Drawing.Size(59, 19);
+            this.SumInsulationСonsumables.Size = new System.Drawing.Size(54, 19);
             this.SumInsulationСonsumables.TabIndex = 83;
-            this.SumInsulationСonsumables.Text = "Итого:";
+            this.SumInsulationСonsumables.Text = "0 Руб.";
             // 
             // SumChimneyManufacturerAndInsulation
             // 
@@ -660,9 +660,9 @@ namespace DomPecheyKP
             this.SumChimneyManufacturerAndInsulation.Location = new System.Drawing.Point(654, 911);
             this.SumChimneyManufacturerAndInsulation.Name = "SumChimneyManufacturerAndInsulation";
             this.SumChimneyManufacturerAndInsulation.Padding = new System.Windows.Forms.Padding(0, 0, 0, 10);
-            this.SumChimneyManufacturerAndInsulation.Size = new System.Drawing.Size(59, 29);
+            this.SumChimneyManufacturerAndInsulation.Size = new System.Drawing.Size(54, 29);
             this.SumChimneyManufacturerAndInsulation.TabIndex = 85;
-            this.SumChimneyManufacturerAndInsulation.Text = "Итого:";
+            this.SumChimneyManufacturerAndInsulation.Text = "0 Руб.";
             // 
             // label8
             // 
@@ -680,9 +680,9 @@ namespace DomPecheyKP
             this.SumChimneyElements.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.SumChimneyElements.Location = new System.Drawing.Point(628, 598);
             this.SumChimneyElements.Name = "SumChimneyElements";
-            this.SumChimneyElements.Size = new System.Drawing.Size(59, 19);
+            this.SumChimneyElements.Size = new System.Drawing.Size(54, 19);
             this.SumChimneyElements.TabIndex = 81;
-            this.SumChimneyElements.Text = "Итого:";
+            this.SumChimneyElements.Text = "0 Руб.";
             // 
             // label6
             // 
@@ -825,7 +825,6 @@ namespace DomPecheyKP
             this.Number.FillWeight = 50F;
             this.Number.HeaderText = "№ п.п.";
             this.Number.Name = "Number";
-            this.Number.ReadOnly = true;
             // 
             // NameElement
             // 
@@ -840,8 +839,8 @@ namespace DomPecheyKP
             // 
             // PriceElement
             // 
-            dataGridViewCellStyle2.NullValue = null;
-            this.PriceElement.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.NullValue = null;
+            this.PriceElement.DefaultCellStyle = dataGridViewCellStyle1;
             this.PriceElement.HeaderText = "Цена за 1 шт. Руб.";
             this.PriceElement.Name = "PriceElement";
             // 
@@ -849,7 +848,6 @@ namespace DomPecheyKP
             // 
             this.SumElement.HeaderText = "Цена без скидки Руб.";
             this.SumElement.Name = "SumElement";
-            this.SumElement.ReadOnly = true;
             // 
             // deleteInstallationWork
             // 
@@ -950,9 +948,9 @@ namespace DomPecheyKP
             this.SumInstallationWork.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.SumInstallationWork.Location = new System.Drawing.Point(653, 1163);
             this.SumInstallationWork.Name = "SumInstallationWork";
-            this.SumInstallationWork.Size = new System.Drawing.Size(59, 19);
+            this.SumInstallationWork.Size = new System.Drawing.Size(54, 19);
             this.SumInstallationWork.TabIndex = 93;
-            this.SumInstallationWork.Text = "Итого:";
+            this.SumInstallationWork.Text = "0 Руб.";
             // 
             // label14
             // 
@@ -1063,9 +1061,9 @@ namespace DomPecheyKP
             this.SumRiggingDelivery.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.SumRiggingDelivery.Location = new System.Drawing.Point(654, 1409);
             this.SumRiggingDelivery.Name = "SumRiggingDelivery";
-            this.SumRiggingDelivery.Size = new System.Drawing.Size(59, 19);
+            this.SumRiggingDelivery.Size = new System.Drawing.Size(54, 19);
             this.SumRiggingDelivery.TabIndex = 101;
-            this.SumRiggingDelivery.Text = "Итого:";
+            this.SumRiggingDelivery.Text = "0 Руб.";
             // 
             // label13
             // 
@@ -1095,9 +1093,9 @@ namespace DomPecheyKP
             this.SumRiggingAndInstall.Location = new System.Drawing.Point(653, 1469);
             this.SumRiggingAndInstall.Name = "SumRiggingAndInstall";
             this.SumRiggingAndInstall.Padding = new System.Windows.Forms.Padding(0, 0, 0, 10);
-            this.SumRiggingAndInstall.Size = new System.Drawing.Size(59, 29);
+            this.SumRiggingAndInstall.Size = new System.Drawing.Size(54, 29);
             this.SumRiggingAndInstall.TabIndex = 105;
-            this.SumRiggingAndInstall.Text = "Итого:";
+            this.SumRiggingAndInstall.Text = "0 Руб.";
             // 
             // label12
             // 
@@ -1117,18 +1115,18 @@ namespace DomPecheyKP
             this.SumNotDiscount.Location = new System.Drawing.Point(653, 1507);
             this.SumNotDiscount.Name = "SumNotDiscount";
             this.SumNotDiscount.Padding = new System.Windows.Forms.Padding(0, 0, 0, 10);
-            this.SumNotDiscount.Size = new System.Drawing.Size(53, 29);
+            this.SumNotDiscount.Size = new System.Drawing.Size(54, 29);
             this.SumNotDiscount.TabIndex = 107;
-            this.SumNotDiscount.Text = "Итого";
+            this.SumNotDiscount.Text = "0 Руб.";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label7.Location = new System.Drawing.Point(423, 1605);
+            this.label7.Location = new System.Drawing.Point(423, 1610);
             this.label7.Name = "label7";
-            this.label7.Padding = new System.Windows.Forms.Padding(0, 0, 0, 30);
-            this.label7.Size = new System.Drawing.Size(144, 49);
+            this.label7.Padding = new System.Windows.Forms.Padding(0, 0, 0, 20);
+            this.label7.Size = new System.Drawing.Size(144, 39);
             this.label7.TabIndex = 108;
             this.label7.Text = "Итого со скидкой:";
             // 
@@ -1136,12 +1134,12 @@ namespace DomPecheyKP
             // 
             this.AllSum.AutoSize = true;
             this.AllSum.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.AllSum.Location = new System.Drawing.Point(654, 1605);
+            this.AllSum.Location = new System.Drawing.Point(654, 1610);
             this.AllSum.Name = "AllSum";
-            this.AllSum.Padding = new System.Windows.Forms.Padding(0, 0, 0, 30);
-            this.AllSum.Size = new System.Drawing.Size(53, 49);
+            this.AllSum.Padding = new System.Windows.Forms.Padding(0, 0, 0, 20);
+            this.AllSum.Size = new System.Drawing.Size(54, 39);
             this.AllSum.TabIndex = 109;
-            this.AllSum.Text = "Итого";
+            this.AllSum.Text = "0 Руб.";
             // 
             // label17
             // 
@@ -1176,17 +1174,7 @@ namespace DomPecheyKP
             // percentDiscount
             // 
             this.percentDiscount.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.percentDiscount.Increment = new decimal(new int[] {
-            500,
-            0,
-            0,
-            0});
             this.percentDiscount.Location = new System.Drawing.Point(587, 1576);
-            this.percentDiscount.Maximum = new decimal(new int[] {
-            1410065408,
-            2,
-            0,
-            0});
             this.percentDiscount.Name = "percentDiscount";
             this.percentDiscount.Size = new System.Drawing.Size(120, 27);
             this.percentDiscount.TabIndex = 114;
@@ -1217,7 +1205,7 @@ namespace DomPecheyKP
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(767, 572);
+            this.ClientSize = new System.Drawing.Size(767, 662);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.percentDiscount);
             this.Controls.Add(this.label18);

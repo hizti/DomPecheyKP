@@ -608,24 +608,24 @@ namespace DomPecheyKP
             loadIW(1);
             loadRD();
             //удалить
-            foreach (Object checkedItem in NewChimneyElements.Items)
-            {
-                ChimneyElements.Rows.Add("1", checkedItem.ToString(), "1", list[checkedItem.ToString()], list[checkedItem.ToString()]);
-            }
+            //foreach (Object checkedItem in NewChimneyElements.Items)
+            //{
+            //    ChimneyElements.Rows.Add("1", checkedItem.ToString(), "1", list[checkedItem.ToString()], list[checkedItem.ToString()]);
+            //}
 
-            foreach (Object checkedItem in NewInstallationWork.Items)
-            {
-                InstallationWork.Rows.Add("1", checkedItem.ToString(), "1", listIW[checkedItem.ToString()], listIW[checkedItem.ToString()]);
-            }
+            //foreach (Object checkedItem in NewInstallationWork.Items)
+            //{
+            //    InstallationWork.Rows.Add("1", checkedItem.ToString(), "1", listIW[checkedItem.ToString()], listIW[checkedItem.ToString()]);
+            //}
 
-            foreach (Object checkedItem in NewInsulationСonsumables.Items)
-            {
-                InsulationСonsumables.Rows.Add("1", checkedItem.ToString(), "1", listIC[checkedItem.ToString()], listIC[checkedItem.ToString()]);
-            }
-            foreach (Object checkedItem in NewRiggingDelivery.Items)
-            {
-                RiggingDelivery.Rows.Add("1", checkedItem.ToString(), "1", listRD[checkedItem.ToString()], listRD[checkedItem.ToString()]);
-            }
+            //foreach (Object checkedItem in NewInsulationСonsumables.Items)
+            //{
+            //    InsulationСonsumables.Rows.Add("1", checkedItem.ToString(), "1", listIC[checkedItem.ToString()], listIC[checkedItem.ToString()]);
+            //}
+            //foreach (Object checkedItem in NewRiggingDelivery.Items)
+            //{
+            //    RiggingDelivery.Rows.Add("1", checkedItem.ToString(), "1", listRD[checkedItem.ToString()], listRD[checkedItem.ToString()]);
+            //}
 
         }
 
@@ -755,21 +755,23 @@ namespace DomPecheyKP
 
         private void deleteChimneyElements_Click(object sender, EventArgs e)
         {
-
-            while (ChimneyElements.SelectedRows.Count != 0)
+            
+            foreach (DataGridViewCell cell in ChimneyElements.SelectedCells)
             {
-                if (list.ContainsKey(ChimneyElements.SelectedRows[0].Cells[1].Value.ToString()))
-                    NewChimneyElements.Items.Add(ChimneyElements.SelectedRows[0].Cells[1].Value);
-                ChimneyElements.Rows.Remove(ChimneyElements.SelectedRows[0]);
+                if (ChimneyElements.Rows[cell.RowIndex].Cells[1].Value != null)
+                {
+                    if (list.ContainsKey(this.ChimneyElements.Rows[cell.RowIndex].Cells[1].Value.ToString()))
+                        NewChimneyElements.Items.Add(ChimneyElements.Rows[cell.RowIndex].Cells[1].Value);
+                    ChimneyElements.Rows.RemoveAt(cell.RowIndex);
+                }
+
             }
 
             for (int i = 0; i < ChimneyElements.RowCount - 1; i++)
-            {
-                ChimneyElements.Rows[i].Cells[0].Value = i + 1;
-            }
+               ChimneyElements.Rows[i].Cells[0].Value = i + 1;
+            
             calculateChimneyElementsSum();
             checkAllChimneyElement();
-
         }
 
         private void checkAllChimneyElement()
@@ -786,6 +788,7 @@ namespace DomPecheyKP
                 if (!f)
                     NewChimneyElements.Items.Add(str);
             }
+
         }
 
         private void currentDataGridView_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
@@ -809,7 +812,7 @@ namespace DomPecheyKP
                 string page = a.First().ToString() + " " + b.First().ToString();
                 int col = Convert.ToInt32(c.First().ToString());
                 loadElD(page, col);
-                SumChimneyElements.Text = "Итого:";
+                SumChimneyElements.Text = "0 Руб.";
                 calculateResults();
             }
                 
@@ -826,7 +829,7 @@ namespace DomPecheyKP
                 string page = a.First().ToString() + " " + b.First().ToString();                
                 int col = Convert.ToInt32(c.First().ToString());
                 loadElD(page,col);
-                SumChimneyElements.Text = "Итого:";
+                SumChimneyElements.Text = "0 Руб.";
                 calculateResults();
             }
                 
@@ -864,7 +867,7 @@ namespace DomPecheyKP
                 string page = a.First().ToString() + " " + b.First().ToString();
                 int col = Convert.ToInt32(c.First().ToString());
                 loadElD(page, col);
-                SumChimneyElements.Text = "Итого:";
+                SumChimneyElements.Text = "0 Руб.";
                 calculateResults();
             }
 
@@ -877,7 +880,7 @@ namespace DomPecheyKP
             if (radioButton.Checked)
             {
                 loadIW(Convert.ToInt32(radioButton.Tag));
-                SumInstallationWork.Text = "Итого:";
+                SumInstallationWork.Text = "0 Руб.";
                 calculateResults();
             }
         }
@@ -914,15 +917,31 @@ namespace DomPecheyKP
         private void currentDataGridView_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             int nRow = e.RowIndex;
-            var isValid = Regex.IsMatch(currentDataGridView.Rows[nRow].Cells[e.ColumnIndex].Value.ToString(), @"^[0-9]*[,]?[0-9]+$");
-            if (e.ColumnIndex == 2 || e.ColumnIndex == 3)
+
+            if ((e.ColumnIndex == 2 || e.ColumnIndex == 3) && nRow < currentDataGridView.Rows.Count)
             {
+                var isValid = Regex.IsMatch(currentDataGridView.Rows[nRow].Cells[e.ColumnIndex].Value.ToString(), @"^[0-9]*[,]?[0-9]+$");
                 if (!isValid)
                 {
                     MessageBox.Show("Ошибка при вводе числа. Введите значение заново.");
                     currentDataGridView.Rows[nRow].Cells[e.ColumnIndex].Value = "0";
                 }
                 currentDataGridView.Rows[nRow].Cells[4].Value = Convert.ToDouble(currentDataGridView.Rows[nRow].Cells[2].Value) * Convert.ToDouble(currentDataGridView.Rows[nRow].Cells[3].Value);
+            }
+            switch (currentDataGridView.Name)
+            {
+                case "ChimneyElements":
+                    calculateChimneyElementsSum(); 
+                    break;
+                case "InsulationСonsumables":
+                    calculateInsulationСonsumablesSum();
+                    break;
+                case "InstallationWork":
+                    calculateInstallationWorkSum();
+                    break;
+                case "RiggingDelivery":
+                    calculateRiggingDeliverySum();
+                    break;
             }
             calculateResults();
 
@@ -937,19 +956,20 @@ namespace DomPecheyKP
 
         private void deleteInsulationСonsumables_Click(object sender, EventArgs e)
         {
-            while (InsulationСonsumables.SelectedRows.Count != 0)
+            foreach (DataGridViewCell cell in InsulationСonsumables.SelectedCells)
             {
-                if (listIC.ContainsKey(InsulationСonsumables.SelectedRows[0].Cells[1].Value.ToString()))
-                    NewInsulationСonsumables.Items.Add(InsulationСonsumables.SelectedRows[0].Cells[1].Value);
-                InsulationСonsumables.Rows.Remove(InsulationСonsumables.SelectedRows[0]);
+                if (InsulationСonsumables.Rows[cell.RowIndex].Cells[1].Value != null)
+                {
+                    if (listIC.ContainsKey(this.InsulationСonsumables.Rows[cell.RowIndex].Cells[1].Value.ToString()))
+                        NewInsulationСonsumables.Items.Add(InsulationСonsumables.Rows[cell.RowIndex].Cells[1].Value);
+                    InsulationСonsumables.Rows.RemoveAt(cell.RowIndex);
+                }
+
             }
 
             for (int i = 0; i < InsulationСonsumables.RowCount - 1; i++)
-            {
-                InsulationСonsumables.Rows[i].Cells[0].Value = i + 1;
-            }
+                InsulationСonsumables.Rows[i].Cells[0].Value = i + 1; 
             calculateInsulationСonsumablesSum();
-
             checkAllInsulationСonsumables();
         }
         private void checkAllInsulationСonsumables()
@@ -966,6 +986,15 @@ namespace DomPecheyKP
                 if (!f)
                     NewInsulationСonsumables.Items.Add(str);
             }
+        }
+
+        private void calculateSum()
+        {
+            sumIC = 0;
+            foreach (DataGridViewRow row in InsulationСonsumables.Rows)
+                sumIC += Convert.ToDouble(row.Cells[4].Value);
+            SumInsulationСonsumables.Text = sumIC.ToString() + " Руб.";
+            calculateResults();
         }
 
         private void calculateInsulationСonsumablesSum()
@@ -1001,12 +1030,17 @@ namespace DomPecheyKP
 
         private void deleteInstallationWork_Click(object sender, EventArgs e)
         {
-            while (InstallationWork.SelectedRows.Count != 0)
+            foreach (DataGridViewCell cell in InstallationWork.SelectedCells)
             {
-                if (listIW.ContainsKey(InstallationWork.SelectedRows[0].Cells[1].Value.ToString()))
-                    NewInstallationWork.Items.Add(InstallationWork.SelectedRows[0].Cells[1].Value);
-                InstallationWork.Rows.Remove(InstallationWork.SelectedRows[0]);
+                if (InstallationWork.Rows[cell.RowIndex].Cells[1].Value != null)
+                {
+                    if (listIW.ContainsKey(this.InstallationWork.Rows[cell.RowIndex].Cells[1].Value.ToString()))
+                        NewInstallationWork.Items.Add(InstallationWork.Rows[cell.RowIndex].Cells[1].Value);
+                    InstallationWork.Rows.RemoveAt(cell.RowIndex);
+                }
+
             }
+
 
             for (int i = 0; i < InstallationWork.RowCount - 1; i++)
             {
@@ -1065,21 +1099,23 @@ namespace DomPecheyKP
 
         private void deleteRiggingDelivery_Click(object sender, EventArgs e)
         {
-            while (RiggingDelivery.SelectedRows.Count != 0)
+            foreach (DataGridViewCell cell in RiggingDelivery.SelectedCells)
             {
-                if (listRD.ContainsKey(RiggingDelivery.SelectedRows[0].Cells[1].Value.ToString()))
-                    NewRiggingDelivery.Items.Add(RiggingDelivery.SelectedRows[0].Cells[1].Value);
-                RiggingDelivery.Rows.Remove(RiggingDelivery.SelectedRows[0]);
+                if (RiggingDelivery.Rows[cell.RowIndex].Cells[1].Value != null)
+                {
+                    if (listRD.ContainsKey(this.RiggingDelivery.Rows[cell.RowIndex].Cells[1].Value.ToString()))
+                        NewRiggingDelivery.Items.Add(RiggingDelivery.Rows[cell.RowIndex].Cells[1].Value);
+                    RiggingDelivery.Rows.RemoveAt(cell.RowIndex);
+                }
+
             }
 
-            for (int i = 0; i < RiggingDelivery.RowCount - 1; i++)
-            {
-                RiggingDelivery.Rows[i].Cells[0].Value = i + 1;
-            }
+            for (int i = 0; i < RiggingDelivery.RowCount - 1; i++)     
+                RiggingDelivery.Rows[i].Cells[0].Value = i + 1; 
             calculateRiggingDeliverySum();
-
             checkAllRiggingDelivery();
         }
+
         private void checkAllRiggingDelivery()
         {
             NewRiggingDelivery.Items.Clear();
