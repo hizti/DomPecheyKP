@@ -29,7 +29,7 @@ namespace DomPecheyKP
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.BathOven = new System.Windows.Forms.RadioButton();
             this.StoveFireplace = new System.Windows.Forms.RadioButton();
             this.ManagerName = new System.Windows.Forms.TextBox();
@@ -129,6 +129,7 @@ namespace DomPecheyKP
             this.label18 = new System.Windows.Forms.Label();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.button2 = new System.Windows.Forms.Button();
             this.Manufacturer.SuspendLayout();
             this.MetalThickness.SuspendLayout();
             this.Diameter.SuspendLayout();
@@ -552,7 +553,7 @@ namespace DomPecheyKP
             // deleteInsulationСonsumables
             // 
             this.deleteInsulationСonsumables.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.deleteInsulationСonsumables.Location = new System.Drawing.Point(542, 797);
+            this.deleteInsulationСonsumables.Location = new System.Drawing.Point(651, 798);
             this.deleteInsulationСonsumables.Name = "deleteInsulationСonsumables";
             this.deleteInsulationСonsumables.Size = new System.Drawing.Size(96, 35);
             this.deleteInsulationСonsumables.TabIndex = 78;
@@ -756,7 +757,7 @@ namespace DomPecheyKP
             // deleteChimneyElements
             // 
             this.deleteChimneyElements.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.deleteChimneyElements.Location = new System.Drawing.Point(538, 552);
+            this.deleteChimneyElements.Location = new System.Drawing.Point(651, 551);
             this.deleteChimneyElements.Name = "deleteChimneyElements";
             this.deleteChimneyElements.Size = new System.Drawing.Size(96, 35);
             this.deleteChimneyElements.TabIndex = 71;
@@ -839,8 +840,8 @@ namespace DomPecheyKP
             // 
             // PriceElement
             // 
-            dataGridViewCellStyle1.NullValue = null;
-            this.PriceElement.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.NullValue = null;
+            this.PriceElement.DefaultCellStyle = dataGridViewCellStyle2;
             this.PriceElement.HeaderText = "Цена за 1 шт. Руб.";
             this.PriceElement.Name = "PriceElement";
             // 
@@ -853,7 +854,7 @@ namespace DomPecheyKP
             // deleteInstallationWork
             // 
             this.deleteInstallationWork.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.deleteInstallationWork.Location = new System.Drawing.Point(535, 1101);
+            this.deleteInstallationWork.Location = new System.Drawing.Point(651, 1101);
             this.deleteInstallationWork.Name = "deleteInstallationWork";
             this.deleteInstallationWork.Size = new System.Drawing.Size(96, 35);
             this.deleteInstallationWork.TabIndex = 90;
@@ -966,7 +967,7 @@ namespace DomPecheyKP
             // deleteRiggingDelivery
             // 
             this.deleteRiggingDelivery.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.deleteRiggingDelivery.Location = new System.Drawing.Point(541, 1359);
+            this.deleteRiggingDelivery.Location = new System.Drawing.Point(651, 1357);
             this.deleteRiggingDelivery.Name = "deleteRiggingDelivery";
             this.deleteRiggingDelivery.Size = new System.Drawing.Size(96, 35);
             this.deleteRiggingDelivery.TabIndex = 98;
@@ -1202,11 +1203,22 @@ namespace DomPecheyKP
             this.label18.TabIndex = 113;
             this.label18.Text = "Скидка (%)";
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(568, 114);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 4;
+            this.button2.Text = "button2";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(767, 572);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.percentDiscount);
             this.Controls.Add(this.label18);
             this.Controls.Add(this.numericUpDown1);
@@ -1387,5 +1399,6 @@ namespace DomPecheyKP
         private System.Windows.Forms.DataGridViewTextBoxColumn SumElement;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.Button button2;
     }
 }

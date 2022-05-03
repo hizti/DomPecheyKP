@@ -582,7 +582,7 @@ namespace DomPecheyKP
                             {
                                 contentByte.BeginText();
                                 contentByte.SetColorFill(BaseColor.WHITE);
-                                contentByte.SetFontAndSize(fontManagerName.BaseFont, 36);
+                                contentByte.SetFontAndSize(fontManagerName.BaseFont, 33);
                                 contentByte.ShowTextAligned(PdfContentByte.ALIGN_CENTER, ManagerName.Text, 640, 93, 0);
                                 contentByte.EndText();
                             }
@@ -1145,6 +1145,11 @@ namespace DomPecheyKP
             {
                 numericUpDown1.Value = Convert.ToDecimal(Math.Round(sumND * (Convert.ToDouble(percentDiscount.Value) / 100), 0));
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
