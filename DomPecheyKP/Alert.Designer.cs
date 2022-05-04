@@ -36,21 +36,23 @@ namespace DomPecheyKP
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(41, 52);
+            this.label1.Location = new System.Drawing.Point(1, 39);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(239, 37);
+            this.label1.Size = new System.Drawing.Size(327, 74);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Файл сохраняется";
+            this.label1.Text = "Файл сохраняется,\r\nпожалуйста подождите...";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Alert
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.BackColor = System.Drawing.Color.Bisque;
             this.ClientSize = new System.Drawing.Size(329, 158);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Alert";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Уведомление";
             this.ResumeLayout(false);
             this.PerformLayout();

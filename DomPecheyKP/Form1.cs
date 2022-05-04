@@ -1027,7 +1027,7 @@ namespace DomPecheyKP
         {
             int nRow = e.RowIndex;
 
-            if ((e.ColumnIndex == 2 || e.ColumnIndex == 3) && nRow < currentDataGridView.Rows.Count)
+            if ((e.ColumnIndex == 2 || e.ColumnIndex == 3) && currentDataGridView.Rows[e.RowIndex].Cells[1].Value != null)
             {
                 var isValid = Regex.IsMatch(currentDataGridView.Rows[nRow].Cells[e.ColumnIndex].Value.ToString(), @"^[0-9]*[,]?[0-9]+$");
                 if (!isValid)
@@ -1511,6 +1511,12 @@ namespace DomPecheyKP
                 resx.Close();
             }
             
+        }
+
+        private void Form1_Click(object sender, EventArgs e)
+        {
+            this.Focus();
+
         }
     }
 }
