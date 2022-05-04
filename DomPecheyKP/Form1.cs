@@ -15,6 +15,7 @@ using iTextSharp.text;
 using iTextSharp.text.pdf;
 using Excel = Microsoft.Office.Interop.Excel;
 using System.Text.RegularExpressions;
+using System.Threading;
 
 namespace DomPecheyKP
 {
@@ -29,7 +30,7 @@ namespace DomPecheyKP
         Dictionary<string, double> listIC;
         Dictionary<string, double> listIW;
         Dictionary<string, double> listRD;
-
+        static AutoResetEvent a1 = new AutoResetEvent(false);
         double sumCE = 0;
         double sumIC = 0;
         double sumIW = 0;
@@ -694,26 +695,26 @@ namespace DomPecheyKP
             loadIW(1);
             loadRD();
             //удалить
-            //foreach (Object checkedItem in NewChimneyElements.Items)
-            //{
-            //    ChimneyElements.Rows.Add("1", checkedItem.ToString(), "1", list[checkedItem.ToString()], list[checkedItem.ToString()]);
-            //}
+            foreach (Object checkedItem in NewChimneyElements.Items)
+            {
+                ChimneyElements.Rows.Add("1", checkedItem.ToString(), "1", list[checkedItem.ToString()], list[checkedItem.ToString()]);
+            }
 
-            //foreach (Object checkedItem in NewInsulationСonsumables.Items)
-            //{
-            //    InsulationСonsumables.Rows.Add("1", checkedItem.ToString(), "1", listIC[checkedItem.ToString()], listIC[checkedItem.ToString()]);
-            //}
+            foreach (Object checkedItem in NewInsulationСonsumables.Items)
+            {
+                InsulationСonsumables.Rows.Add("1", checkedItem.ToString(), "1", listIC[checkedItem.ToString()], listIC[checkedItem.ToString()]);
+            }
 
-            //foreach (Object checkedItem in NewInstallationWork.Items)
-            //{
-            //    InstallationWork.Rows.Add("1", checkedItem.ToString(), "1", listIW[checkedItem.ToString()], listIW[checkedItem.ToString()]);
-            //}
+            foreach (Object checkedItem in NewInstallationWork.Items)
+            {
+                InstallationWork.Rows.Add("1", checkedItem.ToString(), "1", listIW[checkedItem.ToString()], listIW[checkedItem.ToString()]);
+            }
 
 
-            //foreach (Object checkedItem in NewRiggingDelivery.Items)
-            //{
-            //    RiggingDelivery.Rows.Add("1", checkedItem.ToString(), "1", listRD[checkedItem.ToString()], listRD[checkedItem.ToString()]);
-            //}
+            foreach (Object checkedItem in NewRiggingDelivery.Items)
+            {
+                RiggingDelivery.Rows.Add("1", checkedItem.ToString(), "1", listRD[checkedItem.ToString()], listRD[checkedItem.ToString()]);
+            }
 
         }
 
@@ -1277,14 +1278,23 @@ namespace DomPecheyKP
 
         private void button2_Click(object sender, EventArgs e)
         {
-            int nRow=10;
-            int s1=12, s2, f1, f2;
-            string nameOfNewFile = Environment.CurrentDirectory + @"/template/2.xlsx";
+            Thread t1 = new Thread(exportExcel);
+            
             saveFileDialog1.Filter = "Excel files|*.xls;*.xlsx";
             saveFileDialog1.FileName = "123.xlsx";
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                nameOfNewFile = saveFileDialog1.FileName;
+                t1.Start();
+            }
+            //WaitHandle.WaitAll(new WaitHandle[] {a1});
+            //MessageBox.Show("Экспорт в Excel завершен");
+        }
+        private void exportExcel()
+        {
+            int nRow = 10;
+            int s1 = 12, s2, f1, f2;
+            string nameOfNewFile = Environment.CurrentDirectory + @"/template/2.xlsx";
+            nameOfNewFile = saveFileDialog1.FileName;
                 Excel.Application excelApp;
 
                 string fileTarget = nameOfNewFile;
@@ -1438,18 +1448,20 @@ namespace DomPecheyKP
 
 
                 //Save file
-                wbTarget.SaveAs(fileTarget);
+                excelApp.DisplayAlerts = false;
+                wbTarget.SaveAs(fileTarget, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Excel.XlSaveAsAccessMode.xlNoChange, Type.Missing, Type.Missing, Type.Missing,
+                    Type.Missing, Type.Missing);
                 //Close and save target workbook
                 wbTarget.Close(true);
                 //Kill excelapp
                 excelApp.Quit();
-
-
                 excelApp = null;
                 wbTarget = null;
                 sh = null;
                 GC.Collect();
-            }
+                a1.Set();
+
+            MessageBox.Show("Экспорт в Excel завершен");
 
         }
     }
