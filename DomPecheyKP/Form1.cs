@@ -17,6 +17,7 @@ using Excel = Microsoft.Office.Interop.Excel;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Resources;
+using System.Xml;
 
 namespace DomPecheyKP
 {
@@ -705,7 +706,16 @@ namespace DomPecheyKP
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            ManagerName.Text = Resource1.ManagerName;
+            string name = "";
+            XmlDocument doc = new XmlDocument();
+            doc.Load("manager.xml");
+            foreach (XmlNode node in doc.DocumentElement)
+            {
+                name = node.Attributes[0].Value;                
+            }
+            ManagerName.Text = name;
+
+
             ObjWorkExcel = new Excel.Application();
             ObjWorkBook = ObjWorkExcel.Workbooks.Open(Environment.CurrentDirectory + @"\ДанныеКП.xlsx", Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing); //открыть файл
             loadElD("Дымок 0,5", 2);
@@ -1503,14 +1513,18 @@ namespace DomPecheyKP
 
         private void ManagerName_TextChanged(object sender, EventArgs e)
         {
-            //Resource1.ManagerName. = ManagerName.Text;
-            using (ResXResourceWriter resx = new ResXResourceWriter(@"Resource1.resx"))
-            {
-                resx.AddResource("ManagerName123", "Classic American Cars");
-                resx.Generate();
-                resx.Close();
-            }
-            
+            XmlDocument xmlDoc = new XmlDocument();
+            XmlNode rootNode = xmlDoc.CreateElement("managers");
+            xmlDoc.AppendChild(rootNode);
+
+            XmlNode userNode = xmlDoc.CreateElement("managers");
+            XmlAttribute attribute = xmlDoc.CreateAttribute("name");
+            attribute.Value = ManagerName.Text;
+            userNode.Attributes.Append(attribute);
+            rootNode.AppendChild(userNode);
+
+            xmlDoc.Save("manager.xml");
+
         }
 
         private void Form1_Click(object sender, EventArgs e)
