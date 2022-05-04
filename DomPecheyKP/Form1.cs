@@ -16,6 +16,7 @@ using iTextSharp.text.pdf;
 using Excel = Microsoft.Office.Interop.Excel;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.Resources;
 
 namespace DomPecheyKP
 {
@@ -30,7 +31,6 @@ namespace DomPecheyKP
         Dictionary<string, double> listIC;
         Dictionary<string, double> listIW;
         Dictionary<string, double> listRD;
-        static AutoResetEvent a1 = new AutoResetEvent(false);
         double sumCE = 0;
         double sumIC = 0;
         double sumIW = 0;
@@ -42,11 +42,11 @@ namespace DomPecheyKP
         string nameOfSheetIC = "Изоляц и расход материалы";
         string nameOfSheetIW = "Монтажные работы и выезд";
         string nameOfSheetRD = "Такелажные работы и доставка";
-
+        string managerName = "";
         Excel.Application ObjWorkExcel;
         Excel.Worksheet ObjWorkSheet;
         Excel.Workbook ObjWorkBook;
-
+        Alert formAlert;
         DataGridView currentDataGridView;
         BaseColor borderColor = BaseColor.BLACK;
 
@@ -675,6 +675,13 @@ namespace DomPecheyKP
                             }
 
                         }
+                        if (numberOfFile ==3)
+                        {
+                            document.NewPage();
+                            var importedPage = writer.GetImportedPage(reader, reader.NumberOfPages);
+                            var contentByte = writer.DirectContent;
+                            contentByte.AddTemplate(importedPage, 0, 0);
+                        }
                         document.Close();
                         writer.Close();
                     }
@@ -686,6 +693,7 @@ namespace DomPecheyKP
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            ManagerName.Text = Resource1.ManagerName;
             ObjWorkExcel = new Excel.Application();
             ObjWorkBook = ObjWorkExcel.Workbooks.Open(Environment.CurrentDirectory + @"\ДанныеКП.xlsx", Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing); //открыть файл
             loadElD("Дымок 0,5", 2);
@@ -1276,193 +1284,219 @@ namespace DomPecheyKP
             }
         }
 
+        BackgroundWorker worker;
         private void button2_Click(object sender, EventArgs e)
         {
-            Thread t1 = new Thread(exportExcel);
+            managerName = ManagerName.Text;
             
             saveFileDialog1.Filter = "Excel files|*.xls;*.xlsx";
             saveFileDialog1.FileName = "123.xlsx";
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                t1.Start();
+                formAlert = new Alert();
+                formAlert.Show();
+                worker = new BackgroundWorker();
+                worker.DoWork += new DoWorkEventHandler(exportExcel);
+                worker.RunWorkerCompleted +=
+                           new RunWorkerCompletedEventHandler(worker_RunWorkerCompleted);
+                worker.RunWorkerAsync();
             }
-            //WaitHandle.WaitAll(new WaitHandle[] {a1});
-            //MessageBox.Show("Экспорт в Excel завершен");
         }
-        private void exportExcel()
+        void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            formAlert.Hide();
+            formAlert.Close();
+            MessageBox.Show("Экспорт завершен");
+        }
+
+        private void exportExcel(object sender, DoWorkEventArgs e)
+        {
+            //formAlert = new Alert();
+            //formAlert.Refresh();
+            //formAlert.Show();
             int nRow = 10;
             int s1 = 12, s2, f1, f2;
             string nameOfNewFile = Environment.CurrentDirectory + @"/template/2.xlsx";
             nameOfNewFile = saveFileDialog1.FileName;
-                Excel.Application excelApp;
+            Excel.Application excelApp;
 
-                string fileTarget = nameOfNewFile;
-                string fileTemplate = Environment.CurrentDirectory + @"/template/template1.xlsx";
-                excelApp = new Excel.Application();
-                Excel.Workbook wbTarget;
-                Excel.Worksheet sh;
+            string fileTarget = nameOfNewFile;
+            string fileTemplate = Environment.CurrentDirectory + @"/template/template1.xlsx";
+            excelApp = new Excel.Application();
+            Excel.Workbook wbTarget;
+            Excel.Worksheet sh;
 
-                //Create target workbook
-                wbTarget = excelApp.Workbooks.Open(fileTemplate);
+            //Create target workbook    
+            wbTarget = excelApp.Workbooks.Open(fileTemplate);
 
-                //Fill target workbook
-                //Open the template sheet
-                sh = wbTarget.Worksheets[1];
-                sh.Name = "Коммерческое предложение";
+            //Fill target workbook
+            //Open the template sheet
+            sh = wbTarget.Worksheets[1];
+            sh.Name = "Коммерческое предложение";
+            sh.Cells[1,2] = DateTime.Now.ToShortDateString();
+            sh.Cells[4,2] = " Ваш менеджер: " + managerName;
 
-                //Вывод первой таблицы
-                var a = from RadioButton r in ProductType.Controls where r.Checked == true select r.Text;
-                sh.Cells[9, 1] = "1. " + a.First();
+
+            //Вывод первой таблицы
+            var a = from RadioButton r in ProductType.Controls where r.Checked == true select r.Text;
+            sh.Cells[9, 1] = "1. " + a.First();
+            for (int j = 0; j < 5; j++)
+                sh.Cells[nRow, j + 1] = NameOfKiln.Rows[0].Cells[j].Value.ToString();
+            nRow++;
+            //Вывод второй таблицы
+
+            a = from RadioButton r in Manufacturer.Controls where r.Checked == true select r.Text;
+            string str = "2. " + a.First();
+            if (OwnD.Checked)
+            {
+                str += " D" + OwnValue.Value.ToString() + " мм";
+            }
+            else
+            {
+                a = from RadioButton r in Diameter.Controls.OfType<RadioButton>() where (r.Checked) == true select r.Text;
+
+                str += " D" + a.First() + " мм";
+            }
+            a = from RadioButton r in MetalThickness.Controls where r.Checked == true select r.Text;
+            str += " (" + a.First() + ")";
+            sh.Cells[nRow, 1] = str;
+            nRow++;
+            if (ChimneyElements.RowCount == 1)
+            {
+                sh.Cells[nRow, 1] = "1";
+                sh.Cells[nRow, 2] = "Отсутствует";
+                nRow++;
+            }
+            else
+            for (int i = 0; i < ChimneyElements.RowCount - 1; i++)
+            {
+                if (i != 0)
+                {
+                    Excel.Range cellRange = (Excel.Range)sh.Cells[nRow, 1];
+                    Excel.Range rowRange = cellRange.EntireRow;
+                    rowRange.Insert(Excel.XlInsertShiftDirection.xlShiftDown, false);
+                }
                 for (int j = 0; j < 5; j++)
-                    sh.Cells[nRow, j + 1] = NameOfKiln.Rows[0].Cells[j].Value.ToString();
-                nRow++;
-                //Вывод второй таблицы
+                {
+                    sh.Cells[nRow, j + 1] = ChimneyElements.Rows[i].Cells[j].Value.ToString();
+                }
 
-                a = from RadioButton r in Manufacturer.Controls where r.Checked == true select r.Text;
-                string str = "2. " + a.First();
-                if (OwnD.Checked)
-                {
-                    str += " D" + OwnValue.Value.ToString() + " мм";
-                }
-                else
-                {
-                    a = from RadioButton r in Diameter.Controls.OfType<RadioButton>() where (r.Checked) == true select r.Text;
-
-                    str += " D" + a.First() + " мм";
-                }
-                a = from RadioButton r in MetalThickness.Controls where r.Checked == true select r.Text;
-                str += " (" + a.First() + ")";
-                sh.Cells[nRow, 1] = str;
                 nRow++;
-                if (ChimneyElements.RowCount == 1)
-                {
-                    sh.Cells[nRow, 1] = "1";
-                    sh.Cells[nRow, 2] = "Отсутствует";
-                    nRow++;
-                }
-                else
-                for (int i = 0; i < ChimneyElements.RowCount - 1; i++)
-                {
-                    if (i != 0)
-                    {
-                        Excel.Range cellRange = (Excel.Range)sh.Cells[nRow, 1];
-                        Excel.Range rowRange = cellRange.EntireRow;
-                        rowRange.Insert(Excel.XlInsertShiftDirection.xlShiftDown, false);
-                    }
-                    for (int j = 0; j < 5; j++)
-                    {
-                        sh.Cells[nRow, j + 1] = ChimneyElements.Rows[i].Cells[j].Value.ToString();
-                    }
-
-                    nRow++;
-                }
+            }
+            nRow++;
+            //вывод третьей таблицы
+            if (InsulationСonsumables.RowCount == 1)
+            {
+                sh.Cells[nRow, 1] = "1";
+                sh.Cells[nRow, 2] = "Отсутствует";
                 nRow++;
-                //вывод третьей таблицы
-                if (InsulationСonsumables.RowCount == 1)
+            }
+            else
+                for (int i = 0; i < InsulationСonsumables.RowCount - 1; i++)
+            {
+                if (i != 0)
                 {
-                    sh.Cells[nRow, 1] = "1";
-                    sh.Cells[nRow, 2] = "Отсутствует";
-                    nRow++;
+                    Excel.Range cellRange = (Excel.Range)sh.Cells[nRow, 1];
+                    Excel.Range rowRange = cellRange.EntireRow;
+                    rowRange.Insert(Excel.XlInsertShiftDirection.xlShiftDown, false);
                 }
-                else
-                    for (int i = 0; i < InsulationСonsumables.RowCount - 1; i++)
-                {
-                    if (i != 0)
-                    {
-                        Excel.Range cellRange = (Excel.Range)sh.Cells[nRow, 1];
-                        Excel.Range rowRange = cellRange.EntireRow;
-                        rowRange.Insert(Excel.XlInsertShiftDirection.xlShiftDown, false);
-                    }
-                    for (int j = 0; j < 5; j++)
-                        sh.Cells[nRow, j + 1] = InsulationСonsumables.Rows[i].Cells[j].Value.ToString();
-                    nRow++;
-                }
-                f1 = nRow;
+                for (int j = 0; j < 5; j++)
+                    sh.Cells[nRow, j + 1] = InsulationСonsumables.Rows[i].Cells[j].Value.ToString();
                 nRow++;
-                sh.Cells[nRow++, 5] = resultSum1;
-                double disc = Convert.ToDouble(numericUpDown1.Value);
-                sh.Cells[nRow++, 5] = disc;
-                sh.Cells[nRow++, 5] = resultSum1 - disc;
-                nRow += 2;
-                s2 = nRow + 1;
-                //вывод четвертой таблицы
-                if (InstallationWork.RowCount==1)
-                {
-                    sh.Cells[nRow, 1] = "1";
-                    sh.Cells[nRow, 2] = "Отсутствует";
-                    nRow++;
-                }
-                else
-                for (int i = 0; i < InstallationWork.RowCount - 1; i++)
-                {
-                    if (i != 0)
-                    {
-                        Excel.Range cellRange = (Excel.Range)sh.Cells[nRow, 1];
-                        Excel.Range rowRange = cellRange.EntireRow;
-                        rowRange.Insert(Excel.XlInsertShiftDirection.xlShiftDown, false);
-                    }
-                    for (int j = 0; j < 5; j++)
-                        sh.Cells[nRow, j + 1] = InstallationWork.Rows[i].Cells[j].Value.ToString();
-                    nRow++;
-                }
+            }
+            f1 = nRow;
+            nRow++;
+            sh.Cells[nRow++, 5] = resultSum1;
+            double disc = Convert.ToDouble(numericUpDown1.Value);
+            sh.Cells[nRow++, 5] = disc;
+            sh.Cells[nRow++, 5] = resultSum1 - disc;
+            nRow += 2;
+            s2 = nRow + 1;
+            //вывод четвертой таблицы
+            if (InstallationWork.RowCount==1)
+            {
+                sh.Cells[nRow, 1] = "1";
+                sh.Cells[nRow, 2] = "Отсутствует";
                 nRow++;
-                //вывод пятой таблицы
-                if (RiggingDelivery.RowCount == 1)
+            }
+            else
+            for (int i = 0; i < InstallationWork.RowCount - 1; i++)
+            {
+                if (i != 0)
                 {
-                    sh.Cells[nRow, 1] = "1";
-                    sh.Cells[nRow, 2] = "Отсутствует";
-                    nRow++;
+                    Excel.Range cellRange = (Excel.Range)sh.Cells[nRow, 1];
+                    Excel.Range rowRange = cellRange.EntireRow;
+                    rowRange.Insert(Excel.XlInsertShiftDirection.xlShiftDown, false);
                 }
-                else                    
-                for (int i = 0; i < RiggingDelivery.RowCount - 1; i++)
+                for (int j = 0; j < 5; j++)
+                    sh.Cells[nRow, j + 1] = InstallationWork.Rows[i].Cells[j].Value.ToString();
+                nRow++;
+            }
+            nRow++;
+            //вывод пятой таблицы
+            if (RiggingDelivery.RowCount == 1)
+            {
+                sh.Cells[nRow, 1] = "1";
+                sh.Cells[nRow, 2] = "Отсутствует";
+                nRow++;
+            }
+            else                    
+            for (int i = 0; i < RiggingDelivery.RowCount - 1; i++)
+            {
+                if (i != 0)
                 {
-                    if (i != 0)
-                    {
-                        Excel.Range cellRange = (Excel.Range)sh.Cells[nRow, 1];
-                        Excel.Range rowRange = cellRange.EntireRow;
-                        rowRange.Insert(Excel.XlInsertShiftDirection.xlShiftDown, false);
-                    }
-                    for (int j = 0; j < 5; j++)
-                        sh.Cells[nRow, j + 1] = RiggingDelivery.Rows[i].Cells[j].Value.ToString();
-                    nRow++;
+                    Excel.Range cellRange = (Excel.Range)sh.Cells[nRow, 1];
+                    Excel.Range rowRange = cellRange.EntireRow;
+                    rowRange.Insert(Excel.XlInsertShiftDirection.xlShiftDown, false);
                 }
-                f2 = nRow;
+                for (int j = 0; j < 5; j++)
+                    sh.Cells[nRow, j + 1] = RiggingDelivery.Rows[i].Cells[j].Value.ToString();
                 nRow++;
-                sh.Cells[nRow++, 5] = resultSum2;
-                sh.Cells[nRow++, 5] = 0;
-                sh.Cells[nRow++, 5] = resultSum2;
-                nRow++;
-                sh.Cells[nRow++, 5] = sumFinal;
-                sh.Cells[nRow++, 5] = disc;
-                sh.Cells[nRow++, 5] = sumFinal - disc;
+            }
+            f2 = nRow;
+            nRow++;
+            sh.Cells[nRow++, 5] = resultSum2;
+            sh.Cells[nRow++, 5] = 0;
+            sh.Cells[nRow++, 5] = resultSum2;
+            nRow++;
+            sh.Cells[nRow++, 5] = sumFinal;
+            sh.Cells[nRow++, 5] = disc;
+            sh.Cells[nRow++, 5] = sumFinal - disc;
                 
 
-                Excel.Range workSheet_range = sh.get_Range("A" + s1, "E" + f1);
-                workSheet_range.Borders.Color = System.Drawing.Color.Black.ToArgb();
-                workSheet_range = sh.get_Range("A" + s2, "E" + f2);
-                workSheet_range.Borders.Color = System.Drawing.Color.Black.ToArgb();
+            Excel.Range workSheet_range = sh.get_Range("A" + s1, "E" + f1);
+            workSheet_range.Borders.Color = System.Drawing.Color.Black.ToArgb();
+            workSheet_range = sh.get_Range("A" + s2, "E" + f2);
+            workSheet_range.Borders.Color = System.Drawing.Color.Black.ToArgb();
 
-                workSheet_range = sh.get_Range("A5", "E" + (nRow - 1));
-                workSheet_range.BorderAround2(Excel.XlLineStyle.xlContinuous, Excel.XlBorderWeight.xlThick, Excel.XlColorIndex.xlColorIndexNone, Color.Black, Type.Missing);
+            workSheet_range = sh.get_Range("A5", "E" + (nRow - 1));
+            workSheet_range.BorderAround2(Excel.XlLineStyle.xlContinuous, Excel.XlBorderWeight.xlThick, Excel.XlColorIndex.xlColorIndexNone, Color.Black, Type.Missing);
 
 
-                //Save file
-                excelApp.DisplayAlerts = false;
-                wbTarget.SaveAs(fileTarget, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Excel.XlSaveAsAccessMode.xlNoChange, Type.Missing, Type.Missing, Type.Missing,
-                    Type.Missing, Type.Missing);
-                //Close and save target workbook
-                wbTarget.Close(true);
-                //Kill excelapp
-                excelApp.Quit();
-                excelApp = null;
-                wbTarget = null;
-                sh = null;
-                GC.Collect();
-                a1.Set();
+            //Save file
+            excelApp.DisplayAlerts = false;
+            wbTarget.SaveAs(fileTarget, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Excel.XlSaveAsAccessMode.xlNoChange, Type.Missing, Type.Missing, Type.Missing,
+                Type.Missing, Type.Missing);
+            //Close and save target workbook
+            wbTarget.Close(true);
+            //Kill excelapp
+            excelApp.Quit();
+            excelApp = null;
+            wbTarget = null;
+            sh = null;
+            GC.Collect();
+        }
 
-            MessageBox.Show("Экспорт в Excel завершен");
-
+        private void ManagerName_TextChanged(object sender, EventArgs e)
+        {
+            //Resource1.ManagerName. = ManagerName.Text;
+            using (ResXResourceWriter resx = new ResXResourceWriter(@"Resource1.resx"))
+            {
+                resx.AddResource("ManagerName123", "Classic American Cars");
+                resx.Generate();
+                resx.Close();
+            }
+            
         }
     }
 }
