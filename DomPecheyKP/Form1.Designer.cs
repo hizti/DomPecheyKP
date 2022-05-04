@@ -85,7 +85,7 @@ namespace DomPecheyKP
             this.NewChimneyElements = new System.Windows.Forms.CheckedListBox();
             this.deleteChimneyElements = new System.Windows.Forms.Button();
             this.addChimneyElements = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.ExportPdf = new System.Windows.Forms.Button();
             this.ProductType = new System.Windows.Forms.GroupBox();
             this.ChimneyElements = new System.Windows.Forms.DataGridView();
             this.Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -129,7 +129,10 @@ namespace DomPecheyKP
             this.label18 = new System.Windows.Forms.Label();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.button2 = new System.Windows.Forms.Button();
+            this.ExportExcel = new System.Windows.Forms.Button();
+            this.isVIP = new System.Windows.Forms.GroupBox();
+            this.UsualPdf = new System.Windows.Forms.RadioButton();
+            this.VIPPdf = new System.Windows.Forms.RadioButton();
             this.Manufacturer.SuspendLayout();
             this.MetalThickness.SuspendLayout();
             this.Diameter.SuspendLayout();
@@ -142,6 +145,7 @@ namespace DomPecheyKP
             ((System.ComponentModel.ISupportInitialize)(this.RiggingDelivery)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.percentDiscount)).BeginInit();
+            this.isVIP.SuspendLayout();
             this.SuspendLayout();
             // 
             // BathOven
@@ -152,7 +156,7 @@ namespace DomPecheyKP
             this.BathOven.Name = "BathOven";
             this.BathOven.Size = new System.Drawing.Size(119, 23);
             this.BathOven.TabIndex = 3;
-            this.BathOven.Tag = "7";
+            this.BathOven.Tag = "4";
             this.BathOven.Text = "Банная печь";
             this.BathOven.UseVisualStyleBackColor = true;
             this.BathOven.CheckedChanged += new System.EventHandler(this.iw_CheckedChanged);
@@ -165,7 +169,7 @@ namespace DomPecheyKP
             this.StoveFireplace.Name = "StoveFireplace";
             this.StoveFireplace.Size = new System.Drawing.Size(117, 23);
             this.StoveFireplace.TabIndex = 2;
-            this.StoveFireplace.Tag = "4";
+            this.StoveFireplace.Tag = "1";
             this.StoveFireplace.Text = "Печь-камин";
             this.StoveFireplace.UseVisualStyleBackColor = true;
             this.StoveFireplace.CheckedChanged += new System.EventHandler(this.iw_CheckedChanged);
@@ -195,7 +199,7 @@ namespace DomPecheyKP
             this.ClientName.Location = new System.Drawing.Point(128, 12);
             this.ClientName.Name = "ClientName";
             this.ClientName.Size = new System.Drawing.Size(182, 26);
-            this.ClientName.TabIndex = 59;
+            this.ClientName.TabIndex = 1;
             this.ClientName.Text = "Александр";
             // 
             // label1
@@ -532,7 +536,7 @@ namespace DomPecheyKP
             this.FireplaceInsert.Size = new System.Drawing.Size(149, 23);
             this.FireplaceInsert.TabIndex = 1;
             this.FireplaceInsert.TabStop = true;
-            this.FireplaceInsert.Tag = "1";
+            this.FireplaceInsert.Tag = "7";
             this.FireplaceInsert.Text = "Каминная топка";
             this.FireplaceInsert.UseVisualStyleBackColor = true;
             this.FireplaceInsert.CheckedChanged += new System.EventHandler(this.iw_CheckedChanged);
@@ -776,15 +780,16 @@ namespace DomPecheyKP
             this.addChimneyElements.UseVisualStyleBackColor = true;
             this.addChimneyElements.Click += new System.EventHandler(this.addChimneyElements_Click);
             // 
-            // button1
+            // ExportPdf
             // 
-            this.button1.Location = new System.Drawing.Point(672, 114);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 68;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.ExportPdf.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.ExportPdf.Location = new System.Drawing.Point(192, 32);
+            this.ExportPdf.Name = "ExportPdf";
+            this.ExportPdf.Size = new System.Drawing.Size(195, 56);
+            this.ExportPdf.TabIndex = 1000;
+            this.ExportPdf.Text = "Создать комерческое предложение";
+            this.ExportPdf.UseVisualStyleBackColor = true;
+            this.ExportPdf.Click += new System.EventHandler(this.button1_Click);
             // 
             // ProductType
             // 
@@ -889,9 +894,9 @@ namespace DomPecheyKP
             this.label11.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label11.Location = new System.Drawing.Point(24, 948);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(271, 19);
+            this.label11.Size = new System.Drawing.Size(276, 19);
             this.label11.TabIndex = 87;
-            this.label11.Text = "Монтажные работы,выезд на замер";
+            this.label11.Text = "Монтажные работы, выезд на замер";
             // 
             // InstallationWork
             // 
@@ -976,7 +981,7 @@ namespace DomPecheyKP
             // addRiggingDelivery
             // 
             this.addRiggingDelivery.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.addRiggingDelivery.Location = new System.Drawing.Point(423, 1359);
+            this.addRiggingDelivery.Location = new System.Drawing.Point(423, 1358);
             this.addRiggingDelivery.Name = "addRiggingDelivery";
             this.addRiggingDelivery.Size = new System.Drawing.Size(90, 35);
             this.addRiggingDelivery.TabIndex = 97;
@@ -1191,22 +1196,63 @@ namespace DomPecheyKP
             this.label18.TabIndex = 113;
             this.label18.Text = "Скидка (%)";
             // 
-            // button2
+            // ExportExcel
             // 
-            this.button2.Location = new System.Drawing.Point(568, 114);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.ExportExcel.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.ExportExcel.Location = new System.Drawing.Point(138, 1576);
+            this.ExportExcel.Name = "ExportExcel";
+            this.ExportExcel.Size = new System.Drawing.Size(173, 49);
+            this.ExportExcel.TabIndex = 1001;
+            this.ExportExcel.Text = "Создать локальный сметный расчет";
+            this.ExportExcel.UseVisualStyleBackColor = true;
+            this.ExportExcel.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // isVIP
+            // 
+            this.isVIP.Controls.Add(this.UsualPdf);
+            this.isVIP.Controls.Add(this.VIPPdf);
+            this.isVIP.Controls.Add(this.ExportPdf);
+            this.isVIP.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.isVIP.Location = new System.Drawing.Point(22, 1459);
+            this.isVIP.Name = "isVIP";
+            this.isVIP.Size = new System.Drawing.Size(393, 100);
+            this.isVIP.TabIndex = 115;
+            this.isVIP.TabStop = false;
+            this.isVIP.Text = "Комерческое предложение";
+            // 
+            // UsualPdf
+            // 
+            this.UsualPdf.AutoSize = true;
+            this.UsualPdf.BackColor = System.Drawing.SystemColors.Control;
+            this.UsualPdf.Checked = true;
+            this.UsualPdf.Location = new System.Drawing.Point(7, 32);
+            this.UsualPdf.Name = "UsualPdf";
+            this.UsualPdf.Size = new System.Drawing.Size(94, 23);
+            this.UsualPdf.TabIndex = 1;
+            this.UsualPdf.TabStop = true;
+            this.UsualPdf.Tag = "0";
+            this.UsualPdf.Text = "Обычное";
+            this.UsualPdf.UseVisualStyleBackColor = false;
+            // 
+            // VIPPdf
+            // 
+            this.VIPPdf.AutoSize = true;
+            this.VIPPdf.BackColor = System.Drawing.SystemColors.Control;
+            this.VIPPdf.Location = new System.Drawing.Point(8, 64);
+            this.VIPPdf.Name = "VIPPdf";
+            this.VIPPdf.Size = new System.Drawing.Size(52, 23);
+            this.VIPPdf.TabIndex = 0;
+            this.VIPPdf.Tag = "1";
+            this.VIPPdf.Text = "VIP";
+            this.VIPPdf.UseVisualStyleBackColor = false;
             // 
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(767, 662);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.isVIP);
+            this.Controls.Add(this.ExportExcel);
             this.Controls.Add(this.percentDiscount);
             this.Controls.Add(this.label18);
             this.Controls.Add(this.numericUpDown1);
@@ -1255,7 +1301,6 @@ namespace DomPecheyKP
             this.Controls.Add(this.NewChimneyElements);
             this.Controls.Add(this.deleteChimneyElements);
             this.Controls.Add(this.addChimneyElements);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.ProductType);
             this.Controls.Add(this.ChimneyElements);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -1280,6 +1325,8 @@ namespace DomPecheyKP
             ((System.ComponentModel.ISupportInitialize)(this.RiggingDelivery)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.percentDiscount)).EndInit();
+            this.isVIP.ResumeLayout(false);
+            this.isVIP.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1329,7 +1376,7 @@ namespace DomPecheyKP
         private System.Windows.Forms.CheckedListBox NewChimneyElements;
         private System.Windows.Forms.Button deleteChimneyElements;
         private System.Windows.Forms.Button addChimneyElements;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button ExportPdf;
         private System.Windows.Forms.GroupBox ProductType;
         private System.Windows.Forms.DataGridView ChimneyElements;
         private System.Windows.Forms.Button deleteInstallationWork;
@@ -1387,6 +1434,9 @@ namespace DomPecheyKP
         private System.Windows.Forms.DataGridViewTextBoxColumn SumElement;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button ExportExcel;
+        private System.Windows.Forms.GroupBox isVIP;
+        private System.Windows.Forms.RadioButton UsualPdf;
+        private System.Windows.Forms.RadioButton VIPPdf;
     }
 }

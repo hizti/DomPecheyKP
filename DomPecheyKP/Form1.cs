@@ -31,6 +31,7 @@ namespace DomPecheyKP
         Dictionary<string, double> listIC;
         Dictionary<string, double> listIW;
         Dictionary<string, double> listRD;
+
         double sumCE = 0;
         double sumIC = 0;
         double sumIW = 0;
@@ -65,9 +66,14 @@ namespace DomPecheyKP
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string nameOfNewFile = @"newFile.pdf";
+            string nameOfNewFile;
             saveFileDialog1.Filter = "Pdf files|*.pdf";
-            saveFileDialog1.FileName = "123.pdf";
+            
+            var typeProduct = from RadioButton r in ProductType.Controls where r.Checked == true select r.Tag;
+            var VIP = from RadioButton r in isVIP.Controls where r.Checked == true select r.Tag;
+            var typeProductstring = from RadioButton r in ProductType.Controls where r.Checked == true select r.Text;
+            var VIPstring = from RadioButton r in isVIP.Controls where r.Checked == true select r.Text;
+            saveFileDialog1.FileName = "Комерческое предложение " + VIPstring.First().ToString() + " " + typeProductstring.First().ToString()  + " " + ClientName.Text + " " + DateTime.Now.ToShortDateString() + ".pdf";
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 nameOfNewFile = saveFileDialog1.FileName;
@@ -91,87 +97,93 @@ namespace DomPecheyKP
                 string fontTablePath = "";
                 BaseColor mainColor = new BaseColor(55, 55, 55);
 
-                if (numberOfFile == 0)
+                if (typeProduct.First().ToString() != "4")
                 {
-                    fileName = @"template/КП Банные Печи индивид.pdf";
-                    pageClientName = 2;
-                    pageTable = 7;
-                    pageManagerName = 11;
-                    firstMaxHeightTable = 460;
-                    secondMaxHeightTable = 520;
-                    firstTableMarginTop = 100;
-                    secongTableMarginTop = 0;
-                    fontClientNameName = "Sitka Text Italic";
-                    fontClientNamePath = "Fonts/SitkaText.ttf";
-                    fontManagerNameName = "Sitka Text Bold";
-                    fontManagerNamePath = "Fonts/SitkaText-Bold.ttf";
-                    fontHeaderTableName = "Roboto Bold";
-                    fontHeaderTablePath = "Fonts/Roboto-Bold.ttf";
-                    fontTableName = "Roboto";
-                    fontTablePath = "Fonts/Roboto-Regular.ttf";
-
-                }
-                else if (numberOfFile == 1)
-                {
-                    fileName = @"template/КП - Банные Печи.pdf";
-                    pageClientName = 0;
-                    pageTable = 4;
-                    pageManagerName = 0;
-                    firstMaxHeightTable = 310;
-                    secondMaxHeightTable = 520;
-                    firstTableMarginTop = 250;
-                    secongTableMarginTop = 0;
-                    fontClientNameName = "Sitka Text Italic";
-                    fontClientNamePath = "Fonts/SitkaText.ttf";
-                    fontManagerNameName = "Sitka Text Bold";
-                    fontManagerNamePath = "Fonts/SitkaText-Bold.ttf";
-                    fontHeaderTableName = "Roboto Bold";
-                    fontHeaderTablePath = "Fonts/Roboto-Bold.ttf";
-                    fontTableName = "Roboto";
-                    fontTablePath = "Fonts/Roboto-Regular.ttf";
-                    mainColor = new BaseColor(100, 52, 13);
-                    borderColor = new BaseColor(100, 52, 13);
-                }
-                else if (numberOfFile == 2)
-                {
-                    fileName = @"template/КП Камины индивид.pdf";
-                    pageClientName = 2;
-                    pageTable = 5;
-                    pageManagerName = 9;
-                    firstMaxHeightTable = 420;
-                    secondMaxHeightTable = 520;
-                    firstTableMarginTop = 140;
-                    secongTableMarginTop = 0;
-                    fontClientNameName = "Sitka Text Italic";
-                    fontClientNamePath = "Fonts/SitkaText.ttf";
-                    fontManagerNameName = "Sitka Text Bold";
-                    fontManagerNamePath = "Fonts/SitkaText-Bold.ttf";
-                    fontHeaderTableName = "Roboto Bold";
-                    fontHeaderTablePath = "Fonts/Roboto-Bold.ttf";
-                    fontTableName = "Roboto";
-                    fontTablePath = "Fonts/Roboto-Regular.ttf";
-                }
-                else if (numberOfFile == 3)
-                {
-                    fileName = @"template/КП Камины.pdf";
-                    pageClientName = 0;
-                    pageTable = 8;
-                    pageManagerName = 0;
-                    firstMaxHeightTable = 460;
-                    secondMaxHeightTable = 520;
-                    firstTableMarginTop = 0;
-                    secongTableMarginTop = 0;
-                    fontClientNameName = "Sitka Text Italic";
-                    fontClientNamePath = "Fonts/SitkaText.ttf";
-                    fontManagerNameName = "Sitka Text Bold";
-                    fontManagerNamePath = "Fonts/SitkaText-Bold.ttf";
-                    fontHeaderTableName = "Roboto Bold";
-                    fontHeaderTablePath = "Fonts/Roboto-Bold.ttf";
-                    fontTableName = "Roboto";
-                    fontTablePath = "Fonts/Roboto-Regular.ttf";
+                    if (VIP.First().ToString() == "0")
+                    {
+                        fileName = @"template/Fireplace.pdf";
+                        pageClientName = 0;
+                        pageTable = 8;
+                        pageManagerName = 0;
+                        firstMaxHeightTable = 460;
+                        secondMaxHeightTable = 520;
+                        firstTableMarginTop = 0;
+                        secongTableMarginTop = 0;
+                        fontClientNameName = "Sitka Text Italic";
+                        fontClientNamePath = "Fonts/SitkaText.ttf";
+                        fontManagerNameName = "Sitka Text Bold";
+                        fontManagerNamePath = "Fonts/SitkaText-Bold.ttf";
+                        fontHeaderTableName = "Roboto Bold";
+                        fontHeaderTablePath = "Fonts/Roboto-Bold.ttf";
+                        fontTableName = "Roboto";
+                        fontTablePath = "Fonts/Roboto-Regular.ttf";
+                    }
+                    else
+                    {
+                        fileName = @"template/FireplaceVIP.pdf";
+                        pageClientName = 2;
+                        pageTable = 5;
+                        pageManagerName = 9;
+                        firstMaxHeightTable = 420;
+                        secondMaxHeightTable = 520;
+                        firstTableMarginTop = 140;
+                        secongTableMarginTop = 0;
+                        fontClientNameName = "Sitka Text Italic";
+                        fontClientNamePath = "Fonts/SitkaText.ttf";
+                        fontManagerNameName = "Sitka Text Bold";
+                        fontManagerNamePath = "Fonts/SitkaText-Bold.ttf";
+                        fontHeaderTableName = "Roboto Bold";
+                        fontHeaderTablePath = "Fonts/Roboto-Bold.ttf";
+                        fontTableName = "Roboto";
+                        fontTablePath = "Fonts/Roboto-Regular.ttf";
+                    }
                 }
 
+                else
+                {
+                    if (VIP.First().ToString() == "0")
+                    {
+                        fileName = @"template/Bath.pdf";
+                        pageClientName = 0;
+                        pageTable = 4;
+                        pageManagerName = 0;
+                        firstMaxHeightTable = 310;
+                        secondMaxHeightTable = 520;
+                        firstTableMarginTop = 250;
+                        secongTableMarginTop = 0;
+                        fontClientNameName = "Sitka Text Italic";
+                        fontClientNamePath = "Fonts/SitkaText.ttf";
+                        fontManagerNameName = "Sitka Text Bold";
+                        fontManagerNamePath = "Fonts/SitkaText-Bold.ttf";
+                        fontHeaderTableName = "Roboto Bold";
+                        fontHeaderTablePath = "Fonts/Roboto-Bold.ttf";
+                        fontTableName = "Roboto";
+                        fontTablePath = "Fonts/Roboto-Regular.ttf";
+                        mainColor = new BaseColor(100, 52, 13);
+                        borderColor = new BaseColor(100, 52, 13);
+                    }
+                    else
+                    {
+                        fileName = @"template/BathVIP.pdf";
+                        pageClientName = 2;
+                        pageTable = 7;
+                        pageManagerName = 11;
+                        firstMaxHeightTable = 460;
+                        secondMaxHeightTable = 520;
+                        firstTableMarginTop = 100;
+                        secongTableMarginTop = 0;
+                        fontClientNameName = "Sitka Text Italic";
+                        fontClientNamePath = "Fonts/SitkaText.ttf";
+                        fontManagerNameName = "Sitka Text Bold";
+                        fontManagerNamePath = "Fonts/SitkaText-Bold.ttf";
+                        fontHeaderTableName = "Roboto Bold";
+                        fontHeaderTablePath = "Fonts/Roboto-Bold.ttf";
+                        fontTableName = "Roboto";
+                        fontTablePath = "Fonts/Roboto-Regular.ttf";
+                    }
+                }
 
+    
 
                 int countColumns = 5;
                 PdfPTable fTable = new PdfPTable(countColumns);
@@ -221,7 +233,7 @@ namespace DomPecheyKP
                         //Добавим в таблицу общий заголовок
                         int paddingLeft = 5;
                         int paddingTop = 13;
-                        if (numberOfFile == 1)
+                        if (typeProduct.First().ToString() != "4" && VIP.First().ToString() == "0") // печи не VIP
                         {
                             fTable.DefaultCell.BorderColor = mainColor;
                             fTable.DefaultCell.BorderColorBottom = mainColor;
@@ -418,7 +430,7 @@ namespace DomPecheyKP
 
 
 
-                        fTable.AddCell(getMidHeader("4. Монтажные работы,выезд на замер", fontTable));
+                        fTable.AddCell(getMidHeader("4. Монтажные работы, выезд на замер", fontTable));
                         if (InstallationWork.RowCount == 1)
                         {
                             cell = new PdfPCell(new Phrase(new Phrase("1", fontTable)));
@@ -703,26 +715,26 @@ namespace DomPecheyKP
             loadIW(1);
             loadRD();
             //удалить
-            foreach (Object checkedItem in NewChimneyElements.Items)
-            {
-                ChimneyElements.Rows.Add("1", checkedItem.ToString(), "1", list[checkedItem.ToString()], list[checkedItem.ToString()]);
-            }
+            //foreach (Object checkedItem in NewChimneyElements.Items)
+            //{
+            //    ChimneyElements.Rows.Add("1", checkedItem.ToString(), "1", list[checkedItem.ToString()], list[checkedItem.ToString()]);
+            //}
 
-            foreach (Object checkedItem in NewInsulationСonsumables.Items)
-            {
-                InsulationСonsumables.Rows.Add("1", checkedItem.ToString(), "1", listIC[checkedItem.ToString()], listIC[checkedItem.ToString()]);
-            }
+            //foreach (Object checkedItem in NewInsulationСonsumables.Items)
+            //{
+            //    InsulationСonsumables.Rows.Add("1", checkedItem.ToString(), "1", listIC[checkedItem.ToString()], listIC[checkedItem.ToString()]);
+            //}
 
-            foreach (Object checkedItem in NewInstallationWork.Items)
-            {
-                InstallationWork.Rows.Add("1", checkedItem.ToString(), "1", listIW[checkedItem.ToString()], listIW[checkedItem.ToString()]);
-            }
+            //foreach (Object checkedItem in NewInstallationWork.Items)
+            //{
+            //    InstallationWork.Rows.Add("1", checkedItem.ToString(), "1", listIW[checkedItem.ToString()], listIW[checkedItem.ToString()]);
+            //}
 
 
-            foreach (Object checkedItem in NewRiggingDelivery.Items)
-            {
-                RiggingDelivery.Rows.Add("1", checkedItem.ToString(), "1", listRD[checkedItem.ToString()], listRD[checkedItem.ToString()]);
-            }
+            //foreach (Object checkedItem in NewRiggingDelivery.Items)
+            //{
+            //    RiggingDelivery.Rows.Add("1", checkedItem.ToString(), "1", listRD[checkedItem.ToString()], listRD[checkedItem.ToString()]);
+            //}
 
         }
 
@@ -1290,7 +1302,9 @@ namespace DomPecheyKP
             managerName = ManagerName.Text;
             
             saveFileDialog1.Filter = "Excel files|*.xls;*.xlsx";
-            saveFileDialog1.FileName = "123.xlsx";
+            var typeProductstring = from RadioButton r in ProductType.Controls where r.Checked == true select r.Text;
+            var VIPstring = from RadioButton r in isVIP.Controls where r.Checked == true select r.Text;
+            saveFileDialog1.FileName = "Локальный сметный счет " + VIPstring.First().ToString() + " " + typeProductstring.First().ToString() + " " + ClientName.Text + " " + DateTime.Now.ToShortDateString() + ".xlsx";
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 formAlert = new Alert();
