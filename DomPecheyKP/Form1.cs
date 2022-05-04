@@ -65,9 +65,11 @@ namespace DomPecheyKP
         private void button1_Click(object sender, EventArgs e)
         {
             string nameOfNewFile = @"newFile.pdf";
-            if (true)//(saveFileDialog1.ShowDialog() == DialogResult.OK)
+            saveFileDialog1.Filter = "Pdf files|*.pdf";
+            saveFileDialog1.FileName = "123.pdf";
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                //nameOfNewFile = saveFileDialog1.FileName + ".pdf";
+                nameOfNewFile = saveFileDialog1.FileName;
 
                 int numberOfFile = 3;
                 string fileName = "";
@@ -190,15 +192,6 @@ namespace DomPecheyKP
                         System.Text.EncodingProvider ppp = System.Text.CodePagesEncodingProvider.Instance;
                         Encoding.RegisterProvider(ppp);
 
-                        //var fontName = "Sitka Banner";
-                        //if (!FontFactory.IsRegistered(fontName))
-                        //{
-                        //    var fontPath = Environment.GetEnvironmentVariable("Sitka-Banner.ttf");
-                        //    FontFactory.Register("Sitka-Banner.ttf");
-                        //}
-                        //iTextSharp.text.Font font = FontFactory.GetFont(fontName, BaseFont.IDENTITY_H);
-                        //font.Color = iTextSharp.text.BaseColor.BLACK;
-                        //font.Size = 25;
 
                         var fontName = fontHeaderTableName;
                         if (!FontFactory.IsRegistered(fontName))
@@ -318,7 +311,31 @@ namespace DomPecheyKP
 
                         fTable.AddCell(getMidHeader(str, fontTable));
 
-                        for (int j = 0; j < ChimneyElements.RowCount - 1; j++)
+
+                        if (ChimneyElements.RowCount == 1)
+                        {
+                            cell = new PdfPCell(new Phrase(new Phrase("1", fontTable)));
+                            cell.BorderColor = borderColor;
+                            cell.HorizontalAlignment = Element.ALIGN_CENTER;
+                            cell.BorderWidthLeft = 0;
+                            fTable.AddCell(cell);
+                            cell = new PdfPCell(new Phrase(new Phrase("Отсутствует", fontTable)));
+                            cell.BorderColor = borderColor;
+                            fTable.AddCell(cell);
+
+                            cell = new PdfPCell(new Phrase(new Phrase("", fontTable)));
+                            cell.BorderColor = borderColor;
+                            fTable.AddCell(cell);
+                            cell = new PdfPCell(new Phrase(new Phrase("", fontTable)));
+                            cell.BorderColor = borderColor;
+                            fTable.AddCell(cell);
+                            cell = new PdfPCell(new Phrase(new Phrase("", fontTable)));
+                            cell.BorderColor = borderColor;
+                            cell.BorderWidthRight = 0;
+                            fTable.AddCell(cell);
+                        }
+                        else
+                            for (int j = 0; j < ChimneyElements.RowCount - 1; j++)
                         {
                             for (int k = 0; k < countColumns; k++)
                             {
@@ -350,7 +367,29 @@ namespace DomPecheyKP
                         fTable.AddCell(getMidHeader("3. Изоляционные и расходные материалы", fontTable));
 
 
+                        if(InsulationСonsumables.RowCount== 1)
+                        {
+                            cell = new PdfPCell(new Phrase(new Phrase("1", fontTable)));
+                            cell.BorderColor = borderColor;
+                            cell.HorizontalAlignment = Element.ALIGN_CENTER;
+                            cell.BorderWidthLeft = 0;
+                            fTable.AddCell(cell);
+                            cell = new PdfPCell(new Phrase(new Phrase("Отсутствует", fontTable)));
+                            cell.BorderColor = borderColor;
+                            fTable.AddCell(cell);
 
+                            cell = new PdfPCell(new Phrase(new Phrase("", fontTable)));
+                            cell.BorderColor = borderColor;
+                            fTable.AddCell(cell);
+                            cell = new PdfPCell(new Phrase(new Phrase("", fontTable)));
+                            cell.BorderColor = borderColor;
+                            fTable.AddCell(cell);
+                            cell = new PdfPCell(new Phrase(new Phrase("", fontTable)));
+                            cell.BorderColor = borderColor;
+                            cell.BorderWidthRight = 0;
+                            fTable.AddCell(cell);
+                        }
+                        else
                         for (int j = 0; j < InsulationСonsumables.RowCount - 1; j++)
                         {
                             for (int k = 0; k < countColumns; k++)
@@ -379,8 +418,30 @@ namespace DomPecheyKP
 
 
                         fTable.AddCell(getMidHeader("4. Монтажные работы,выезд на замер", fontTable));
+                        if (InstallationWork.RowCount == 1)
+                        {
+                            cell = new PdfPCell(new Phrase(new Phrase("1", fontTable)));
+                            cell.BorderColor = borderColor;
+                            cell.HorizontalAlignment = Element.ALIGN_CENTER;
+                            cell.BorderWidthLeft = 0;
+                            fTable.AddCell(cell);
+                            cell = new PdfPCell(new Phrase(new Phrase("Отсутствует", fontTable)));
+                            cell.BorderColor = borderColor;
+                            fTable.AddCell(cell);
 
-                        for (int j = 0; j < InstallationWork.RowCount - 1; j++)
+                            cell = new PdfPCell(new Phrase(new Phrase("", fontTable)));
+                            cell.BorderColor = borderColor;
+                            fTable.AddCell(cell);
+                            cell = new PdfPCell(new Phrase(new Phrase("", fontTable)));
+                            cell.BorderColor = borderColor;
+                            fTable.AddCell(cell);
+                            cell = new PdfPCell(new Phrase(new Phrase("", fontTable)));
+                            cell.BorderColor = borderColor;
+                            cell.BorderWidthRight = 0;
+                            fTable.AddCell(cell);
+                        }
+                        else
+                            for (int j = 0; j < InstallationWork.RowCount - 1; j++)
                         {
                             for (int k = 0; k < countColumns; k++)
                             {
@@ -408,7 +469,30 @@ namespace DomPecheyKP
 
                         fTable.AddCell(getMidHeader("5. Такелажные работы и доставка", fontTable));
 
-                        for (int j = 0; j < RiggingDelivery.RowCount - 1; j++)
+                        if (RiggingDelivery.RowCount == 1)
+                        {
+                            cell = new PdfPCell(new Phrase(new Phrase("1", fontTable)));
+                            cell.BorderColor = borderColor;
+                            cell.HorizontalAlignment = Element.ALIGN_CENTER;
+                            cell.BorderWidthLeft = 0;
+                            fTable.AddCell(cell);
+                            cell = new PdfPCell(new Phrase(new Phrase("Отсутствует", fontTable)));
+                            cell.BorderColor = borderColor;
+                            fTable.AddCell(cell);
+
+                            cell = new PdfPCell(new Phrase(new Phrase("", fontTable)));
+                            cell.BorderColor = borderColor;
+                            fTable.AddCell(cell);
+                            cell = new PdfPCell(new Phrase(new Phrase("", fontTable)));
+                            cell.BorderColor = borderColor;
+                            fTable.AddCell(cell);
+                            cell = new PdfPCell(new Phrase(new Phrase("", fontTable)));
+                            cell.BorderColor = borderColor;
+                            cell.BorderWidthRight = 0;
+                            fTable.AddCell(cell);
+                        }
+                        else
+                            for (int j = 0; j < RiggingDelivery.RowCount - 1; j++)
                         {
                             for (int k = 0; k < countColumns; k++)
                             {
@@ -615,15 +699,17 @@ namespace DomPecheyKP
             //    ChimneyElements.Rows.Add("1", checkedItem.ToString(), "1", list[checkedItem.ToString()], list[checkedItem.ToString()]);
             //}
 
+            //foreach (Object checkedItem in NewInsulationСonsumables.Items)
+            //{
+            //    InsulationСonsumables.Rows.Add("1", checkedItem.ToString(), "1", listIC[checkedItem.ToString()], listIC[checkedItem.ToString()]);
+            //}
+
             //foreach (Object checkedItem in NewInstallationWork.Items)
             //{
             //    InstallationWork.Rows.Add("1", checkedItem.ToString(), "1", listIW[checkedItem.ToString()], listIW[checkedItem.ToString()]);
             //}
 
-            //foreach (Object checkedItem in NewInsulationСonsumables.Items)
-            //{
-            //    InsulationСonsumables.Rows.Add("1", checkedItem.ToString(), "1", listIC[checkedItem.ToString()], listIC[checkedItem.ToString()]);
-            //}
+
             //foreach (Object checkedItem in NewRiggingDelivery.Items)
             //{
             //    RiggingDelivery.Rows.Add("1", checkedItem.ToString(), "1", listRD[checkedItem.ToString()], listRD[checkedItem.ToString()]);
@@ -953,6 +1039,10 @@ namespace DomPecheyKP
         {
             ObjWorkBook.Close(false, Type.Missing, Type.Missing);
             ObjWorkExcel.Quit();
+            ObjWorkBook = null;
+            ObjWorkExcel = null;
+            ObjWorkSheet = null;
+            GC.Collect();
         }
 
 
@@ -1189,153 +1279,177 @@ namespace DomPecheyKP
         {
             int nRow=10;
             int s1=12, s2, f1, f2;
-             Excel.Application excelApp;
-
-            string fileTarget = Environment.CurrentDirectory + @"/template/2.xlsx";
-            string fileTemplate = Environment.CurrentDirectory + @"/template/template1.xlsx";
-            excelApp = new Excel.Application();
-            Excel.Workbook wbTemp, wbTarget;
-            Excel.Worksheet sh;
-
-            //Create target workbook
-            wbTarget = excelApp.Workbooks.Open(fileTemplate);
-
-            //Fill target workbook
-            //Open the template sheet
-            sh = wbTarget.Worksheets[1];
-            sh.Name = "Коммерческое предложение";
-
-            //Вывод первой таблицы
-            var a = from RadioButton r in ProductType.Controls where r.Checked == true select r.Text;
-            sh.Cells[9,1] = "1. " + a.First();
-            for (int j = 0; j < 5; j++)
-                sh.Cells[nRow, j+1] = NameOfKiln.Rows[0].Cells[j].Value.ToString();
-            nRow++;
-            //Вывод второй таблицы
-
-            a = from RadioButton r in Manufacturer.Controls where r.Checked == true select r.Text;
-            string str = "2. " + a.First();
-            if (OwnD.Checked)
+            string nameOfNewFile = Environment.CurrentDirectory + @"/template/2.xlsx";
+            saveFileDialog1.Filter = "Excel files|*.xls;*.xlsx";
+            saveFileDialog1.FileName = "123.xlsx";
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                str += " D" + OwnValue.Value.ToString() + " мм";
-            }
-            else
-            {
-                a = from RadioButton r in Diameter.Controls.OfType<RadioButton>() where (r.Checked) == true select r.Text;
+                nameOfNewFile = saveFileDialog1.FileName;
+                Excel.Application excelApp;
 
-                str += " D" + a.First() + " мм";
-            }
-            a = from RadioButton r in MetalThickness.Controls where r.Checked == true select r.Text;
-            str += " (" + a.First() + ")";
-            sh.Cells[nRow, 1] = str;
-            nRow++;
+                string fileTarget = nameOfNewFile;
+                string fileTemplate = Environment.CurrentDirectory + @"/template/template1.xlsx";
+                excelApp = new Excel.Application();
+                Excel.Workbook wbTarget;
+                Excel.Worksheet sh;
 
-            for(int i = 0; i < ChimneyElements.RowCount-1; i++)
-            {
-                if (i != 0)
-                {
-                    Excel.Range cellRange = (Excel.Range)sh.Cells[nRow, 1];
-                    Excel.Range rowRange = cellRange.EntireRow;
-                    rowRange.Insert(Excel.XlInsertShiftDirection.xlShiftDown, false);
-                }
+                //Create target workbook
+                wbTarget = excelApp.Workbooks.Open(fileTemplate);
+
+                //Fill target workbook
+                //Open the template sheet
+                sh = wbTarget.Worksheets[1];
+                sh.Name = "Коммерческое предложение";
+
+                //Вывод первой таблицы
+                var a = from RadioButton r in ProductType.Controls where r.Checked == true select r.Text;
+                sh.Cells[9, 1] = "1. " + a.First();
                 for (int j = 0; j < 5; j++)
-                {
-                    sh.Cells[nRow, j + 1] = ChimneyElements.Rows[i].Cells[j].Value.ToString();
-                }
-
+                    sh.Cells[nRow, j + 1] = NameOfKiln.Rows[0].Cells[j].Value.ToString();
                 nRow++;
-            }
-            nRow++;
-            //вывод третьей таблицы
-            for (int i = 0; i < InsulationСonsumables.RowCount - 1; i++)
-            {
-                if (i != 0)
+                //Вывод второй таблицы
+
+                a = from RadioButton r in Manufacturer.Controls where r.Checked == true select r.Text;
+                string str = "2. " + a.First();
+                if (OwnD.Checked)
                 {
-                    Excel.Range cellRange = (Excel.Range)sh.Cells[nRow, 1];
-                    Excel.Range rowRange = cellRange.EntireRow;
-                    rowRange.Insert(Excel.XlInsertShiftDirection.xlShiftDown, false);
+                    str += " D" + OwnValue.Value.ToString() + " мм";
                 }
-                for (int j = 0; j < 5; j++)
-                    sh.Cells[nRow, j + 1] = InsulationСonsumables.Rows[i].Cells[j].Value.ToString();
-                nRow++;
-            }
-            f1 = nRow;
-            nRow ++;
-            sh.Cells[nRow++, 5] = resultSum1;
-            double disc = Convert.ToDouble(numericUpDown1.Value);
-            sh.Cells[nRow++, 5] = disc;
-            sh.Cells[nRow++, 5] = resultSum1 - disc;
-            nRow+=2;
-            s2 = nRow+1;
-            //вывод четвертой таблицы
-            for (int i = 0; i < InstallationWork.RowCount - 1; i++)
-            {
-                if (i != 0)
+                else
                 {
-                    Excel.Range cellRange = (Excel.Range)sh.Cells[nRow, 1];
-                    Excel.Range rowRange = cellRange.EntireRow;
-                    rowRange.Insert(Excel.XlInsertShiftDirection.xlShiftDown, false);
+                    a = from RadioButton r in Diameter.Controls.OfType<RadioButton>() where (r.Checked) == true select r.Text;
+
+                    str += " D" + a.First() + " мм";
                 }
-                for (int j = 0; j < 5; j++)
-                    sh.Cells[nRow, j + 1] = InstallationWork.Rows[i].Cells[j].Value.ToString();
+                a = from RadioButton r in MetalThickness.Controls where r.Checked == true select r.Text;
+                str += " (" + a.First() + ")";
+                sh.Cells[nRow, 1] = str;
                 nRow++;
-            }
-            nRow++;
-            //вывод пятой таблицы
-            for (int i = 0; i < RiggingDelivery.RowCount - 1; i++)
-            {
-                if (i != 0)
+                if (ChimneyElements.RowCount == 1)
                 {
-                    Excel.Range cellRange = (Excel.Range)sh.Cells[nRow, 1];
-                    Excel.Range rowRange = cellRange.EntireRow;
-                    rowRange.Insert(Excel.XlInsertShiftDirection.xlShiftDown, false);
+                    sh.Cells[nRow, 1] = "1";
+                    sh.Cells[nRow, 2] = "Отсутствует";
+                    nRow++;
                 }
-                for (int j = 0; j < 5; j++)
-                    sh.Cells[nRow, j + 1] = RiggingDelivery.Rows[i].Cells[j].Value.ToString();
+                else
+                for (int i = 0; i < ChimneyElements.RowCount - 1; i++)
+                {
+                    if (i != 0)
+                    {
+                        Excel.Range cellRange = (Excel.Range)sh.Cells[nRow, 1];
+                        Excel.Range rowRange = cellRange.EntireRow;
+                        rowRange.Insert(Excel.XlInsertShiftDirection.xlShiftDown, false);
+                    }
+                    for (int j = 0; j < 5; j++)
+                    {
+                        sh.Cells[nRow, j + 1] = ChimneyElements.Rows[i].Cells[j].Value.ToString();
+                    }
+
+                    nRow++;
+                }
                 nRow++;
+                //вывод третьей таблицы
+                if (InsulationСonsumables.RowCount == 1)
+                {
+                    sh.Cells[nRow, 1] = "1";
+                    sh.Cells[nRow, 2] = "Отсутствует";
+                    nRow++;
+                }
+                else
+                    for (int i = 0; i < InsulationСonsumables.RowCount - 1; i++)
+                {
+                    if (i != 0)
+                    {
+                        Excel.Range cellRange = (Excel.Range)sh.Cells[nRow, 1];
+                        Excel.Range rowRange = cellRange.EntireRow;
+                        rowRange.Insert(Excel.XlInsertShiftDirection.xlShiftDown, false);
+                    }
+                    for (int j = 0; j < 5; j++)
+                        sh.Cells[nRow, j + 1] = InsulationСonsumables.Rows[i].Cells[j].Value.ToString();
+                    nRow++;
+                }
+                f1 = nRow;
+                nRow++;
+                sh.Cells[nRow++, 5] = resultSum1;
+                double disc = Convert.ToDouble(numericUpDown1.Value);
+                sh.Cells[nRow++, 5] = disc;
+                sh.Cells[nRow++, 5] = resultSum1 - disc;
+                nRow += 2;
+                s2 = nRow + 1;
+                //вывод четвертой таблицы
+                if (InstallationWork.RowCount==1)
+                {
+                    sh.Cells[nRow, 1] = "1";
+                    sh.Cells[nRow, 2] = "Отсутствует";
+                    nRow++;
+                }
+                else
+                for (int i = 0; i < InstallationWork.RowCount - 1; i++)
+                {
+                    if (i != 0)
+                    {
+                        Excel.Range cellRange = (Excel.Range)sh.Cells[nRow, 1];
+                        Excel.Range rowRange = cellRange.EntireRow;
+                        rowRange.Insert(Excel.XlInsertShiftDirection.xlShiftDown, false);
+                    }
+                    for (int j = 0; j < 5; j++)
+                        sh.Cells[nRow, j + 1] = InstallationWork.Rows[i].Cells[j].Value.ToString();
+                    nRow++;
+                }
+                nRow++;
+                //вывод пятой таблицы
+                if (RiggingDelivery.RowCount == 1)
+                {
+                    sh.Cells[nRow, 1] = "1";
+                    sh.Cells[nRow, 2] = "Отсутствует";
+                    nRow++;
+                }
+                else                    
+                for (int i = 0; i < RiggingDelivery.RowCount - 1; i++)
+                {
+                    if (i != 0)
+                    {
+                        Excel.Range cellRange = (Excel.Range)sh.Cells[nRow, 1];
+                        Excel.Range rowRange = cellRange.EntireRow;
+                        rowRange.Insert(Excel.XlInsertShiftDirection.xlShiftDown, false);
+                    }
+                    for (int j = 0; j < 5; j++)
+                        sh.Cells[nRow, j + 1] = RiggingDelivery.Rows[i].Cells[j].Value.ToString();
+                    nRow++;
+                }
+                f2 = nRow;
+                nRow++;
+                sh.Cells[nRow++, 5] = resultSum2;
+                sh.Cells[nRow++, 5] = 0;
+                sh.Cells[nRow++, 5] = resultSum2;
+                nRow++;
+                sh.Cells[nRow++, 5] = sumFinal;
+                sh.Cells[nRow++, 5] = disc;
+                sh.Cells[nRow++, 5] = sumFinal - disc;
+                
+
+                Excel.Range workSheet_range = sh.get_Range("A" + s1, "E" + f1);
+                workSheet_range.Borders.Color = System.Drawing.Color.Black.ToArgb();
+                workSheet_range = sh.get_Range("A" + s2, "E" + f2);
+                workSheet_range.Borders.Color = System.Drawing.Color.Black.ToArgb();
+
+                workSheet_range = sh.get_Range("A5", "E" + (nRow - 1));
+                workSheet_range.BorderAround2(Excel.XlLineStyle.xlContinuous, Excel.XlBorderWeight.xlThick, Excel.XlColorIndex.xlColorIndexNone, Color.Black, Type.Missing);
+
+
+                //Save file
+                wbTarget.SaveAs(fileTarget);
+                //Close and save target workbook
+                wbTarget.Close(true);
+                //Kill excelapp
+                excelApp.Quit();
+
+
+                excelApp = null;
+                wbTarget = null;
+                sh = null;
+                GC.Collect();
             }
-            f2 = nRow;
-            nRow++;
-            sh.Cells[nRow++, 5] = resultSum2;
-            sh.Cells[nRow++, 5] = 0;
-            sh.Cells[nRow++, 5] = resultSum2;
-            nRow++;
-            sh.Cells[nRow++, 5] = sumFinal;
-            sh.Cells[nRow++, 5] = disc;
-            sh.Cells[nRow++, 5] = sumFinal - disc;
-            sh.Cells[10, 8].Borders.LineStyle = Microsoft.Office.Interop.Excel.XlLineStyle.xlDot;
-            sh.Cells[12, 8].Borders.LineStyle = Microsoft.Office.Interop.Excel.XlLineStyle.xlDash;
-            sh.Cells[14, 8].Borders.LineStyle = Microsoft.Office.Interop.Excel.XlLineStyle.xlDashDotDot;
-            sh.Cells[16, 8].Borders.LineStyle = Microsoft.Office.Interop.Excel.XlLineStyle.xlDouble;
-            sh.Cells[18, 8].Borders.LineStyle = Microsoft.Office.Interop.Excel.XlLineStyle.xlDashDot;
-            sh.Cells[20, 8].Borders.LineStyle = Microsoft.Office.Interop.Excel.XlLineStyle.xlContinuous;
-            sh.Cells[22, 8].Borders.LineStyle = Microsoft.Office.Interop.Excel.XlLineStyle.xlLineStyleNone;
-            //Excel.Range cellRange = (Excel.Range)sh.Cells[11, 1];
-            //Excel.Range rowRange = cellRange.EntireRow;
-            //rowRange.Insert(Excel.XlInsertShiftDirection.xlShiftDown, false);
-
-            //Excel.Range excelcells = sh.get_Range(sh.Cells[10,1], sh.Cells[10, 20]);          // Устанавливаем ссылку ячеек на ячейку A1
-            //excelcells.Copy(Type.Missing);
-            //excelcells = sh.get_Range(sh.Cells[11, 1], sh.Cells[11, 20]);          // Устанавливаем ссылку ячеек на ячейку A1
-            //excelcells.PasteSpecial(Microsoft.Office.Interop.Excel.XlPasteType.xlPasteAll, Microsoft.Office.Interop.Excel.XlPasteSpecialOperation.xlPasteSpecialOperationNone, false, false);
-
-
-            Excel.Range workSheet_range = sh.get_Range("A"+s1, "E"+f1);
-            workSheet_range.Borders.Color = System.Drawing.Color.Black.ToArgb();
-            workSheet_range = sh.get_Range("A" + s2, "E" + f2);
-            workSheet_range.Borders.Color = System.Drawing.Color.Black.ToArgb();
-            nRow++;
-
-
-
-
-
-            //Save file
-            wbTarget.SaveAs(fileTarget);
-            //Close and save target workbook
-            wbTarget.Close(true);
-            //Kill excelapp
-            excelApp.Quit();
 
         }
     }
