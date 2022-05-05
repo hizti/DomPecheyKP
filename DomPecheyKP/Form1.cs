@@ -21,11 +21,12 @@ using System.Xml;
 
 namespace DomPecheyKP
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
+            ChimneyElements.ForeColor = NameOfKiln.ForeColor = InsulationСonsumables.ForeColor = addInstallationWork.ForeColor = RiggingDelivery.ForeColor = Color.FromArgb(104, 51, 5);
         }
 
         Dictionary<string, double> list;
@@ -68,16 +69,16 @@ namespace DomPecheyKP
         private void button1_Click(object sender, EventArgs e)
         {
             string nameOfNewFile;
-            saveFileDialog1.Filter = "Pdf files|*.pdf";
+            saveFileDialog.Filter = "Pdf files|*.pdf";
             
             var typeProduct = from RadioButton r in ProductType.Controls where r.Checked == true select r.Tag;
             var VIP = from RadioButton r in isVIP.Controls where r.Checked == true select r.Tag;
             var typeProductstring = from RadioButton r in ProductType.Controls where r.Checked == true select r.Text;
             var VIPstring = from RadioButton r in isVIP.Controls where r.Checked == true select r.Text;
-            saveFileDialog1.FileName = "Комерческое предложение " + VIPstring.First().ToString() + " " + typeProductstring.First().ToString()  + " " + ClientName.Text + " " + DateTime.Now.ToShortDateString() + ".pdf";
-            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            saveFileDialog.FileName = "Комерческое предложение " + VIPstring.First().ToString() + " " + typeProductstring.First().ToString()  + " " + ClientName.Text + " " + DateTime.Now.ToShortDateString() + ".pdf";
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                nameOfNewFile = saveFileDialog1.FileName;
+                nameOfNewFile = saveFileDialog.FileName;
 
                 int numberOfFile = 3;
                 string fileName = "";
@@ -541,7 +542,7 @@ namespace DomPecheyKP
                         cell.HorizontalAlignment = Element.ALIGN_LEFT;
                         fTable.AddCell(cell);
 
-                        cell = new PdfPCell(new Phrase(new Phrase(numericUpDown1.Value.ToString(), fontHeaderTable)));
+                        cell = new PdfPCell(new Phrase(new Phrase(sumDiscont.Value.ToString(), fontHeaderTable)));
                         cell.BorderColor = borderColor;
                         cell.Colspan = 3;
                         cell.BorderWidthLeft = 0;
@@ -803,7 +804,7 @@ namespace DomPecheyKP
             SumRiggingAndInstall.Text = (resultSum2).ToString() + " Руб.";
             sumND = resultSum1 + resultSum2;
             SumNotDiscount.Text = (sumND).ToString() + " Руб.";
-            sumFinal = sumND - Convert.ToDouble(numericUpDown1.Value);
+            sumFinal = sumND - Convert.ToDouble(sumDiscont.Value);
             AllSum.Text = (sumFinal).ToString() + " Руб.";
 
         }
@@ -1289,7 +1290,7 @@ namespace DomPecheyKP
             calculateResults();
             if (sumND != 0)
             {
-                decimal percentD = Convert.ToDecimal(Convert.ToDouble(numericUpDown1.Value) / sumND) * 100;
+                decimal percentD = Convert.ToDecimal(Convert.ToDouble(sumDiscont.Value) / sumND) * 100;
                 if (percentD > 100)
                     percentD = 100;
                 else if (percentD < 0)
@@ -1302,7 +1303,7 @@ namespace DomPecheyKP
         {
             if (sumND != 0)
             {
-                numericUpDown1.Value = Convert.ToDecimal(Math.Round(sumND * (Convert.ToDouble(percentDiscount.Value) / 100), 0));
+                sumDiscont.Value = Convert.ToDecimal(Math.Round(sumND * (Convert.ToDouble(percentDiscount.Value) / 100), 0));
             }
         }
 
@@ -1311,11 +1312,11 @@ namespace DomPecheyKP
         {
             managerName = ManagerName.Text;
             
-            saveFileDialog1.Filter = "Excel files|*.xls;*.xlsx";
+            saveFileDialog.Filter = "Excel files|*.xls;*.xlsx";
             var typeProductstring = from RadioButton r in ProductType.Controls where r.Checked == true select r.Text;
             var VIPstring = from RadioButton r in isVIP.Controls where r.Checked == true select r.Text;
-            saveFileDialog1.FileName = "Локальный сметный счет " + VIPstring.First().ToString() + " " + typeProductstring.First().ToString() + " " + ClientName.Text + " " + DateTime.Now.ToShortDateString() + ".xlsx";
-            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            saveFileDialog.FileName = "Локальный сметный счет " + VIPstring.First().ToString() + " " + typeProductstring.First().ToString() + " " + ClientName.Text + " " + DateTime.Now.ToShortDateString() + ".xlsx";
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 formAlert = new Alert();
                 formAlert.Show();
@@ -1341,7 +1342,7 @@ namespace DomPecheyKP
             int nRow = 10;
             int s1 = 12, s2, f1, f2;
             string nameOfNewFile = Environment.CurrentDirectory + @"/template/2.xlsx";
-            nameOfNewFile = saveFileDialog1.FileName;
+            nameOfNewFile = saveFileDialog.FileName;
             Excel.Application excelApp;
 
             string fileTarget = nameOfNewFile;
@@ -1431,7 +1432,7 @@ namespace DomPecheyKP
             f1 = nRow;
             nRow++;
             sh.Cells[nRow++, 5] = resultSum1;
-            double disc = Convert.ToDouble(numericUpDown1.Value);
+            double disc = Convert.ToDouble(sumDiscont.Value);
             sh.Cells[nRow++, 5] = disc;
             sh.Cells[nRow++, 5] = resultSum1 - disc;
             nRow += 2;
