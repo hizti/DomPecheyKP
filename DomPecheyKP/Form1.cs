@@ -707,6 +707,20 @@ namespace DomPecheyKP
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            long size = 0;
+            System.IO.FileInfo file;
+
+            file = new System.IO.FileInfo(@"template/Bath.pdf");
+            size += file.Length;
+            file = new System.IO.FileInfo(@"template/BathVIP.pdf");
+            size += file.Length;
+            file = new System.IO.FileInfo(@"template/Fireplace.pdf");
+            size += file.Length;
+            file = new System.IO.FileInfo(@"template/FireplaceVIP.pdf");
+            size += file.Length;
+            if (size != 38417940)
+                this.Close();
+
             string name = "";
             XmlDocument doc = new XmlDocument();
             doc.Load("manager.xml");
@@ -767,9 +781,9 @@ namespace DomPecheyKP
 
         private void loadElD(string nameOfPage, int nColumn)
         {
-            sumCE = 0;
+            //sumCE = 0;
             NewChimneyElements.Items.Clear();
-            ChimneyElements.Rows.Clear();
+            //ChimneyElements.Rows.Clear();
 
             list = new Dictionary<string, double>();
 
@@ -777,22 +791,66 @@ namespace DomPecheyKP
             var lastCell = ObjWorkSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell);//1 ячейку
             for (int i = 3; i <= (int)lastCell.Row; i++) // по всем строкам
             {
-                if (ObjWorkSheet.Cells[i, 1].Text.ToString() != "" && !list.ContainsKey(ObjWorkSheet.Cells[i, 1].Text.ToString()))
+                string name = ObjWorkSheet.Cells[i, 1].Text.ToString();
+                bool nameNotNull = name != "";
+                bool nameNotContainsInList = !list.ContainsKey(name);
+                bool nameNotContainsInDataGrid = true;
+                foreach (DataGridViewRow row in ChimneyElements.Rows)
+                {
+                    if (row.Cells[1].Value != null && name == row.Cells[1].Value.ToString())
+                        nameNotContainsInDataGrid = false;
+                }
+
+                if (nameNotNull && nameNotContainsInList)
                 {
                     try
                     {
-                        list.Add(ObjWorkSheet.Cells[i, 1].Text.ToString(), Convert.ToDouble(ObjWorkSheet.Cells[i, nColumn].Text.ToString()));//считываем текст в строку
+                        list.Add(name, Convert.ToDouble(ObjWorkSheet.Cells[i, nColumn].Text.ToString()));//считываем текст в строку
                     }
                     catch (Exception ex)
                     {
-                        list.Add(ObjWorkSheet.Cells[i, 1].Text.ToString(), 0);//считываем текст в строку
+                        list.Add(name, 0);//считываем текст в строку
 
                     }
-                    NewChimneyElements.Items.Add(ObjWorkSheet.Cells[i, 1].Text.ToString());
+                    if(nameNotContainsInDataGrid)
+                    NewChimneyElements.Items.Add(name);
                 }
 
             }
 
+        }
+
+        private void loadIW(int nColumn)
+        {
+            //sumIW = 0;
+            NewInstallationWork.Items.Clear();
+            //InstallationWork.Rows.Clear();
+            listIW = new Dictionary<string, double>();
+            Excel.Worksheet ObjWorkSheet = (Excel.Worksheet)ObjWorkBook.Sheets[nameOfSheetIW]; //получить 1 лист
+            var lastCell = ObjWorkSheet.Columns[nColumn].Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell);//1 ячейку
+
+            for (int i = 3; i <= (int)lastCell.Row; i++) // по всем строкам
+            {
+                string name = ObjWorkSheet.Cells[i, nColumn].Text.ToString();
+                bool nameNotNull = name.Trim() != "";
+                bool nameNotContainsInList = !listIW.ContainsKey(name);
+                bool nameNotContainsInDataGrid = true;
+                foreach (DataGridViewRow row in InstallationWork.Rows)
+                {
+                    if (row.Cells[1].Value != null && name == row.Cells[1].Value.ToString())
+                        nameNotContainsInDataGrid = false;
+                }
+
+
+                if (nameNotNull && nameNotContainsInList)
+                {
+                    listIW.Add(name, Convert.ToDouble(ObjWorkSheet.Cells[i, nColumn + 1].Text.ToString()));//считываем текст в строку
+                    if (nameNotContainsInDataGrid)
+                    NewInstallationWork.Items.Add(name);
+                }
+
+            }
+            NewInstallationWork.Sorted = true;
         }
 
         private void calculateResults()
@@ -806,7 +864,6 @@ namespace DomPecheyKP
             SumNotDiscount.Text = (sumND).ToString() + " Руб.";
             sumFinal = sumND - Convert.ToDouble(sumDiscont.Value);
             AllSum.Text = (sumFinal).ToString() + " Руб.";
-
         }
 
         private void calculateChimneyElementsSum()
@@ -820,25 +877,7 @@ namespace DomPecheyKP
 
 
 
-        private void loadIW(int nColumn)
-        {
-            sumIW = 0;
-            NewInstallationWork.Items.Clear();
-            InstallationWork.Rows.Clear();
-            listIW = new Dictionary<string, double>();
-            Excel.Worksheet ObjWorkSheet = (Excel.Worksheet)ObjWorkBook.Sheets[nameOfSheetIW]; //получить 1 лист
-            var lastCell = ObjWorkSheet.Columns[nColumn].Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell);//1 ячейку
-            for (int i = 3; i <= (int)lastCell.Row; i++) // по всем строкам
-            {
-                if (ObjWorkSheet.Cells[i, nColumn].Text.ToString() != "")
-                {
-                    listIW.Add(ObjWorkSheet.Cells[i, nColumn].Text.ToString(), Convert.ToDouble(ObjWorkSheet.Cells[i, nColumn + 1].Text.ToString()));//считываем текст в строку
-                    NewInstallationWork.Items.Add(ObjWorkSheet.Cells[i, 1].Text.ToString());
-                }
 
-            }
-            NewInstallationWork.Sorted = true;
-        }
 
         private void loadRD()
         {
@@ -884,7 +923,6 @@ namespace DomPecheyKP
                         NewChimneyElements.Items.Add(ChimneyElements.Rows[cell.RowIndex].Cells[1].Value);
                     ChimneyElements.Rows.RemoveAt(cell.RowIndex);
                 }
-
             }
 
             for (int i = 0; i < ChimneyElements.RowCount - 1; i++)
@@ -949,8 +987,8 @@ namespace DomPecheyKP
                 string page = a.First().ToString() + " " + b.First().ToString();
                 int col = Convert.ToInt32(c.First().ToString());
                 loadElD(page,col);
-                SumChimneyElements.Text = "0 Руб.";
-                calculateResults();
+                //SumChimneyElements.Text = "0 Руб.";
+                //calculateResults();
             }
 
         }
@@ -1000,8 +1038,8 @@ namespace DomPecheyKP
             if (radioButton.Checked)
             {
                 loadIW(Convert.ToInt32(radioButton.Tag));
-                SumInstallationWork.Text = "0 Руб.";
-                calculateResults();
+                //SumInstallationWork.Text = "0 Руб.";
+                //calculateResults();
             }
         }
 
