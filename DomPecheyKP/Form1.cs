@@ -1533,5 +1533,10 @@ namespace DomPecheyKP
             this.Focus();
 
         }
+
+        private void SumRiggingDelivery_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
