@@ -718,6 +718,7 @@ namespace DomPecheyKP
             size += file.Length;
             file = new System.IO.FileInfo(@"template/FireplaceVIP.pdf");
             size += file.Length;
+
             if (size != 38417940)
                 this.Close();
 
